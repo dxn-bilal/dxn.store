@@ -105,20 +105,14 @@
     }
     
     header {
-      background-color: #2c5e3b;
-      color: white;
-      padding: 20px 10px;
+      background-color: #ffffff;
+      padding: 25px 15px;
       text-align: center;
-      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-    }
-    header h1 {
-      font-size: 28px;
-      margin: 0 0 5px 0;
-    }
-    header p {
-      font-size: 16px;
-      margin: 0;
-      opacity: 0.9;
+      max-width: 800px;
+      margin: 20px auto;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+      border: 1px solid #eef2f0;
     }
     
     .categories {
@@ -170,19 +164,18 @@
       gap: 20px;
       padding: 20px;
       max-width: 1200px;
-      margin: 0 auto 150px auto; 
+      margin: 0 auto 170px auto; 
     }
     .product-card {
       background: white;
       border-radius: 12px;
       box-shadow: 0 4px 15px rgba(0,0,0,0.04);
-      /* تم إلغاء overflow hidden لمنع إخفاء الأزرار */
       display: flex;
       flex-direction: column;
       justify-content: space-between;
       transition: transform 0.3s;
       border: 1px solid #eef2f0;
-      height: auto !important; /* يضمن تمدد الكارت ليظهر الزر بالكامل */
+      height: auto !important;
     }
     .product-card:hover {
       transform: translateY(-5px);
@@ -239,7 +232,6 @@
       margin-top: auto;
     }
     
-    /* 🌟 أضفنا زر السلة الافتراضي للكمبيوتر واللابتوب لكي يظهر بقوة */
     .btn-add-to-cart {
       display: block !important;
       visibility: visible !important;
@@ -260,25 +252,24 @@
       background-color: #21462c;
     }
     
-    /* شريط أزرار التواصل الافتراضي للحاسبة */
     .floating-contact-bar {
       position: fixed;
       bottom: 20px;
       left: 50%;
       transform: translateX(-50%);
       display: flex;
-      gap: 12px;
+      gap: 15px;
       background: rgba(255, 255, 255, 0.98);
-      padding: 8px 16px;
-      border-radius: 50px;
+      padding: 12px 16px;
+      border-radius: 16px;
       box-shadow: 0 6px 25px rgba(0,0,0,0.15);
       z-index: 9999;
-      width: 360px; 
+      width: 420px; 
       box-sizing: border-box;
     }
     .floating-btn {
       flex: 1;
-      padding: 8px;
+      padding: 10px 8px;
       border-radius: 25px;
       color: white;
       text-decoration: none;
@@ -312,42 +303,36 @@
       max-height: 85%;
       border-radius: 8px;
     }
-
-    /* 5. تنسيق حاوية معلومات التواصل العلوية */
-    .header-contacts {
-      display: flex;
-      justify-content: center;
-      gap: 15px;
-      margin-top: 15px;
-      flex-wrap: wrap;
-    }
     
     .contact-item {
-      background: rgba(255, 255, 255, 0.15);
-      padding: 8px 14px; 
+      background: rgba(0, 0, 0, 0.04);
+      padding: 6px 10px; 
       border-radius: 8px;
-      font-size: 15px; 
+      font-size: 13px; 
       font-weight: bold;
       cursor: pointer;
       display: flex;
       align-items: center;
+      justify-content: space-between;
       gap: 6px;
       position: relative;
       transition: background 0.2s;
       user-select: none;
+      width: 100%;
+      box-sizing: border-box;
     }
     
     .contact-item:hover {
-      background: rgba(255, 255, 255, 0.25);
+      background: rgba(0, 0, 0, 0.08);
     }
     
     .copy-btn-text {
-      font-size: 12px;
-      border: 1.5px solid rgba(255, 255, 255, 0.5);
-      padding: 2px 8px;
+      font-size: 11px;
+      border: 1.5px solid currentColor;
+      padding: 1px 6px;
       border-radius: 4px;
-      background: rgba(255, 255, 255, 0.08);
-      margin-right: 8px;
+      background: rgba(255, 255, 255, 0.6);
+      margin-right: 4px;
       font-weight: bold;
       transition: all 0.2s ease;
     }
@@ -383,36 +368,6 @@
       text-align: center;
     }
 
-    <div id="member-modal" class="cart-modal" style="display:none;">
-    <div class="cart-content" style="position: relative; max-width: 460px; margin: auto;"> 
-      
-      <button onclick="toggleMemberModal()" class="close-cart-btn" style="position: absolute; top: 15px; left: 15px; background: #f5f5f5; border: none; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; color: #555; transition: all 0.2s; z-index: 10;" onmouseover="this.style.background='#e8e8e8'; this.style.transform='rotate(90deg)';" onmouseout="this.style.background='#f5f5f5'; this.style.transform='rotate(0deg)';">
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
-      </button>
-
-      <div class="cart-header" style="text-align: center; border-bottom: 1px solid #eee; padding-bottom: 10px; margin-bottom: 15px;">
-        <h3 style="color: #114232; margin: 0; font-size: 18px;">💳 بطاقة التخفيض الرسمية للأعضاء</h3>
-        <p style="font-size: 12.5px; color: #777; margin: 5px 0 0 0;">(تستخدم في حال الشراء من المركز المعتمد بدون توصيل للبيت)</p>
-      </div>
-      
-      <div class="member-id-container" style="background: #f4f7f5; padding: 15px; border-radius: 8px; text-align: center; border: 1px dashed #114232; margin-bottom: 15px;">
-        <h3 id="member-id-number" style="color:#114232; margin:0; letter-spacing:2px; font-size: 24px; font-weight: 800;">828119655</h3>
-      </div>
-      
-      <div style="font-size: 13px; color: #cc3333; margin: 5px 0 12px 0; line-height: 1.5; background: #fff5f5; padding: 10px; border-radius: 6px; border: 1px solid #ffe3e3; text-align: right; direction: rtl;">
-        ⚠️ **يجب التأكد من ظهور هذا الاسم لدى موظف المركز عند الشراء لضمان الخصم:** <br>
-        <strong style="display: block; text-align: center; margin-top: 5px; font-size: 15px; color: #114232;">BLAL JAMAL JASEEM</strong>
-      </div>
-
-      <div style="font-size: 13px; color: #444444; margin: 0 0 15px 0; font-weight: 600; line-height: 1.5; text-align: right; direction: rtl;">
-        📍 لمعرفة مواقع مراكز البيع الرسمية في محافظتك ومدينتك، يرجى مراسلتنا على الواتساب أو التليجرام وسنرسل لك العنوان اللوكيشن فوراً.
-      </div>
-      
-      <button onclick="copyMemberID()" class="copy-card-btn" style="width: 100%; background: #000000; color: #ffffff; border: none; padding: 12px; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 14px; transition: 0.2s;">📋 نسخ كود التخفيض</button>
-    </div>
-  </div>
-
-    /* 6. نافذة السلة وحقول الإدخال للحاسبة */
     .cart-modal {
       position: fixed;
       top: 0; left: 0; width: 100%; height: 100%;
@@ -464,108 +419,87 @@
     .tg-btn { background-color: #0088cc; }
     .tg-btn:hover { background-color: #0077b5; }
 
+    /* =================================================== */
+    /* ثانياً وثالثاً: تنسيقات الموبايل المخصصة وأزرار التواصل */
+    /* =================================================== */
 
-/* =================================================== */
-/* ثانياً وثالثاً: تنسيقات الموبايل المخصصة وأزرار التواصل */
-/* =================================================== */
+    .mobile-device .fixed-cart-top { padding: 14px 24px; font-size: 17px; }
+    .mobile-device .fixed-cart-top .cart-badge { font-size: 14px; }
+    .mobile-device .copy-card-btn { padding: 14px 28px; font-size: 17px; }
+    .mobile-device .btn-category { border: 2px solid #2c5e3b; padding: 10px 16px; font-size: 15px; font-weight: 500 !important; text-shadow: none !important; }
+    .mobile-device .floating-contact-bar { width: 94% !important; max-width: 440px !important; padding: 12px 10px !important; bottom: 15px !important; gap: 10px !important; } 
+    .mobile-device .floating-btn { padding: 12px 4px !important; font-size: 14px !important; font-weight: bold !important; gap: 4px !important; } 
+    .mobile-device .checkout-form input, .mobile-device .checkout-form textarea { padding: 14px; font-size: 16px; }
+    .mobile-device .btn-send { padding: 15px 12px; font-size: 17px; }
+    .mobile-device .contact-item { padding: 8px 10px; font-size: 12px; }
+    .mobile-device .product-card h3, .mobile-device .product-title, .mobile-device .product-name { font-weight: 500 !important; }
+    .mobile-device .btn-add-to-cart { display: block !important; width: 100% !important; padding: 6px 4px !important; font-size: 13px !important; font-weight: 500 !important; }
 
-/* 1. التنسيقات المعتمدة على كلاس الأجهزة الذكية برمجياً */
-.mobile-device .fixed-cart-top { padding: 14px 24px; font-size: 17px; }
-.mobile-device .fixed-cart-top .cart-badge { font-size: 14px; }
-.mobile-device .copy-card-btn { padding: 14px 28px; font-size: 17px; }
-.mobile-device .btn-category { border: 2px solid #2c5e3b; padding: 10px 16px; font-size: 15px; font-weight: 500 !important; text-shadow: none !important; }
-.mobile-device .floating-contact-bar { width: 92% !important; max-width: 440px !important; padding: 10px 14px !important; bottom: 15px !important; gap: 8px !important; } 
-.mobile-device .floating-btn { padding: 12px 6px !important; font-size: 15px !important; font-weight: bold !important; gap: 4px !important; } 
-.mobile-device .checkout-form input, .mobile-device .checkout-form textarea { padding: 14px; font-size: 16px; }
-.mobile-device .btn-send { padding: 15px 12px; font-size: 17px; }
-.mobile-device .contact-item { padding: 11px 18px; font-size: 17px; }
-.mobile-device .product-card h3, .mobile-device .product-title, .mobile-device .product-name { font-weight: 500 !important; }
-.mobile-device .btn-add-to-cart { display: block !important; width: 100% !important; padding: 6px 4px !important; font-size: 13px !important; font-weight: 500 !important; }
+    @media (max-width: 768px) {
+        .fixed-cart-top { padding: 14px 24px; font-size: 17px; }
+        .fixed-cart-top .cart-badge { font-size: 14px; }
+        .copy-card-btn { padding: 14px 28px; font-size: 17px; }
+        
+        .btn-category, .category-btn, .category-tab { 
+            border: 2px solid #2c5e3b !important; 
+            padding: 10px 16px !important; 
+            font-size: 15px !important; 
+            font-weight: 500 !important; 
+            text-shadow: none !important; 
+        }
+        
+        #products-container {
+            display: grid !important;
+            grid-template-columns: repeat(2, 1fr) !important;
+            gap: 12px !important;
+            padding: 10px;
+        }
 
-/* 2. التنسيقات المعتمدة على حجم شاشة الموبايل (Media Query) */
-@media (max-width: 768px) {
-    .fixed-cart-top { padding: 14px 24px; font-size: 17px; }
-    .fixed-cart-top .cart-badge { font-size: 14px; }
-    .copy-card-btn { padding: 14px 28px; font-size: 17px; }
-    
-    /* 🌟 تنعيم أزرار قوائم الأقسام للموبايل تماماً وإلغاء البولد والظل */
-    .btn-category, .category-btn, .category-tab { 
-        border: 2px solid #2c5e3b !important; 
-        padding: 10px 16px !important; 
-        font-size: 15px !important; 
-        font-weight: 500 !important; 
-        text-shadow: none !important; 
+        .product-name, .product-card h3, .product-title {
+            font-weight: 500 !important;
+        }
+
+        .btn-add-to-cart {
+            display: block !important; 
+            visibility: visible !important;
+            opacity: 1 !important;
+            width: 100% !important; 
+            padding: 6px 4px !important; 
+            font-size: 13px !important; 
+            font-weight: 500 !important; 
+            border-radius: 6px !important;
+            margin: 8px auto 0 auto !important;
+        }
+
+        .floating-contact-bar { width: 94% !important; max-width: 440px !important; padding: 12px 10px !important; bottom: 15px !important; gap: 10px !important; } 
+        .floating-btn { padding: 12px 4px !important; font-size: 14px !important; font-weight: bold !important; gap: 4px !important; } 
+        .checkout-form input, .checkout-form textarea { padding: 14px; font-size: 16px; }
+        .btn-send { padding: 15px 12px; font-size: 17px; }
+        .contact-item { padding: 8px 10px; font-size: 12px; }
     }
-    
-    /* عرض منتجين بجانب بعض بدقة وفخامة */
-    #products-container {
-        display: grid !important;
-        grid-template-columns: repeat(2, 1fr) !important;
-        gap: 12px !important;
-        padding: 10px;
-    }
-
-    /* 🌟 تنعيم أسماء وعناوين المنتجات تماماً للموبايل لإلغاء البولد */
-    .product-name, .product-card h3, .product-title {
-        font-weight: 500 !important;
-    }
-
-    /* 🌟 زر أضف للسلة للموبايل: يظهر بشكل كامل، ناعم، وبنفس حجم خط السعر والنقاط تماماً */
-    .btn-add-to-cart {
-        display: block !important; 
-        visibility: visible !important;
-        opacity: 1 !important;
-        width: 100% !important; 
-        padding: 6px 4px !important; 
-        font-size: 13px !important; 
-        font-weight: 500 !important; 
-        border-radius: 6px !important;
-        margin: 8px auto 0 auto !important;
-    }
-
-    /* أزرار التواصل والنوافذ للموبايل */
-    .floating-contact-bar { width: 92% !important; max-width: 440px !important; padding: 10px 14px !important; bottom: 15px !important; gap: 8px !important; } 
-    .floating-btn { padding: 12px 6px !important; font-size: 15px !important; font-weight: bold !important; gap: 4px !important; } 
-    .checkout-form input, .checkout-form textarea { padding: 14px; font-size: 16px; }
-    .btn-send { padding: 15px 12px; font-size: 17px; }
-    .contact-item { padding: 11px 18px; font-size: 17px; }
-}
-</style>
+  </style>
 
   <link rel="icon" type="image/jpeg" href="https://i.ibb.co/zWmbNc3R/photo-2026-06-02-08-37-05.jpg">
-<link rel="apple-touch-icon" href="https://i.ibb.co/zWmbNc3R/photo-2026-06-02-08-37-05.jpg">
-
+  <link rel="apple-touch-icon" href="https://i.ibb.co/zWmbNc3R/photo-2026-06-02-08-37-05.jpg">
 </head>
 <body>
 
   <div style="text-align: center; padding: 0; background-color: #ffffff; border-bottom: 1px solid #eef2f5; box-shadow: 0 2px 8px rgba(0,0,0,0.04); overflow: hidden;">
-  <img src="https://i.ibb.co/352QZp1g/photo-2026-06-02-08-37-01.jpg" alt="متجر منتجات DXN" style="max-height: 220px; width: auto; display: block; margin: 0 auto; object-fit: contain;">
-</div>
+    <img src="https://i.ibb.co/352QZp1g/photo-2026-06-02-08-37-01.jpg" alt="متجر منتجات DXN" style="max-height: 220px; width: auto; display: block; margin: 0 auto; object-fit: contain;">
+  </div>
 
   <div id="top-left-cart" onclick="toggleCartModal()" style="position: fixed; top: 20px; left: 20px; background-color: #000000; color: #ffffff; padding: 10px 18px; border-radius: 50px; z-index: 9999; cursor: pointer; box-shadow: 0 4px 15px rgba(0,0,0,0.25); font-weight: bold; display: flex; align-items: center; gap: 8px; direction: rtl;">
     🛒 السلة <span id="cart-count-top" style="background-color: red; color: white; border-radius: 50%; padding: 2px 8px; font-size: 12px; font-weight: bold; border: 1px solid white;">0</span>
   </div>
 
-  <header style="padding: 20px 10px; text-align: center;">
-    <h1 style="color: #114232; margin-bottom: 5px;">منتجات DXN العضوية</h1>
-    <p style="color: #666; margin-top: 0; font-size: 15px;">بإدارة عضو شركة DXN بلال جمال جاسم</p>
+  <header>
+    <h1 style="color: #000000; margin: 0 0 8px 0; font-size: 28px; font-weight: bold;">منتجات DXN العضوية</h1>
+    <p style="color: #222222; margin: 0 0 15px 0; font-size: 16px; font-weight: 600;">بإدارة عضو شركة DXN بلال جمال جاسم</p>
     
-    <button onclick="toggleMemberModal()" style="background-color: #000000; color: #ffffff; border: none; padding: 12px 20px; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 14px; margin: 10px 0; transition: 0.2s; box-shadow: 0 4px 10px rgba(0,0,0,0.1);" onmouseover="this.style.opacity='0.9'" onmouseout="this.style.opacity='1'">
-      💳 الشراء المباشر من الفروع؟ اضغط هنا لأخذ كود التخفيض الرسمي
+    <!-- تم تعديل نص الزر هنا حسب طلبك تماماً -->
+    <button onclick="toggleMemberModal()" style="background-color: #114232; color: #ffffff; border: none; padding: 12px 20px; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 14px; margin: 5px 0; transition: 0.2s; box-shadow: 0 4px 10px rgba(17,66,50,0.15);" onmouseover="this.style.opacity='0.9'" onmouseout="this.style.opacity='1'">
+      💳 للشراء من مراكز البيع بدون توصيل اضغط هنا للحصول على كود التخفيض الرسمي
     </button>
-    
-    <div class="header-contacts" style="margin-top: 15px;">
-      <div class="contact-item">
-        <span>الواتساب: 9647875415845+</span>
-        <span class="copy-btn-text" onclick="copyText('+9647875415845', this)">نسخ</span>
-        <span class="tooltip-text">نسخ الرقم</span>
-      </div>
-      <div class="contact-item">
-        <span>التليجرام: Ert234789@</span>
-        <span class="copy-btn-text" onclick="copyText('@Ert234789', this)">نسخ</span>
-        <span class="tooltip-text">نسخ المعرف</span>
-      </div>
-    </div>
   </header>
 
   <div class="categories">
@@ -582,15 +516,135 @@
   <div id="products-container" class="products-grid" style="display: none;"></div>
 
   <div class="floating-contact-bar">
-    <a href="https://wa.me/9647875415845" target="_blank" class="floating-btn btn-wa">واتساب للتواصل 💬</a>
-    <a href="tg://resolve?domain=Ert234789" target="_blank" class="floating-btn btn-tg">تليجرام للتواصل 💬</a>
+    <div style="display: flex; flex-direction: column; gap: 6px; flex: 1; align-items: center;">
+      <div class="contact-item" style="background: #e8f5e9; color: #114232;">
+        <span style="font-size: 12px; direction: ltr;">+9647875415845</span>
+        <span class="copy-btn-text" style="color: #114232; border-color: #114232;" onclick="copyText('+9647875415845', this)">نسخ</span>
+        <span class="tooltip-text">نسخ الرقم</span>
+      </div>
+      <a href="https://wa.me/9647875415845" target="_blank" class="floating-btn btn-wa" style="width: 100%;">واتساب للتواصل 💬</a>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 6px; flex: 1; align-items: center;">
+      <div class="contact-item" style="background: #e1f5fe; color: #0288d1;">
+        <span style="font-size: 12px; direction: ltr;">@Ert234789</span>
+        <span class="copy-btn-text" style="color: #0288d1; border-color: #0288d1;" onclick="copyText('@Ert234789', this)">نسخ</span>
+        <span class="tooltip-text">نسخ المعرف</span>
+      </div>
+      <a href="tg://resolve?domain=Ert234789" target="_blank" class="floating-btn btn-tg" style="width: 100%;">تليجرام للتواصل 💬</a>
+    </div>
+  </div>
+
+  <div id="member-modal" class="cart-modal" style="display:none;">
+    <div class="cart-content" style="position: relative; max-width: 460px; margin: auto;"> 
+      
+      <button onclick="toggleMemberModal()" class="close-cart-btn" style="position: absolute; top: 15px; left: 15px; background: #f5f5f5; border: none; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; color: #555; transition: all 0.2s; z-index: 10;" onmouseover="this.style.background='#e8e8e8'; this.style.transform='rotate(90deg)';" onmouseout="this.style.background='#f5f5f5'; this.style.transform='rotate(0deg)';">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+      </button>
+
+      <div class="cart-header" style="text-align: center; border-bottom: 1px solid #eee; padding-bottom: 10px; margin-bottom: 15px;">
+        <h3 style="color: #114232; margin: 0; font-size: 18px;">💳 بطاقة التخفيض الرسمية للأعضاء</h3>
+        <p style="font-size: 12.5px; color: #777; margin: 5px 0 0 0;">(تستخدم في حال الشراء من المركز المعتمد بدون توصيل للبيت)</p>
+      </div>
+      
+      <div class="member-id-container" style="background: #f4f7f5; padding: 15px; border-radius: 8px; text-align: center; border: 1px dashed #114232; margin-bottom: 15px; width: 100%; box-sizing: border-box;">
+        <h3 id="member-id-number" style="color:#114232; margin:0; letter-spacing:2px; font-size: 24px; font-weight: 800;">828119655</h3>
+      </div>
+      
+      <div style="font-size: 13px; color: #cc3333; margin: 5px 0 12px 0; line-height: 1.5; background: #fff5f5; padding: 10px; border-radius: 6px; border: 1px solid #ffe3e3; text-align: right; direction: rtl;">
+        ⚠️ **يجب التأكد من ظهور هذا الاسم لدى موظف المركز عند الشراء لضمان الخصم:** <br>
+        <strong style="display: block; text-align: center; margin-top: 5px; font-size: 15px; color: #114232;">BLAL JAMAL JASEEM</strong>
+      </div>
+
+      <div style="font-size: 13px; color: #444444; margin: 0 0 15px 0; font-weight: 600; line-height: 1.5; text-align: right; direction: rtl;">
+        📍 لمعرفة مواقع مراكز البيع الرسمية في محافظتك ومدينتك، يرجى مراسلتنا على الواتساب أو التليجرام وسنرسل لك العنوان اللوكيشن فوراً.
+      </div>
+      
+      <button onclick="copyMemberID()" class="copy-card-btn" style="width: 100%; background: #000000; color: #ffffff; border: none; padding: 12px; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 14px; transition: 0.2s;">📋 نسخ كود التخفيض</button>
+    </div>
+  </div>
+
+  <div id="cart-modal" class="cart-modal" style="display:none;">
+    <div class="cart-content" style="position: relative;"> 
+      <button onclick="toggleCartModal()" class="close-cart-btn" style="position: absolute; top: 15px; left: 15px; background: #f5f5f5; border: none; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; color: #555; transition: all 0.2s; z-index: 10;" onmouseover="this.style.background='#e8e8e8'; this.style.color='#000'; this.style.transform='rotate(90deg)';" onmouseout="this.style.background='#f5f5f5'; this.style.color='#555'; this.style.transform='rotate(0deg)';">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+      </button>
+
+      <div class="cart-header">
+        <h3>🛒 سلة المشتريات</h3>
+      </div>
+      
+      <div id="cart-items-list" class="cart-items-list"></div>
+      
+      <div class="cart-summary">
+        <div id="smart-pv-alert" style="margin-top: 10px; font-size: 13px; display: none;"></div>
+        <strong>الإجمالي: <span id="cart-total-price">0</span> دينار</strong>
+      </div>
+
+      <div class="checkout-form">
+        
+        <!-- الملاحظة الجديدة والمميزة لأسعار التوصيل في أول الملاحظات -->
+        <div style="background: #fff8db; border-right: 4px solid #f39c12; padding: 12px; margin-bottom: 10px; border-radius: 6px; font-size: 14px; font-weight: bold; color: #b76e00; text-align: right; line-height: 1.5; box-shadow: 0 2px 5px rgba(0,0,0,0.02);">
+          🚚 سعر التوصيل: عادة يكون 3,000 للمناطق الداخلية، و 5,000 أو 6,000 للمناطق الخارجية.
+        </div>
+
+        <div style="background: #f9f9f9; border-right: 4px solid #114232; padding: 12px; margin-bottom: 15px; border-radius: 6px; font-size: 14px; color: #333; text-align: right; line-height: 1.5;">
+          🏢 <strong>ملاحظة الشحن:</strong> التوصيل متوفر لكافة محافظات العراق (المراكز والأقضية الرئيسية والمدن المحيطة بها) لباب البيت.<br>
+          📅 <strong>فترة الشحن:</strong> يتم شحن وتوصيل الطلبات من يوم 1 إلى يوم 24 من كل شهر.<br>
+          📅 <strong>تنويه:</strong> استقبال الطلبات عبر الموقع متاح 24 ساعة طوال أيام الشهر، وسيتم حجز طلبك وتجهيزه فور بدء مواعيد الشحن الرسمية.
+        </div>
+
+        <h4>📍 معلومات الشحن والتوصيل</h4>
+
+        <label style="display: block; margin-bottom: 5px; font-weight: 600; color: #114232; font-size: 14px; text-align: right;">الاسم الثلاثي</label>
+        <input type="text" id="cust-name" placeholder="أدخل اسمك الكامل هنا" required>
+
+        <label style="display: block; margin-bottom: 5px; font-weight: 600; color: #114232; font-size: 14px; text-align: right;">رقم الهاتف</label>
+        <input type="tel" id="cust-phone" placeholder="07xxxxxxxxx" required>
+
+        <select id="cust-governorate" required style="width: 100%; padding: 12px; margin-bottom: 12px; border: 1px solid #ccc; border-radius: 8px; font-size: 16px; background-color: white; color: #333; cursor: pointer; box-sizing: border-box;">
+          <option value="" disabled selected hidden>اختر المحافظة أو المدينة...</option>
+          <option value="الموصل">الموصل</option>
+          <option value="كركوك">كركوك</option>
+          <option value="صلاح الدين">صلاح الدين</option>
+          <option value="ديالى">ديالى</option>
+          <option value="الفلوجة">الفلوجة</option>
+          <option value="الرمادي">الرمادي</option>
+          <option value="بابل">بابل</option>
+          <option value="كربلاء">كربلاء</option>
+          <option value="النجف">النجف</option>
+          <option value="الناصرية">الناصرية</option>
+          <option value="ميسان">ميسان</option>
+          <option value="البصرة">البصرة</option>
+          <option value="اربيل">اربيل</option>
+          <option value="بغداد">بغداد</option>
+          <option value="السليمانية">السليمانية</option>
+          <option value="الديوانية">الديوانية</option>
+          <option value="دهوك">دهوك</option>
+        </select>
+
+        <label style="display: block; margin-bottom: 5px; font-weight: 600; color: #114232; font-size: 14px; text-align: right;">عنوان السكن</label>
+        <input type="text" id="cust-address" placeholder="المنطقة / أقرب نقطة دالة" required>
+
+        <label style="display: block; margin-bottom: 5px; font-weight: 600; color: #114232; font-size: 14px; text-align: right;">ملاحظات إضافية (اختياري)</label>
+        <textarea id="cust-notes" placeholder="هل لديك أي تفاصيل أخرى؟"></textarea>
+        
+        <div class="submit-buttons-row">
+          <button onclick="sendOrder('whatsapp')" class="btn-send wa-btn">🟢 إرسال عبر الواتساب</button>
+          <button onclick="sendOrder('telegram')" class="btn-send tg-btn">🔵 إرسال عبر التليجرام</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="imgModal" class="image-modal" onclick="this.style.display='none'">
+    <img id="modalImg" src="" alt="صورة مكبرة">
   </div>
 
   <script>
     let allProducts = [];
     let cart = []; 
 
-    // 1. دالة تشغيل الموقع وجلب البيانات من رابط جوجل الجديد
     window.onload = function() {
       const googleWebAppUrl = "https://script.google.com/macros/s/AKfycbwPq5PlIvetAueCo5ugjEYIQzLeoBuQMh83n6R2R2-jrVyYt-3ooMKBOTaJWCfjdkMe/exec";
 
@@ -600,14 +654,12 @@
           return response.json();
         })
         .then(data => {
-          // تمرير البيانات لدالة العرض الأساسية
           handleResponse(data);
         })
         .catch(err => {
           document.getElementById('loading').innerHTML = "<span style='color:red;'>حدث خطأ في الاتصال: " + err.message + "</span>";
         });
 
-      // الحفاظ على كود استرجاع بيانات الزبون المحفوظة
       if (localStorage.getItem("saved_cust_name")) {
         document.getElementById("cust-name").value = localStorage.getItem("saved_cust_name");
       }
@@ -622,15 +674,13 @@
       }
     };
 
-    // 2. دالة الحفاظ على ظهور السلة دائماً في كل مكان ومنع إخفائها عند التمرير
     window.addEventListener('scroll', function() {
       var topLeftCart = document.getElementById('top-left-cart');
       if(topLeftCart) {
-        topLeftCart.style.display = 'flex'; // تبقى ظاهرة دائماً كعنصر مرن
+        topLeftCart.style.display = 'flex'; 
       }
     });
 
-    // 3. دالة استقبال البيانات وفحص الأخطاء
     function handleResponse(response) {
       if (response && response.error) {
         document.getElementById('loading').innerHTML = "<span style='color:red;'>خطأ في قراءة الجدول: " + response.error + "</span>";
@@ -640,7 +690,6 @@
       renderGrid(allProducts);
     }
 
-    // 4. دالة معالجة خطأ تحميل صور المنتجات
     function handleImgError(imgElement) {
       const fallbackDiv = document.createElement('div');
       fallbackDiv.className = 'product-img-fallback';
@@ -648,7 +697,6 @@
       imgElement.parentNode.replaceChild(fallbackDiv, imgElement);
     }
 
-    // 5. دالة بناء وعرض شبكة المنتجات (Grid) وحساب النقاط PV
     function renderGrid(productsList) {
       const container = document.getElementById('products-container');
       const loadingDiv = document.getElementById('loading');
@@ -668,8 +716,6 @@
           let imgUrl = (product.img && product.img.trim().startsWith('http')) ? product.img.trim() : '';
           
           let productPV = Number(product.pv || product.points || 0);
-
-          // حماية اسم المنتج عند تمريره داخل دالة الضغط لتجنب أخطاء الـ JavaScript
           let safeName = name.replace(/'/g, "\\'");
 
           let imageSection = imgUrl 
@@ -687,7 +733,7 @@
                 <div class="product-price">${formattedPrice} د.ع</div>
                 <div class="product-pv" style="font-size: 14px; color: #114232; font-weight: bold; margin-top: 4px; background: #fff8db; padding: 6px; border-radius: 4px; display: inline-block; text-align:center; width:calc(100% - 12px);">⭐ النقاط: ${productPV} PV</div>
                 
-                <button onclick="addToCart('${safeName}', ${rawPrice}, ${productPV})" class="btn-add-to-cart" style="width: 100%; margin-top: 10px; background-color: #114232; color: white; border: none; padding: 10px; border-radius: 6px; font-weight: bold; cursor: pointer; font-size: 14px; transition: 0.2s;" onmouseover="this.style.opacity='0.9'" onmouseout="this.style.opacity='1'">
+                <button onclick="addToCart('${safeName}', ${rawPrice}, ${productPV})" class="btn-add-to-cart">
                   🛒 إضافة للسلة
                 </button>
               </div>
@@ -700,7 +746,6 @@
       container.style.display = 'grid';
     }
 
-    // 6. دالة تصفية المنتجات حسب الأقسام
     function filterCategory(category, buttonElement) {
       const buttons = document.querySelectorAll('.btn-category');
       buttons.forEach(btn => btn.classList.remove('active'));
@@ -715,7 +760,6 @@
       renderGrid(filtered);
     }
 
-    // 7. دالة تكبير صورة المنتج عند الضغط عليها
     function zoomImage(url) {
       if(!url) return;
       const modal = document.getElementById('imgModal');
@@ -724,7 +768,6 @@
       modal.style.display = 'flex';
     }
 
-    // 8. دالة نسخ النصوص
     function copyText(textToCopy, element) {
       navigator.clipboard.writeText(textToCopy).then(() => {
         const tooltip = element.parentElement.querySelector('.tooltip-text');
@@ -741,13 +784,11 @@
       });
     }
 
-    // 9. دالة فتح وإغلاق نافذة السلة
     function toggleCartModal() {
       var modal = document.getElementById("cart-modal");
       modal.style.display = modal.style.display === "none" ? "flex" : "none";
     }
 
-    // 10. دالة إضافة منتج إلى السلة
     function addToCart(name, price, pv) {
       if (isNaN(price) || price <= 0) {
         alert("⚠️ هذا المنتج غير متاح للشراء حالياً.");
@@ -763,13 +804,11 @@
       updateCartUI();
     }
 
-    // 11. دالة حذف منتج تماماً من السلة
     function removeFromCart(name) {
       cart = cart.filter(item => item.name !== name);
       updateCartUI();
     }
 
-    // 12. دالة تحديث واجهة السلة وحساب المجموع الكلي وعرض ذكي لشحن الـ 130 نقطة
     function updateCartUI() {
       const listContainer = document.getElementById("cart-items-list");
       const totalContainer = document.getElementById("cart-total-price");
@@ -804,12 +843,12 @@
           </div>
           
           <div style="display: flex; align-items: center; gap: 8px; margin-left: 12px; margin-right: 12px; direction: ltr;">
-            <button onclick="changeQuantity('${safeName}', 1)" style="background-color:#2c5e3b; color:white; border:none; border-radius:6px; width:26px; height:26px; font-weight:bold; font-size:14px; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:0.2s;" onmouseover="this.style.opacity='0.9'" onmouseout="this.style.opacity='1'">+</button>
+            <button onclick="changeQuantity('${safeName}', 1)" style="background-color:#2c5e3b; color:white; border:none; border-radius:6px; width:26px; height:26px; font-weight:bold; font-size:14px; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:0.2s;">+</button>
             <span style="font-weight:600; font-size:14px; min-width:18px; text-align:center; color:#333;">${item.quantity}</span>
-            <button onclick="changeQuantity('${safeName}', -1)" style="background-color:#e0e0e0; color:#333; border:none; border-radius:6px; width:26px; height:26px; font-weight:bold; font-size:14px; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:0.2s;" onmouseover="this.style.background='#d5d5d5'" onmouseout="this.style.background='#e0e0e0'">-</button>
+            <button onclick="changeQuantity('${safeName}', -1)" style="background-color:#e0e0e0; color:#333; border:none; border-radius:6px; width:26px; height:26px; font-weight:bold; font-size:14px; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:0.2s;">-</button>
           </div>
 
-          <button onclick="removeFromCart('${safeName}')" style="background:none; border:none; color:#b0b0b0; cursor:pointer; padding: 6px; display:flex; align-items:center; justify-content:center; transition: all 0.2s; border-radius:50%;" onmouseover="this.style.color='#e74c3c'; this.style.background='#f9f9f9';" onmouseout="this.style.color='#b0b0b0'; this.style.background='none';" title="حذف المنتج">
+          <button onclick="removeFromCart('${safeName}')" style="background:none; border:none; color:#b0b0b0; cursor:pointer; padding: 6px; display:flex; align-items:center; justify-content:center; transition: all 0.2s; border-radius:50%;" title="حذف المنتج">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
           </button>
         `;
@@ -846,7 +885,6 @@
       if (badge) badge.innerText = totalItems;
     }
 
-    // 13. دالة تعديل الكمية (+ أو -) داخل السلة
     function changeQuantity(name, amount) {
       let item = cart.find(item => item.name === name);
       if (item) {
@@ -859,7 +897,6 @@
       }
     }
 
-    // 14. دالة إرسال تفاصيل الطلب كاملة وبشكل منسق عبر الواتساب أو التليجرام
     function sendOrder(platform) {
       var name = document.getElementById("cust-name").value.trim();
       var phone = document.getElementById("cust-phone").value.trim();
@@ -922,7 +959,6 @@
       }
     }
 
-    // 15. دالة نسخ رقم العضوية الخاص بك للزبون
     function copyMemberID() {
       var idNum = document.getElementById("member-id-number").innerText;
       navigator.clipboard.writeText(idNum);
@@ -941,84 +977,10 @@
       }, 2000);
     }
 
-    // دالة فتح وإغلاق نافذة كود التخفيض (المودال)
     function toggleMemberModal() {
       var modal = document.getElementById("member-modal");
       modal.style.display = modal.style.display === "none" ? "flex" : "none";
     }
-    
-</script>
-
-  <div id="imgModal" class="image-modal" onclick="this.style.display='none'">
-    <img id="modalImg" src="" alt="صورة مكبرة">
-  </div>
-
-  <div id="cart-modal" class="cart-modal" style="display:none;">
-    <div class="cart-content" style="position: relative;"> 
-      <button onclick="toggleCartModal()" class="close-cart-btn" style="position: absolute; top: 15px; left: 15px; background: #f5f5f5; border: none; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; color: #555; transition: all 0.2s; z-index: 10;" onmouseover="this.style.background='#e8e8e8'; this.style.color='#000'; this.style.transform='rotate(90deg)';" onmouseout="this.style.background='#f5f5f5'; this.style.color='#555'; this.style.transform='rotate(0deg)';">
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
-      </button>
-
-      <div class="cart-header">
-        <h3>🛒 سلة المشتريات</h3>
-      </div>
-      
-      <div id="cart-items-list" class="cart-items-list"></div>
-      
-      <div class="cart-summary">
-        <div id="smart-pv-alert" style="margin-top: 10px; font-size: 13px; display: none;"></div>
-        <strong>الإجمالي: <span id="cart-total-price">0</span> دينار</strong>
-      </div>
-
-      <div class="checkout-form">
-        <div style="background: #f9f9f9; border-right: 4px solid #114232; padding: 12px; margin-bottom: 15px; border-radius: 6px; font-size: 14px; color: #333; text-align: right; line-height: 1.5;">
-          🏢 <strong>ملاحظة الشحن:</strong> التوصيل متوفر لكافة محافظات العراق (المراكز والأقضية الرئيسية والمدن المحيطة بها) لباب البيت.<br>
-          📅 <strong>فترة الشحن:</strong> يتم شحن وتوصيل الطلبات من يوم 1 إلى يوم 24 من كل شهر.<br>
-          📅 <strong>تنويه:</strong> استقبال الطلبات عبر الموقع متاح 24 ساعة طوال أيام الشهر، وسيتم حجز طلبك وتجهيزه فور بدء مواعيد الشحن الرسمية.
-        </div>
-
-        <h4>📍 معلومات الشحن والتوصيل</h4>
-
-        <label style="display: block; margin-bottom: 5px; font-weight: 600; color: #114232; font-size: 14px; text-align: right;">الاسم الثلاثي</label>
-        <input type="text" id="cust-name" placeholder="أدخل اسمك الكامل هنا" required>
-
-        <label style="display: block; margin-bottom: 5px; font-weight: 600; color: #114232; font-size: 14px; text-align: right;">رقم الهاتف</label>
-        <input type="tel" id="cust-phone" placeholder="07xxxxxxxxx" required>
-
-        <select id="cust-governorate" required style="width: 100%; padding: 12px; margin-bottom: 12px; border: 1px solid #ccc; border-radius: 8px; font-size: 16px; background-color: white; color: #333; cursor: pointer; box-sizing: border-box;">
-          <option value="" disabled selected hidden>اختر المحافظة أو المدينة...</option>
-          <option value="الموصل">الموصل</option>
-          <option value="كركوك">كركوك</option>
-          <option value="صلاح الدين">صلاح الدين</option>
-          <option value="ديالى">ديالى</option>
-          <option value="الفلوجة">الفلوجة</option>
-          <option value="الرمادي">الرمادي</option>
-          <option value="بابل">بابل</option>
-          <option value="كربلاء">كربلاء</option>
-          <option value="النجف">النجف</option>
-          <option value="الناصرية">الناصرية</option>
-          <option value="ميسان">ميسان</option>
-          <option value="البصرة">البصرة</option>
-          <option value="اربيل">اربيل</option>
-          <option value="بغداد">بغداد</option>
-          <option value="السليمانية">السليمانية</option>
-          <option value="الديوانية">الديوانية</option>
-          <option value="دهوك">دهوك</option>
-        </select>
-
-        <label style="display: block; margin-bottom: 5px; font-weight: 600; color: #114232; font-size: 14px; text-align: right;">عنوان السكن</label>
-        <input type="text" id="cust-address" placeholder="المنطقة / أقرب نقطة دالة" required>
-
-        <label style="display: block; margin-bottom: 5px; font-weight: 600; color: #114232; font-size: 14px; text-align: right;">ملاحظات إضافية (اختياري)</label>
-        <textarea id="cust-notes" placeholder="هل لديك أي تفاصيل أخرى؟"></textarea>
-        
-        <div class="submit-buttons-row">
-          <button onclick="sendOrder('whatsapp')" class="btn-send wa-btn">🟢 إرسال عبر الواتساب</button>
-          <button onclick="sendOrder('telegram')" class="btn-send tg-btn">🔵 إرسال عبر التليجرام</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
+  </script>
 </body>
 </html>
