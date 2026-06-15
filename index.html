@@ -685,7 +685,7 @@
 
 
   <script>
-        let allProducts = [];
+            let allProducts = [];
     let cart = []; 
 
     window.onload = function() {
@@ -769,7 +769,7 @@
                 <div class="product-price">${formattedPrice} د.ع</div>
                 <div class="product-pv" style="font-size: 14px; color: #114232; font-weight: bold; margin-top: 4px; background: #fff8db; padding: 6px; border-radius: 4px; display: inline-block; text-align:center; width:calc(100% - 12px);">⭐ النقاط: ${productPV} PV</div>
                 
-                <button onclick="addToCart('${safeName}', ${rawPrice}, ${productPV})" class="btn-add-to-cart">
+                <button onclick="addToCart('${safeName}', ${rawPrice}, ${productPV})" class="btn-add-to-cart" style="background-color: #114232;">
                   🛒 إضافة للسلة
                 </button>
               </div>
@@ -804,16 +804,18 @@
       if(modal && modalImg) {
         modalImg.src = url;
         modal.style.display = 'flex';
-        google.script.history.push(null, null, 'product');
+        window.location.hash = 'product';
       }
     }
 
-    // 🔴 دالة غلق الصورة يدوياً وتنظيف الرابط
+    // 🔴 دالة غلق الصورة وتنظيف الرابط
     function closeZoomImage() {
       const modal = document.getElementById('imgModal');
       if (modal) {
         modal.style.display = 'none';
-        google.script.history.push(null, null, '');
+        if (window.location.hash === '#product') {
+          window.history.back();
+        }
       }
     }
 
@@ -833,45 +835,49 @@
       });
     }
 
-    // 🟢 دالة فتح وغلق السلة الذكية
+    // 🟢 دالة فتح وغلق السلة بنظام الهاش القياسي
     function toggleCartModal() {
       var modal = document.getElementById("cart-modal");
       if (!modal) return;
       if (modal.style.display === "none" || modal.style.display === "") {
         modal.style.display = "flex";
-        google.script.history.push(null, null, 'cart');
+        window.location.hash = 'cart';
       } else {
         modal.style.display = "none";
-        google.script.history.push(null, null, '');
+        if (window.location.hash === '#cart') {
+          window.history.back();
+        }
       }
     }
 
-    // 🟢 دالة فتح وغلق كود التخفيض الذكية
+    // 🟢 دالة فتح وغلق كود التخفيض بنظام الهاش القياسي
     function toggleMemberModal() {
       var modal = document.getElementById("member-modal");
       if (!modal) return;
       if (modal.style.display === "none" || modal.style.display === "") {
         modal.style.display = "flex";
-        google.script.history.push(null, null, 'discount');
+        window.location.hash = 'discount';
       } else {
         modal.style.display = "none";
-        google.script.history.push(null, null, '');
+        if (window.location.hash === '#discount') {
+          window.history.back();
+        }
       }
     }
 
-    // 🛡️ الحارس الموحد لمراقبة دقمة الرجوع مالت التلفون للثلاث نوافذ
-    google.script.history.setChangeHandler(function(e) {
+    // 🛡️ الحارس العام الموحد والذكي لمراقبة دقمة الرجوع مالت التلفون (متوافق 100% مع جيت هاب)
+    window.addEventListener('hashchange', function() {
       var cartModal = document.getElementById("cart-modal");
       var memberModal = document.getElementById("member-modal");
       var imgModal = document.getElementById("imgModal");
 
-      if (e.location.hash !== 'cart' && cartModal) {
+      if (window.location.hash !== '#cart' && cartModal) {
         cartModal.style.display = "none";
       }
-      if (e.location.hash !== 'discount' && memberModal) {
+      if (window.location.hash !== '#discount' && memberModal) {
         memberModal.style.display = "none";
       }
-      if (e.location.hash !== 'product' && imgModal) {
+      if (window.location.hash !== '#product' && imgModal) {
         imgModal.style.display = "none";
       }
     });
@@ -929,7 +935,7 @@
           </div>
           
           <div style="display: flex; align-items: center; gap: 8px; margin-left: 12px; margin-right: 12px; direction: ltr;">
-            <button onclick="changeQuantity('${safeName}', 1)" style="background-color:#2c5e3b; color:white; border:none; border-radius:6px; width:26px; height:26px; font-weight:bold; font-size:14px; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:0.2s;">+</button>
+            <button onclick="changeQuantity('${safeName}', 1)" style="background-color:#114232; color:white; border:none; border-radius:6px; width:26px; height:26px; font-weight:bold; font-size:14px; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:0.2s;">+</button>
             <span style="font-weight:600; font-size:14px; min-width:18px; text-align:center; color:#333;">${item.quantity}</span>
             <button onclick="changeQuantity('${safeName}', -1)" style="background-color:#e0e0e0; color:#333; border:none; border-radius:6px; width:26px; height:26px; font-weight:bold; font-size:14px; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:0.2s;">-</button>
           </div>
