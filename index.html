@@ -9,14 +9,14 @@
   <meta property="og:title" content="متجر DXN للمنتجات العضوية">
   <meta property="og:description" content="  لمنتجات DXN الصحية - بإدارة بلال جمال. أفضل المنتجات الطبيعية والصحية ">
   <meta property="og:type" content="website">
-  <meta property="og:image" content="https://i.ibb.co/JWZMmtGL/photo-2026-06-02-22-31-17.jpg">
+  <meta property="og:image" content="Wageh.jpg">
 
   <script>
     if (/Mobi|Android|iPhone|iPad/i.test(navigator.userAgent) || window.innerWidth < 768) {
       document.documentElement.classList.add('mobile-device');
     }
   </script>
-  
+
   <style>
     /* =================================================== */
     /* أولاً: تنسيقات الحاسبة الافتراضية (ناعمة وأنيقة وتلقائية)  */
@@ -103,7 +103,7 @@
       padding: 0;
       color: #333;
     }
-    
+
     header {
       background-color: #ffffff;
       padding: 25px 15px;
@@ -114,7 +114,7 @@
       box-shadow: 0 4px 15px rgba(0,0,0,0.03);
       border: 1px solid #eef2f0;
     }
-    
+
     .categories {
       display: flex;
       justify-content: center;
@@ -124,7 +124,7 @@
       padding: 0 10px;
       max-width: 800px;
     }
-    
+
     /* 3. قوائم الأقسام العلوية للحاسبة */
     .btn-category {
       background-color: #fff;
@@ -157,7 +157,7 @@
     .loading-container {
       text-align: center;
     }
-    
+
     .products-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -176,8 +176,8 @@
       transition: transform 0.3s;
       border: 1px solid #eef2f0;
       height: auto !important;
-      border-radius: 14px; /* هذا السطر يسوي حواف الكارت دائرية وناعمة */
-    overflow: hidden;    /* هذا السطر يقص حواف الصورة والأزرار حتى تمشي وية تدويرة الكارت */
+      border-radius: 14px; 
+      overflow: hidden;    
     }
 
     .product-card:hover {
@@ -191,7 +191,7 @@
       background-color: #ffffff;
       box-sizing: border-box;
     }
-    
+
     .product-img-fallback {
       width: 100%;
       height: 140px;
@@ -234,7 +234,7 @@
       border-radius: 6px;
       margin-top: auto;
     }
-    
+
     .btn-add-to-cart {
       display: block !important;
       visibility: visible !important;
@@ -254,7 +254,7 @@
     .btn-add-to-cart:hover {
       background-color: #21462c;
     }
-    
+
     .floating-contact-bar {
       position: fixed;
       bottom: 20px;
@@ -306,7 +306,7 @@
       max-height: 85%;
       border-radius: 8px;
     }
-    
+
     .contact-item {
       background: rgba(0, 0, 0, 0.04);
       padding: 6px 10px; 
@@ -324,11 +324,11 @@
       width: 100%;
       box-sizing: border-box;
     }
-    
+
     .contact-item:hover {
       background: rgba(0, 0, 0, 0.08);
     }
-    
+
     .copy-btn-text {
       font-size: 11px;
       border: 1.5px solid currentColor;
@@ -339,7 +339,7 @@
       font-weight: bold;
       transition: all 0.2s ease;
     }
-    
+
     .contact-item .tooltip-text {
       visibility: hidden;
       background-color: #333;
@@ -379,14 +379,13 @@
       z-index: 99999;
       padding: 10px;
     }
-    
+
     .cart-content {
       background: #ffffff; width: 100%; max-width: 460px;
       border-radius: 14px; padding: 22px; max-height: 90vh; overflow-y: auto;
       box-shadow: 0 5px 25px rgba(0,0,0,0.3);
     }
-    
-    /* تثبيت زر الإكس باللون الأسود الداكن ومتحرك مع السكرول */
+
     .close-cart-btn { 
       position: sticky !important;
       top: 0px;
@@ -409,14 +408,14 @@
       background: #222222 !important;
       transform: rotate(90deg);
     }
-    
+
     .cart-header {
       display: flex; justify-content: space-between; align-items: center;
       border-bottom: 2px solid #114232; padding-bottom: 10px; margin-bottom: 15px;
     }
     .cart-items-list { margin-bottom: 15px; }
     .cart-summary { font-size: 18px; font-weight: bold; border-bottom: 1px dashed #ccc; padding-bottom: 10px; margin-bottom: 15px; text-align: right; }
-    
+
     .checkout-form input, .checkout-form select, .checkout-form textarea {
       width: 100%; 
       padding: 10px; 
@@ -429,7 +428,7 @@
     }
     .checkout-form textarea { height: 75px; resize: vertical; }
     .submit-buttons-row { display: flex; gap: 10px; margin-top: 15px; }
-    
+
     .btn-send {
       flex: 1; 
       border: none; 
@@ -462,8 +461,7 @@
     .mobile-device .contact-item { padding: 8px 10px; font-size: 12px; }
     .mobile-device .product-card h3, .mobile-device .product-title, .mobile-device .product-name { font-weight: 500 !important; }
     .mobile-device .btn-add-to-cart { display: block !important; width: 100% !important; padding: 6px 4px !important; font-size: 13px !important; font-weight: 500 !important; }
-    
-    /* تصغير طفيف ومريح لصفحة السلة على الموبايل */
+
     .mobile-device .cart-content {
       width: 88% !important;
       max-height: 82vh !important;
@@ -474,7 +472,7 @@
         .fixed-cart-top { padding: 14px 24px; font-size: 17px; }
         .fixed-cart-top .cart-badge { font-size: 14px; }
         .copy-card-btn { padding: 14px 28px; font-size: 17px; }
-        
+
         .btn-category, .category-btn, .category-tab { 
             border: 2px solid #2c5e3b !important; 
             padding: 10px 16px !important; 
@@ -482,7 +480,7 @@
             font-weight: 500 !important; 
             text-shadow: none !important; 
         }
-        
+
         #products-container {
             display: grid !important;
             grid-template-columns: repeat(2, 1fr) !important;
@@ -511,8 +509,7 @@
         .checkout-form input, .checkout-form select, .checkout-form textarea { padding: 14px; font-size: 16px; }
         .btn-send { padding: 15px 12px; font-size: 17px; }
         .contact-item { padding: 8px 10px; font-size: 12px; }
-        
-        /* تصغير طفيف ومريح لصفحة السلة على الموبايل عبر الشاشات */
+
         .cart-content {
           width: 88% !important;
           max-height: 82vh !important;
@@ -520,7 +517,6 @@
         }
     }
 
-/* إجبار واجهة السلة والفورم تظهر باللون الأخضر الطوخ الفخم */
 .checkout-form h4, #cart-modal h4 {
     background-color: #114232 !important;
     color: #ffffff !important;
@@ -531,7 +527,6 @@
     font-weight: bold !important;
 }
 
-/* تلوين حواف حقول الإدخال */
 .checkout-form input[type="text"], 
 .checkout-form input[type="tel"], 
 .checkout-form select, 
@@ -539,20 +534,19 @@
     border: 1px solid #114232 !important;
 }
 
-/* تلوين حواف الفورم بالكامل */
 .checkout-form {
     border-top: 3px solid #114232 !important;
 }
 </style>
 
-
-  <link rel="icon" type="image/jpeg" href="https://i.ibb.co/zWmbNc3R/photo-2026-06-02-08-37-05.jpg">
-  <link rel="apple-touch-icon" href="https://i.ibb.co/zWmbNc3R/photo-2026-06-02-08-37-05.jpg">
+  <link rel="icon" type="image/jpeg" href="Tbweb.jpg">
+  <link rel="apple-touch-icon" href="Tbweb.jpg">
 </head>
-<body>
 
-  <div style="text-align: center; padding: 0; background-color: #ffffff; border-bottom: 1px solid #eef2f5; box-shadow: 0 2px 8px rgba(0,0,0,0.04); overflow: hidden;">
-    <img src="https://i.ibb.co/JWZMmtGL/photo-2026-06-02-22-31-17.jpg" alt="متجر منتجات DXN" style="max-height: 220px; width: auto; display: block; margin: 0 auto; object-fit: contain;">
+<body>
+    <div style="text-align: center; padding: 0; background-color: #ffffff; border-bottom: 1px solid #eef2f5; box-shadow: 0 2px 8px rgba(0,0,0,0.04); overflow: hidden;">
+    <!-- تم تغيير الرابط الخارجي هنا إلى اسم الصورة المرفوعة على جيتهاب مباشرة -->
+    <img src="Wageh.jpg" alt="متجر منتجات DXN" style="max-height: 220px; width: auto; display: block; margin: 0 auto; object-fit: contain;">
   </div>
 
   <div id="top-left-cart" onclick="toggleCartModal()" style="position: fixed; top: 20px; left: 20px; background-color: #000000; color: #ffffff; padding: 10px 18px; border-radius: 50px; z-index: 9999; cursor: pointer; box-shadow: 0 4px 15px rgba(0,0,0,0.25); font-weight: bold; display: flex; align-items: center; gap: 8px; direction: rtl;">
@@ -567,6 +561,7 @@
        للشراء من مراكز البيع بدون توصيل اضغط هنا للحصول على كود التخفيض الرسمي
     </button>
 </header>
+
 
 <div class="categories">
     <button class="btn-category active" onclick="filterCategory('الكل', this)">الكل</button>
