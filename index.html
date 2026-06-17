@@ -553,9 +553,11 @@
     🛒 السلة <span id="cart-count-top" style="background-color: red; color: white; border-radius: 50%; padding: 2px 8px; font-size: 12px; font-weight: bold; border: 1px solid white;">0</span>
   </div>
 
-  <div id="scroll-to-download-btn" onclick="scrollToDownload()" style="position: fixed; top: 75px; left: 20px; background-color: #114232; color: #ffffff; padding: 8px 14px; border-radius: 50px; z-index: 9999; cursor: pointer; box-shadow: 0 4px 12px rgba(0,0,0,0.2); font-weight: bold; font-size: 13px; display: flex; align-items: center; gap: 5px; direction: rtl;">
+    <!-- الزر العلوي المطور لمنع التحديد والوميض عند الضغط -->
+  <div id="scroll-to-download-btn" onclick="event.stopPropagation(); scrollToDownload();" style="position: fixed; top: 75px; left: 20px; background-color: #114232; color: #ffffff; padding: 8px 14px; border-radius: 50px; z-index: 9999; cursor: pointer; box-shadow: 0 4px 12px rgba(0,0,0,0.2); font-weight: bold; font-size: 13px; display: flex; align-items: center; gap: 5px; direction: rtl; user-select: none; -webkit-user-select: none; -webkit-tap-highlight-color: transparent;">
      لتحميل التطبيق ⬇️
   </div>
+
 
   <header>
     <h1 style="color: #000000; margin: 0 0 8px 0; font-size: 28px; font-weight: bold;">منتجات DXN العضوية</h1>
@@ -1093,14 +1095,16 @@
     }
 </script>
 
-  <div id="download-section-wrapper" style="text-align: center; padding: 40px 15px; background-color: #ffffff; margin-top: 50px; border-top: 2px dashed #114232;">
-      <h3 style="color: #114232; margin: 0 0 8px 0; font-size: 22px; font-weight: bold;">تطبيق الرافدين للمنتجات العضوية</h3>
+    <!-- قسم تحميل التطبيق النهائي معدل بالكامل لمنع التداخل وتغيير العنوان -->
+  <div id="download-section-wrapper" style="text-align: center; padding: 40px 15px 140px 15px; background-color: #ffffff; margin-top: 50px; border-top: 2px dashed #114232; user-select: none; -webkit-user-select: none;">
+      <h3 style="color: #114232; margin: 0 0 8px 0; font-size: 22px; font-weight: bold;">متجر منتجات DXN</h3>
       <p style="color: #555555; margin: 0 0 20px 0; font-size: 14px; font-weight: 600;">لتصفح أسرع وتجربة شراء أفضل، حمل تطبيقنا الرسمي الآن</p>
       
-      <a href="رابط_ملف_التطبيق_هنا.apk" style="background-color: #000000; color: #ffffff; text-decoration: none; padding: 14px 28px; border-radius: 8px; font-weight: bold; font-size: 15px; display: inline-block; box-shadow: 0 4px 15px rgba(0,0,0,0.2); transition: 0.2s;">
+      <a href="app.apk" style="background-color: #000000; color: #ffffff; text-decoration: none; padding: 14px 28px; border-radius: 8px; font-weight: bold; font-size: 15px; display: inline-block; box-shadow: 0 4px 15px rgba(0,0,0,0.2); transition: 0.2s; -webkit-tap-highlight-color: transparent;">
          📥 تحميل تطبيق المتجر الرسمي APK
       </a>
   </div>
+
 
 <script>
   // دالة النزول السلس إلى قسم التحميل في الأسفل
