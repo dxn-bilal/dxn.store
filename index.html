@@ -19,6 +19,12 @@
 
   <style>
 
+    body {
+    -webkit-user-select: none; /* Safari */
+    -ms-user-select: none; /* IE 10+ */
+    user-select: none; /* القاعدة القياسية */
+}
+
     /* إلغاء اللون الأزرق المشوش والوميض عند الضغط في الموقع والتطبيق */
 * {
     -webkit-tap-highlight-color: transparent !important;
@@ -545,6 +551,13 @@
 .checkout-form {
     border-top: 3px solid #114232 !important;
 }
+
+    /* 👈 ضعه هنا مباشرة قبل وسم إغلاق الستايل */
+ .no-scroll {
+    overflow: hidden !important;
+    height: 100vh !important;
+}
+    
 </style>
 
   <link rel="icon" type="image/jpeg" href="Tbweb.jpg">
@@ -838,6 +851,7 @@
       if(modal && modalImg) {
         modalImg.src = url;
         modal.style.display = 'flex';
+        document.body.classList.add('no-scroll'); // 👈 ضيف هذا السطر هنا لمنع التمرير عند تكبير الصورة
         window.location.hash = 'product';
       }
     }
@@ -847,6 +861,7 @@
       const modal = document.getElementById('imgModal');
       if (modal) {
         modal.style.display = 'none';
+        document.body.classList.remove('no-scroll'); // 👈 ضيف هذا السطر هنا لإعادة التمرير عند إغلاق الصورة
         if (window.location.hash === '#product') {
           window.history.back();
         }
@@ -876,8 +891,10 @@
       if (modal.style.display === "none" || modal.style.display === "") {
         modal.style.display = "flex";
         window.location.hash = 'cart';
+        document.body.classList.add('no-scroll'); // 👈 ضيف هذا السطر هنا لمنع التمرير عند فتح السلة
       } else {
         modal.style.display = "none";
+        document.body.classList.remove('no-scroll'); // 👈 ضيف هذا السطر هنا لإعادة التمرير عند قفل السلة
         if (window.location.hash === '#cart') {
           window.history.back();
         }
@@ -891,8 +908,10 @@
       if (modal.style.display === "none" || modal.style.display === "") {
         modal.style.display = "flex";
         window.location.hash = 'discount';
+        document.body.classList.add('no-scroll'); // 👈 ضيف هذا السطر هنا لمنع التمرير عند فتح السلة
       } else {
         modal.style.display = "none";
+        document.body.classList.remove('no-scroll'); // 👈 ضيف هذا السطر هنا لإعادة التمرير عند قفل السلة
         if (window.location.hash === '#discount') {
           window.history.back();
         }
@@ -914,7 +933,12 @@
       if (window.location.hash !== '#product' && imgModal) {
         imgModal.style.display = "none";
       }
-    });
+           // 👈 ضيف هذا الشرط هنا في نهاية الدالة مباشرة
+          // فائدته: إذا رجع بالهاتف وراحت كل الهاشات، يحذف قفل السكرول تلقائياً
+      if (window.location.hash !== '#cart' && window.location.hash !== '#discount' && window.location.hash !== '#product') {
+           document.body.classList.remove('no-scroll');
+      }
+   });
 
     function addToCart(name, price, pv) {
       if (isNaN(price) || price <= 0) {
