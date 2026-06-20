@@ -1118,7 +1118,7 @@ function updateCartUI(updateTimer = true) {
       window.open(whatsappUrl, '_blank');
       } else if (platform === 'telegram') {
       var telegramUrl = "https://t.me/Ert234789?text=" + encodedMessage;
-      window.open(telegramUrl, '_blank');
+     window.location.href = telegramUrl;
       }
     }
 
