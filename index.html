@@ -1116,7 +1116,7 @@ function updateCartUI(updateTimer = true) {
       var encodedMessage = encodeURIComponent(fullMessage);
 
      // ضع هذا الجديد في السلة داخل دالة الإرسال
-var isInsideOurApp = navigator.userAgent.includes("AlRafidainApp");
+var isInsideOurApp = navigator.userAgent.includes("DXN.Store");
 
 if (platform === 'whatsapp') {
     if (isInsideOurApp) {
@@ -1226,7 +1226,7 @@ document.addEventListener('DOMContentLoaded', initCart);
 
   <script>
 function openSocialLink(platform) {
-    var isInsideOurApp = navigator.userAgent.includes("AlRafidainApp");
+    var isInsideOurApp = navigator.userAgent.includes("DXN.Store");
 
     if (platform === 'whatsapp') {
         if (isInsideOurApp) {
