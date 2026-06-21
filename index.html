@@ -19,18 +19,26 @@
 
   <style>
 
-    body {
-    -webkit-user-select: none; /* Safari */
-    -ms-user-select: none; /* IE 10+ */
-    user-select: none; /* القاعدة القياسية */
-}
-
     /* إلغاء اللون الأزرق المشوش والوميض عند الضغط في الموقع والتطبيق */
 * {
     -webkit-tap-highlight-color: transparent !important;
     -webkit-focus-ring-color: transparent !important;
     outline: none !important;
+  }
+    
+   /* السماح بنسخ النصوص في كامل الموقع */
+  body {
+    -webkit-user-select: text; /* Safari */
+    -ms-user-select: text; /* IE 10+ */
+    user-select: text; /* النص قابل للتحديد */
+  }
+
+/* لكن، لمنع تحديد العناصر التجميلية (مثل الأزرار أو السلة) */
+.fixed-cart-top, .btn-category, .btn-add-to-cart, .floating-btn, .close-cart-btn {
+    -webkit-user-select: none !important;
+    user-select: none !important;
 }
+
     
     /* =================================================== */
     /* أولاً: تنسيقات الحاسبة الافتراضية (ناعمة وأنيقة وتلقائية)  */
@@ -386,19 +394,31 @@
     }
 
     .cart-modal {
-      position: fixed;
-      top: 0; left: 0; width: 100%; height: 100%;
-      background: rgba(0,0,0,0.5);
-      display: flex; justify-content: center; align-items: center;
-      z-index: 99999;
-      padding: 10px;
-    }
-
+  position: fixed;
+  top: 0; 
+  left: 0; 
+  width: 100%; 
+  height: 100%;
+  background: rgba(0,0,0,0.5);
+  display: flex !important;          /* إجبار خاصية الفليكس */
+  justify-content: center !important; /* توسيط أفقي حتمي */
+  align-items: center !important;     /* توسيط عمودي حتمي */
+  z-index: 99999;
+  padding: 15px;
+  box-sizing: border-box;
+}
+    
     .cart-content {
-      background: #ffffff; width: 100%; max-width: 460px;
-      border-radius: 14px; padding: 22px; max-height: 90vh; overflow-y: auto;
-      box-shadow: 0 5px 25px rgba(0,0,0,0.3);
-    }
+  background: #ffffff; 
+  width: 100%; 
+  max-width: 460px;
+  border-radius: 14px; 
+  padding: 22px; 
+  max-height: 85vh; /* تعديل خفيف لحماية الشاشات الصغيرة من الاختفاء */
+  overflow-y: auto;
+  box-shadow: 0 5px 25px rgba(0,0,0,0.3);
+  margin: 0 auto !important; /* تصفير الهوامش الجانبية لمنع الانحراف */
+}
 
     .close-cart-btn { 
       position: sticky !important;
@@ -556,6 +576,12 @@
  .no-scroll {
     overflow: hidden !important;
     height: 100vh !important;
+}
+
+    /* ضبط كرت العضوية والكود ليكون بالمنتصف تماماً أيضاً */
+.member-card-box, .membership-card {
+  margin-left: auto !important;
+  margin-right: auto !important;
 }
     
 </style>
@@ -740,18 +766,38 @@
     window.onload = function() {
       const googleWebAppUrl = "https://script.google.com/macros/s/AKfycbwPq5PlIvetAueCo5ugjEYIQzLeoBuQMh83n6R2R2-jrVyYt-3ooMKBOTaJWCfjdkMe/exec";
 
+      // 1. فحص هل توجد منتجات محفوظة مسبقاً بالذاكرة لعرضها فوراً ومنع الوميض
+      const cachedProducts = localStorage.getItem("dxn_products_cache");
+      if (cachedProducts) {
+        allProducts = JSON.parse(cachedProducts);
+        renderGrid(allProducts); // يعرض المنتجات فوراً بدون انتظار
+      }
+
+      // 2. جلب البيانات من السيرفر في الخلفية لتحديث الموقع إذا طرأ تغيير بالجدول
       fetch(googleWebAppUrl)
         .then(response => {
           if (!response.ok) throw new Error("فشل الاتصال بسيرفر البيانات");
           return response.json();
         })
         .then(data => {
-          handleResponse(data);
+          if (data && !data.error) {
+            // حفظ نسخة جديدة بالذاكرة
+            localStorage.setItem("dxn_products_cache", JSON.stringify(data));
+            allProducts = data;
+            renderGrid(allProducts); // تحديث الواجهة بالبيانات الجديدة بسلاسة
+          } else {
+            handleResponse(data);
+          }
         })
         .catch(err => {
-          document.getElementById('loading').innerHTML = "<span style='color:red;'>حدث خطأ في الاتصال: " + err.message + "</span>";
+          // إذا كانت الذاكرة فارغة وفشل الاتصال، يظهر الخطأ
+          if (!allProducts || allProducts.length === 0) {
+            document.getElementById('loading').innerHTML = "<span style='color:red;'>حدث خطأ في الاتصال: " + err.message + "</span>";
+          }
+          console.error("خطأ خلفي في تحديث البيانات:", err);
         });
 
+      // استرجاع معلومات الزبون المحفوظة (أكوادك القديمة كما هي)
       if (localStorage.getItem("saved_cust_name")) {
         document.getElementById("cust-name").value = localStorage.getItem("saved_cust_name");
       }
@@ -829,6 +875,11 @@
       }
       loadingDiv.style.display = 'none';
       container.style.display = 'grid';
+
+      // تأكد أن هذا السطر موجود في نهاية دالة renderGrid
+    document.getElementById('loading').style.display = 'none';
+    container.style.display = 'grid';
+      
     }
 
     function filterCategory(category, buttonElement) {
