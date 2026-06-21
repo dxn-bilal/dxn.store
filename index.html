@@ -603,40 +603,58 @@ button, .btn, img, nav, i, .menu {
   <link rel="apple-touch-icon" href="Tbweb.jpg">
 
     <style>
-        /* تصميم زر الصعود للأعلى */
-        .scroll-to-top {
-            position: fixed;
-            bottom: 25px;
-            right: 25px;
-            width: 48px;
-            height: 48px;
-            background-color: #121212;
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.2s ease;
-            z-index: 999;
-            -webkit-tap-highlight-color: transparent;
-        }
-        .scroll-to-top svg {
-            width: 22px;
-            height: 22px;
-            transition: transform 0.2s ease;
-        }
-        .scroll-to-top:active {
-            transform: scale(0.92) translateY(-3px);
-            background-color: #000000;
-        }
-        .scroll-to-top.show {
-            opacity: 1;
-            visibility: visible;
-        }
+      
+       /* تصميم زر الصعود للأعلى المطور - أفخم وأكبر */
+.scroll-to-top {
+    position: fixed;
+    bottom: 30px; /* رفعت مسافته قليلاً عن الحافة */
+    right: 30px;
+    width: 60px; /* كبرت الحجم من 48 إلى 60 */
+    height: 60px; /* كبرت الحجم من 48 إلى 60 */
+    
+    /* تأثير الزجاج الخلفي الفخم (Glassmorphism) */
+    background-color: rgba(18, 18, 18, 0.85); /* أسود شفاف قليلاً */
+    -webkit-backdrop-filter: blur(10px); /* ضبابية للمحتوى الخلفي لأجهزة الآيفون */
+    backdrop-filter: blur(10px); /* ضبابية للمحتوى الخلفي للأندرويد */
+    
+    border: 1px solid rgba(255, 255, 255, 0.2); /* إطار أوضح وأفخم */
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    
+    /* ظل أعمق يعطي عمق وفخامة (Deep Shadow) */
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+    
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.4s ease, visibility 0.4s ease, transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* حركة ظهور مرنة */
+    z-index: 999;
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* حركة السهم الجديد داخل الزر */
+.scroll-to-top svg {
+    width: 28px; /* كبرت السهم ليناسب الزر الجديد */
+    height: 28px;
+    transition: transform 0.3s ease;
+}
+
+/* تأثير تفاعلي عند الضغط بالموبايل (Feedback) */
+.scroll-to-top:active {
+    transform: scale(0.9) translateY(-5px); /* ينضغط للداخل ويرتفع قليلاً */
+    background-color: rgba(0, 0, 0, 0.95);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6);
+}
+
+/* فئة الظهور (تتحكم بها لغة الجافاسكريبت - لا تلمسها) */
+.scroll-to-top.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* تأكد أن كود الجافاسكريبت القديم لم يتغير، فهو يعمل بشكل ممتاز مع هذا التصميم */
     </style>
     
 </head>
@@ -1309,7 +1327,7 @@ document.addEventListener('DOMContentLoaded', initCart);
   <!-- زر العودة للأعلى الفخم -->
 <button id="scrollToTopBtn" class="scroll-to-top" title="العودة للأعلى">
     <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M18 15L12 9L6 15" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M12 4L4 12H9V20H15V12H20L12 4Z" fill="#ffffff"/>
     </svg>
 </button>
 
