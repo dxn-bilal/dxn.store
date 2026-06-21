@@ -402,7 +402,7 @@
   background: rgba(0,0,0,0.5);
   display: none; /* ✅ الافتراضي مخفية، وتظهر فقط عند الاستدعاء */
   justify-content: center; 
-  align-items: center;     
+  align-items: center;      
   z-index: 99999;
   padding: 15px;
   box-sizing: border-box;
@@ -656,10 +656,220 @@ button, .btn, img, nav, i, .menu {
 
 /* تأكد أن كود الجافاسكريبت القديم لم يتغير، فهو يعمل بشكل ممتاز مع هذا التصميم */
     </style>
+
+    /* تنسيقات نظام المنتجات المفضلة المضافة حديثاً دون تعديل القديم */
+    <style>
+      /* الزر العائم أعلى يمين الشاشة - لون حليبي والخط أحمر متوسط الغمق */
+      .floating-wishlist-btn {
+          position: fixed;
+          top: 20px;
+          right: 20px;
+          background-color: #fdfbf7 !important; /* لون حليبي كريمي */
+          color: #a61c1c !important; /* لون أحمر متوسط الغمق */
+          border: 1.5px solid rgba(166, 28, 28, 0.4) !important;
+          padding: 10px 16px;
+          font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+          font-weight: bold;
+          font-size: 14px;
+          border-radius: 25px;
+          box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+          cursor: pointer;
+          z-index: 999999; /* لضمان ظهوره فوق كل العناصر والمكونات */
+          transition: all 0.3s ease;
+          display: flex;
+          align-items: center;
+          gap: 6px;
+      }
+
+      .floating-wishlist-btn:active {
+          transform: scale(0.95);
+          background-color: #f5f0e6 !important;
+      }
+
+      /* نافذة العرض المنبثقة للمنتجات المفضلة */
+      .wishlist-modal {
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: rgba(0, 0, 0, 0.6);
+          display: none; /* يتم إظهاره وإخفاؤه عبر الفئة open بالجافاسكريبت */
+          justify-content: center;
+          align-items: center;
+          z-index: 9999999;
+          padding: 15px;
+          box-sizing: border-box;
+      }
+
+      .wishlist-modal.open {
+          display: flex !important;
+      }
+
+      .wishlist-modal-content {
+          background: #ffffff;
+          width: 100%;
+          max-width: 480px;
+          border-radius: 14px;
+          max-height: 85vh;
+          overflow-y: auto;
+          box-shadow: 0 5px 25px rgba(0,0,0,0.3);
+          margin: 0 auto;
+          display: flex;
+          flex-direction: column;
+      }
+
+      .wishlist-modal-header {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          border-bottom: 2px solid #114232;
+          padding: 15px 20px;
+          background-color: #114232;
+          color: white;
+          position: sticky;
+          top: 0;
+          z-index: 10;
+      }
+
+      .wishlist-modal-header h3 {
+          margin: 0;
+          font-size: 18px;
+          font-weight: bold;
+      }
+
+      .close-wishlist-btn {
+          background: #000000 !important;
+          border: none;
+          width: 32px;
+          height: 32px;
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          cursor: pointer;
+          color: #ffffff !important;
+          font-size: 20px;
+          transition: all 0.2s;
+      }
+
+      .close-wishlist-btn:hover {
+          background: #222222 !important;
+          transform: rotate(90deg);
+      }
+
+      #wishlistItemsContainer {
+          padding: 15px;
+      }
+
+      /* حاوية مرنة لجمع الأزرار في أسفل كارد المنتج */
+      .product-actions-container {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          width: 90%;
+          margin: 10px auto 5px auto;
+      }
+
+      /* تنسيق توافق زر السلة عند مجاورته لزر القلب */
+      .product-actions-container .btn-add-to-cart {
+          flex: 1;
+          margin: 0 !important; /* تصفير الهوامش ليتناسق التوزيع الأفقي */
+          width: auto !important;
+      }
+
+      /* زر المفضلة (القلب) */
+      .wishlist-btn {
+          width: 42px;
+          height: 42px;
+          background-color: #f5f5f5;
+          border: 1px solid rgba(0, 0, 0, 0.1);
+          border-radius: 8px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          cursor: pointer;
+          transition: all 0.2s ease;
+          flex-shrink: 0;
+      }
+
+      .wishlist-btn svg {
+          width: 22px;
+          height: 22px;
+          fill: none;
+          stroke: #333333;
+          stroke-width: 2;
+          transition: all 0.2s ease;
+      }
+
+      /* التأثير اللحظي عند تفعيل زر القلب للمنتج */
+      .wishlist-btn.active {
+          background-color: rgba(255, 77, 77, 0.1);
+          border-color: #ff4d4d;
+      }
+
+      .wishlist-btn.active svg {
+          fill: #ff4d4d; /* ملء قلب المحتوى باللون الأحمر */
+          stroke: #ff4d4d;
+      }
+
+      .wishlist-modal .empty-message {
+          text-align: center;
+          color: #888;
+          padding: 40px 0;
+          font-size: 14px;
+          font-weight: bold;
+      }
+
+      /* ملاءمة شاشات الهواتف المحمولة لنظام العرض المزدوج */
+      @media (max-width: 768px) {
+          .product-actions-container {
+              width: 100% !important;
+              padding: 0 4px;
+              box-sizing: border-box;
+              margin: 8px auto 0 auto !important;
+          }
+          .wishlist-btn {
+              width: 35px;
+              height: 35px;
+              border-radius: 6px;
+          }
+          .wishlist-btn svg {
+              width: 18px;
+              height: 18px;
+          }
+          .floating-wishlist-btn {
+              top: 15px;
+              right: 15px;
+              padding: 8px 14px;
+              font-size: 13px;
+          }
+      }
+    </style>
     
 </head>
 
 <body>
+
+  <!-- زر المنتجات المفضلة العلوي -->
+<button id="wishlistToggleBtn" class="floating-wishlist-btn" onclick="toggleWishlistModal()">
+    المنتجات المفضلة (<span id="wishlistCount">0</span>)
+</button>
+
+<!-- النافذة المنبثقة للمنتجات المفضلة (تكون مخفية وتظهر عند الضغط) -->
+<div id="wishlistModal" class="wishlist-modal">
+    <div class="wishlist-modal-content">
+        <div class="wishlist-modal-header">
+            <h3>قائمة المنتجات المفضلة</h3>
+            <button class="close-modal-btn" onclick="toggleWishlistModal()">×</button>
+        </div>
+        <!-- هنا ستظهر المنتجات بنفس كروت الموقع -->
+        <div id="wishlistItemsContainer" class="products-grid">
+            <p class="empty-message">لم تقم بإضافة أي منتج للمفضلة بعد.</p>
+        </div>
+    </div>
+</div>
+  
     <div style="text-align: center; padding: 0; background-color: #ffffff; border-bottom: 1px solid #eef2f5; box-shadow: 0 2px 8px rgba(0,0,0,0.04); overflow: hidden;">
     <!-- تم تغيير الرابط الخارجي هنا إلى اسم الصورة المرفوعة على جيتهاب مباشرة -->
     <img src="Wageh.jpg" alt="متجر منتجات DXN" style="max-height: 220px; width: auto; display: block; margin: 0 auto; object-fit: contain;">
@@ -831,18 +1041,19 @@ button, .btn, img, nav, i, .menu {
   <script>
     let allProducts = [];
     let cart = []; 
+    let wishlist = []; // 👈 إضافة مصفوفة المفضلة
 
     window.onload = function() {
       const googleWebAppUrl = "https://script.google.com/macros/s/AKfycbwPq5PlIvetAueCo5ugjEYIQzLeoBuQMh83n6R2R2-jrVyYt-3ooMKBOTaJWCfjdkMe/exec";
 
-      // 1. فحص هل توجد منتجات محفوظة مسبقاً بالذاكرة لعرضها فوراً ومنع الوميض
+      // 1. فحص المنتجات الكاش لعرضها فوراً
       const cachedProducts = localStorage.getItem("dxn_products_cache");
       if (cachedProducts) {
         allProducts = JSON.parse(cachedProducts);
-        renderGrid(allProducts); // يعرض المنتجات فوراً بدون انتظار
+        renderGrid(allProducts); 
       }
 
-      // 2. جلب البيانات من السيرفر في الخلفية لتحديث الموقع إذا طرأ تغيير بالجدول
+      // 2. جلب البيانات من السيرفر في الخلفية
       fetch(googleWebAppUrl)
         .then(response => {
           if (!response.ok) throw new Error("فشل الاتصال بسيرفر البيانات");
@@ -850,16 +1061,14 @@ button, .btn, img, nav, i, .menu {
         })
         .then(data => {
           if (data && !data.error) {
-            // حفظ نسخة جديدة بالذاكرة
             localStorage.setItem("dxn_products_cache", JSON.stringify(data));
             allProducts = data;
-            renderGrid(allProducts); // تحديث الواجهة بالبيانات الجديدة بسلاسة
+            renderGrid(allProducts); 
           } else {
             handleResponse(data);
           }
         })
         .catch(err => {
-          // إذا كانت الذاكرة فارغة وفشل الاتصال، يظهر الخطأ
           if (!allProducts || allProducts.length === 0) {
             document.getElementById('loading').innerHTML = "<span style='color:red;'>حدث خطأ في الاتصال: " + err.message + "</span>";
           }
@@ -883,6 +1092,7 @@ button, .btn, img, nav, i, .menu {
       imgElement.parentNode.replaceChild(fallbackDiv, imgElement);
     }
 
+    // 🌟 تحديث دالة العرض لتشمل زر المفضلة (القلب)
     function renderGrid(productsList) {
       const container = document.getElementById('products-container');
       const loadingDiv = document.getElementById('loading');
@@ -904,6 +1114,10 @@ button, .btn, img, nav, i, .menu {
           let productPV = Number(product.pv || product.points || 0);
           let safeName = name.replace(/'/g, "\\'");
 
+          // فحص هل المنتج موجود بالمفضلة لتحديد شكل القلب
+          let inWishlist = wishlist.some(item => item.name === name);
+          let heartIcon = inWishlist ? '❤️' : '🤍';
+
           let imageSection = imgUrl 
             ? `<img class="product-img" src="${imgUrl}" alt="${name}" style="cursor: zoom-in;" onclick="zoomImage('${imgUrl}')" onerror="handleImgError(this)">`
             : `<div class="product-img-fallback">🌿</div>`;
@@ -919,9 +1133,14 @@ button, .btn, img, nav, i, .menu {
                 <div class="product-price">${formattedPrice} د.ع</div>
                 <div class="product-pv" style="font-size: 14px; color: #114232; font-weight: bold; margin-top: 4px; background: #fff8db; padding: 6px; border-radius: 4px; display: inline-block; text-align:center; width:calc(100% - 12px);">⭐ النقاط: ${productPV} PV</div>
                 
-                <button onclick="addToCart('${safeName}', ${rawPrice}, ${productPV})" class="btn-add-to-cart" style="background-color: #114232;">
-                  🛒 إضافة للسلة
-                </button>
+                <div style="display: flex; gap: 8px; margin-top: 8px;">
+                  <button onclick="addToCart('${safeName}', ${rawPrice}, ${productPV})" class="btn-add-to-cart" style="background-color: #114232; flex: 1; margin: 0;">
+                    🛒 إضافة للسلة
+                  </button>
+                  <button onclick="toggleWishlistProduct('${safeName}')" style="background: #f1f1f1; border: none; border-radius: 8px; padding: 0 12px; cursor: pointer; font-size: 18px; display: flex; align-items: center; justify-content: center; transition: 0.2s;" title="إضافة للمفضلة">
+                    ${heartIcon}
+                  </button>
+                </div>
               </div>
             </div>
           `;
@@ -946,7 +1165,6 @@ button, .btn, img, nav, i, .menu {
       renderGrid(filtered);
     }
 
-    // 🟢 دالة فتح الصورة المكبرة مع تسجيل الهاش لزر الرجوع
     function zoomImage(url) {
       if(!url) return;
       const modal = document.getElementById('imgModal');
@@ -954,17 +1172,16 @@ button, .btn, img, nav, i, .menu {
       if(modal && modalImg) {
         modalImg.src = url;
         modal.style.display = 'flex';
-        document.body.classList.add('no-scroll'); // 👈 ضيف هذا السطر هنا لمنع التمرير عند تكبير الصورة
+        document.body.classList.add('no-scroll'); 
         window.location.hash = 'product';
       }
     }
 
-    // 🔴 دالة غلق الصورة وتنظيف الرابط
     function closeZoomImage() {
       const modal = document.getElementById('imgModal');
       if (modal) {
         modal.style.display = 'none';
-        document.body.classList.remove('no-scroll'); // 👈 ضيف هذا السطر هنا لإعادة التمرير عند إغلاق الصورة
+        document.body.classList.remove('no-scroll'); 
         if (window.location.hash === '#product') {
           window.history.back();
         }
@@ -987,45 +1204,61 @@ button, .btn, img, nav, i, .menu {
       });
     }
 
-    // 🟢 دالة فتح وغلق السلة بنظام الهاش القياسي
     function toggleCartModal() {
       var modal = document.getElementById("cart-modal");
       if (!modal) return;
       if (modal.style.display === "none" || modal.style.display === "") {
         modal.style.display = "flex";
         window.location.hash = 'cart';
-        document.body.classList.add('no-scroll'); // 👈 ضيف هذا السطر هنا لمنع التمرير عند فتح السلة
+        document.body.classList.add('no-scroll'); 
       } else {
         modal.style.display = "none";
-        document.body.classList.remove('no-scroll'); // 👈 ضيف هذا السطر هنا لإعادة التمرير عند قفل السلة
+        document.body.classList.remove('no-scroll'); 
         if (window.location.hash === '#cart') {
           window.history.back();
         }
       }
     }
 
-    // 🟢 دالة فتح وغلق كود التخفيض بنظام الهاش القياسي
     function toggleMemberModal() {
       var modal = document.getElementById("member-modal");
       if (!modal) return;
       if (modal.style.display === "none" || modal.style.display === "") {
         modal.style.display = "flex";
         window.location.hash = 'discount';
-        document.body.classList.add('no-scroll'); // 👈 ضيف هذا السطر هنا لمنع التمرير عند فتح السلة
+        document.body.classList.add('no-scroll'); 
       } else {
         modal.style.display = "none";
-        document.body.classList.remove('no-scroll'); // 👈 ضيف هذا السطر هنا لإعادة التمرير عند قفل السلة
+        document.body.classList.remove('no-scroll'); 
         if (window.location.hash === '#discount') {
           window.history.back();
         }
       }
     }
 
-    // 🛡️ الحارس العام الموحد والذكي لمراقبة دقمة الرجوع مالت التلفون
+    // 🌟 إضافة دالة فتح وإغلاق المفضلة عبر الهاش
+    function toggleWishlistModal() {
+      var modal = document.getElementById("wishlistModal");
+      if (!modal) return;
+      if (modal.style.display === "none" || modal.style.display === "") {
+        modal.style.display = "flex";
+        window.location.hash = 'wishlist';
+        document.body.classList.add('no-scroll');
+      } else {
+        modal.style.display = "none";
+        document.body.classList.remove('no-scroll');
+        if (window.location.hash === '#wishlist') {
+          window.history.back();
+        }
+      }
+    }
+
+    // 🛡️ تحديث الحارس العام ليشمل نافذة المفضلة عند الضغط على زر الرجوع بالتلفون
     window.addEventListener('hashchange', function() {
       var cartModal = document.getElementById("cart-modal");
       var memberModal = document.getElementById("member-modal");
       var imgModal = document.getElementById("imgModal");
+      var wishlistModal = document.getElementById("wishlistModal");
 
       if (window.location.hash !== '#cart' && cartModal) {
         cartModal.style.display = "none";
@@ -1036,9 +1269,11 @@ button, .btn, img, nav, i, .menu {
       if (window.location.hash !== '#product' && imgModal) {
         imgModal.style.display = "none";
       }
-           // 👈 ضيف هذا الشرط هنا في نهاية الدالة مباشرة
-          // فائدته: إذا رجع بالهاتف وراحت كل الهاشات، يحذف قفل السكرول تلقائياً
-      if (window.location.hash !== '#cart' && window.location.hash !== '#discount' && window.location.hash !== '#product') {
+      if (window.location.hash !== '#wishlist' && wishlistModal) {
+        wishlistModal.style.display = "none";
+      }
+      
+      if (window.location.hash !== '#cart' && window.location.hash !== '#discount' && window.location.hash !== '#product' && window.location.hash !== '#wishlist') {
            document.body.classList.remove('no-scroll');
       }
    });
@@ -1063,8 +1298,7 @@ button, .btn, img, nav, i, .menu {
       updateCartUI();
     }
 
-    // أضفنا (updateTimer = true) كقيمة افتراضية لتحديث العداد تلقائياً مع كل تعديل
-function updateCartUI(updateTimer = true) {
+    function updateCartUI(updateTimer = true) {
       const listContainer = document.getElementById("cart-items-list");
       const totalContainer = document.getElementById("cart-total-price");
       const pvAlertContainer = document.getElementById("smart-pv-alert");
@@ -1109,12 +1343,10 @@ function updateCartUI(updateTimer = true) {
         listContainer.appendChild(itemRow);
       });
 
-      // حفظ السلة الحالية بالذاكرة فوراً
       localStorage.setItem('dxn_products_cart', JSON.stringify(cart));
 
-      // 👇 التعديل الجديد: تحديث العداد بـ 14 يوم عند حدوث أي تعديل حقيقي بالسلة 👇
       if (updateTimer && cart.length > 0) {
-          const FOURTEEN_DAYS_MS = 14 * 24 * 60 * 60 * 1000; // حساب 14 يوم بالملي ثانية
+          const FOURTEEN_DAYS_MS = 14 * 24 * 60 * 60 * 1000; 
           localStorage.setItem('cart_expiry_time', Date.now() + FOURTEEN_DAYS_MS);
       }
   
@@ -1159,9 +1391,77 @@ function updateCartUI(updateTimer = true) {
       }
     }
 
-    function sendOrder(platform) {
+    // 🌟 دالة إضافة/حذف المنتج من المفضلة وتحديث الـ UI
+    function toggleWishlistProduct(name) {
+      let product = allProducts.find(p => p.name === name);
+      if (!product) return;
 
-     const FOURTEEN_DAYS_MS = 14 * 24 * 60 * 60 * 1000;
+      let index = wishlist.findIndex(item => item.name === name);
+      if (index > -1) {
+        wishlist.splice(index, 1);
+      } else {
+        wishlist.push(product);
+      }
+
+      localStorage.setItem('dxn_products_wishlist', JSON.stringify(wishlist));
+      updateWishlistUI();
+      renderGrid(allProducts); // إعادة بناء الجريد لتحديث شكل القلوب ❤️
+    }
+
+    // 🌟 دالة تحديث واجهة المفضلة المودال
+    function updateWishlistUI() {
+      const wishlistCountSpan = document.getElementById('wishlistCount');
+      if (wishlistCountSpan) wishlistCountSpan.innerText = wishlist.length;
+
+      const container = document.getElementById('wishlistItemsContainer');
+      if (!container) return;
+
+      if (wishlist.length === 0) {
+        container.innerHTML = '<p class="empty-message">لم تقم بإضافة أي منتج للمفضلة بعد.</p>';
+        return;
+      }
+
+      container.innerHTML = '';
+      wishlist.forEach(product => {
+        const card = document.createElement('div');
+        card.className = 'product-card';
+
+        let name = product.name || 'منتج بدون اسم';
+        let rawPrice = Number(product.price);
+        let formattedPrice = !isNaN(rawPrice) ? rawPrice.toLocaleString() : 'غير محدد';
+        let imgUrl = (product.img && product.img.trim().startsWith('http')) ? product.img.trim() : '';
+        let productPV = Number(product.pv || product.points || 0);
+        let safeName = name.replace(/'/g, "\\'");
+
+        let imageSection = imgUrl 
+          ? `<img class="product-img" src="${imgUrl}" alt="${name}">`
+          : `<div class="product-img-fallback">🌿</div>`;
+
+        card.innerHTML = `
+          ${imageSection}
+          <div class="product-info">
+            <div>
+              <h3 class="product-name">${name}</h3>
+            </div>
+            <div>
+              <div class="product-price">${formattedPrice} د.ع</div>
+              <div style="display: flex; gap: 5px; margin-top: 8px;">
+                <button onclick="addToCart('${safeName}', ${rawPrice}, ${productPV}); toggleWishlistModal(); toggleCartModal();" class="btn-add-to-cart" style="background-color: #114232; flex: 1; margin: 0; font-size: 12px; padding: 8px;">
+                  🛒 شراء
+                </button>
+                <button onclick="toggleWishlistProduct('${safeName}')" style="background: #ffcdd2; border: none; border-radius: 8px; padding: 0 10px; cursor: pointer; color: #c62828;">
+                  ❌ حذف
+                </button>
+              </div>
+            </div>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    function sendOrder(platform) {
+      const FOURTEEN_DAYS_MS = 14 * 24 * 60 * 60 * 1000;
       localStorage.setItem('cart_expiry_time', Date.now() + FOURTEEN_DAYS_MS);
       
       var name = document.getElementById("cust-name").value.trim();
@@ -1216,13 +1516,13 @@ function updateCartUI(updateTimer = true) {
       var fullMessage = orderTitle + customerInfo + orderDetails;
       var encodedMessage = encodeURIComponent(fullMessage);
 
-    if (platform === 'whatsapp') {
-    var whatsappUrl = "https://wa.me/9647875415845?text=" + encodedMessage;
-    window.open(whatsappUrl, '_blank');
-} else if (platform === 'telegram') {
-    var telegramUrl = "https://t.me/Ert234789?text=" + encodedMessage;
-    window.open(telegramUrl, '_blank');
-}
+      if (platform === 'whatsapp') {
+          var whatsappUrl = "https://wa.me/9647875415845?text=" + encodedMessage;
+          window.open(whatsappUrl, '_blank');
+      } else if (platform === 'telegram') {
+          var telegramUrl = "https://t.me/Ert234789?text=" + encodedMessage;
+          window.open(telegramUrl, '_blank');
+      }
     }
 
     function copyMemberID() {
