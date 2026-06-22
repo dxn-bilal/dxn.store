@@ -948,17 +948,17 @@ button, .btn, img, nav, i, .menu {
                <div class="product-pv" style="font-size: 14px; color: #114232; font-weight: bold; margin-top: 4px; background: #fff8db; padding: 6px; border-radius: 4px; display: inline-block; text-align:center; width:calc(100% - 12px);">⭐ النقاط: ${productPV} PV</div>
                
                <!-- ترتيب الأزرار جنبًا إلى جنب بشكل متناسق للموبايل -->
-               <div style="display: flex; gap: 8px; margin-top: 10px; align-items: stretch; height: 46px !important;">
+               <div style="display: flex; gap: 8px; margin-top: 10px; align-items: center; height: 46px !important;">
   
   <button onclick="addToCart('${safeName}', ${rawPrice}, ${productPV})" 
           class="btn-add-to-cart" 
-          style="background-color: #114232 !important; flex: 1; margin: 0; font-size: 14px; border: none; border-radius: 8px; color: white; font-weight: bold; cursor: pointer; display: flex; align-items: center; justify-content: center; box-sizing: border-box !important; height: 100% !important;">
+          style="background-color: #114232 !important; flex: 1; margin: 0 !important; margin-top: 0 !important; transform: none !important; position: relative !important; top: 0 !important; font-size: 16px !important; border: none; border-radius: 8px; color: white; font-weight: bold; cursor: pointer; display: flex; align-items: center; justify-content: center; box-sizing: border-box !important; height: 46px !important;">
     🛒 إضافة للسلة
   </button>
   
   <button type="button" 
           onclick="event.stopPropagation(); shareProduct('${safeName}', '${safeDesc}')" 
-          style="background: #f5f5f5 !important; border: 1px solid #e0e0e0 !important; border-radius: 8px; width: 46px !important; height: 100% !important; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: 0.2s; -webkit-tap-highlight-color: transparent; margin: 0; padding: 0; box-sizing: border-box !important; flex-shrink: 0;" 
+          style="background: #f5f5f5 !important; border: 1px solid #e0e0e0 !important; border-radius: 8px; width: 46px !important; height: 46px !important; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: 0.2s; -webkit-tap-highlight-color: transparent; margin: 0 !important; padding: 0; box-sizing: border-box !important; flex-shrink: 0;" 
           title="مشاركة المنتج">
     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#444444" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
       <path d="M17 8l5 5-5 5"></path>
