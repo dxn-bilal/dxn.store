@@ -949,7 +949,7 @@ button, .btn, img, nav, i, .menu {
                
                <!-- ترتيب الأزرار جنبًا إلى جنب بشكل متناسق للموبايل -->
                <div style="display: flex; gap: 6px; margin-top: 8px;">
-                 <button onclick="addToCart('${safeName}', ${rawPrice}, ${productPV})" class="btn-add-to-cart" style="background-color: #114232; flex: 1; margin: 0; font-size: 14px; padding: 10px 4px;">
+                 <button onclick="addToCart('${safeName}', ${rawPrice}, ${productPV})" class="btn-add-to-cart" style="background-color: #114232; flex: 1; margin: 0; font-size: 14px; padding: 14px 4px;">
                    🛒 إضافة للسلة
                  </button>
                  
@@ -1435,17 +1435,20 @@ document.addEventListener('DOMContentLoaded', initCart);
     });
 
       // دالة مشاركة المنتج لكل التطبيقات المتاحة بالجهاز
-function shareProduct(productName) {
-    // 1. صياغة الرسالة والنص الذي سيظهر عند المشاركة
+function shareProduct(productName, productBenefit) {
+    // 1. جلب رابط الموقع الحالي ديناميكياً
     var storeUrl = window.location.origin + window.location.pathname; 
-    var fullShareMessage = "شاهد منتج [" + productName + "] في متجر DXN للمنتجات الصحية:\n" + storeUrl;
+    
+    // 2. صياغة الرسالة التسويقية الجديدة (اسم المنتج + الفائدة + الرابط)
+    var fullShareMessage = "• *متجر DXN للمنتجات الصحية* \n\n" +
+                           "• *المنتج:* " + productName + "\n" +
+                           "• *الفوائد:* " + productBenefit + "\n\n" +
+                           "• *رابط المتجر:* " + storeUrl;
 
-    // 2. الفحص إذا كان مفتوحاً داخل التطبيق
+    // 3. الفحص والتمرير للتطبيق أو المتصفح
     if (typeof AppInventor !== 'undefined') {
-        // يرسل النص للتطبيق مع كلمة مفتاحية share:
         AppInventor.setWebViewString("share:" + fullShareMessage);
     } else {
-        // إذا فُتح من متصفح عادي خارجي (كروم أو سفاري)
         if (navigator.share) {
             navigator.share({
                 title: productName,
@@ -1453,9 +1456,8 @@ function shareProduct(productName) {
                 url: storeUrl
             }).catch(err => console.log(err));
         } else {
-            // كخيار احتياطي إذا كان المتصفح قديم جداً: يتم نسخ النص للكلية
             navigator.clipboard.writeText(fullShareMessage);
-            alert("📋 تم نسخ رابط المنتج ووصفه، يمكنك مشاركته الآن!");
+            alert("📋 تم نسخ تفاصيل المنتج والرابط، يمكنك مشاركته الآن!");
         }
     }
 }
