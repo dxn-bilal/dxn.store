@@ -1232,14 +1232,25 @@ function updateCartUI(updateTimer = true) {
       var fullMessage = orderTitle + customerInfo + orderDetails;
       var encodedMessage = encodeURIComponent(fullMessage);
 
-    if (platform === 'whatsapp') {
-    var whatsappUrl = "https://wa.me/9647875415845?text=" + encodedMessage;
-    window.open(whatsappUrl, '_blank');
-} else if (platform === 'telegram') {
+   if (platform === 'whatsapp') {
+    // الرابط المباشر اللي يجبر الموبايل يفتح التطبيق ويخير الزبون بين (العادي والـ Business)
+    var appUrl = "whatsapp://send?phone=9647875415845&text=" + encodedMessage;
+    var webUrl = "https://wa.me/9647875415845?text=" + encodedMessage;
+    
+    // يفتح التطبيق فوراً بالموبايل
+    window.location.href = appUrl;
+    
+    // خطة بديلة: إذا الزبون فاتح من حاسبة وما عنده تطبيق، يفتح له رابط الويب العادي ورا نص ثانية
+    setTimeout(function() {
+        window.open(webUrl, '_blank');
+    }, 500);
+
+    } else if (platform === 'telegram') {
+    // التليكرام يبقـى مثل ما هو بدون أي تغيير
     var telegramUrl = "https://t.me/Ert234789?text=" + encodedMessage;
     window.open(telegramUrl, '_blank');
-}
     }
+ }
 
     function copyMemberID() {
       var idNum = document.getElementById("member-id-number").innerText;
