@@ -19,14 +19,6 @@
 
   <style>
 
-    /* حل مشكلة اختفاء زر الصعود للأعلى في الموبايل */
-@media (max-width: 768px) {
-    .scroll-to-top, #scrollToTopBtn {
-        bottom: 85px !important; /* يرفعه للأعلى شوية حتى يصير فوق أزرار الواتساب والتليكرام */
-        z-index: 9999 !important; /* يضمن ظهوره فوق أي عنصر آخر بالصفحة */
-    }
-}
-
     /* إلغاء اللون الأزرق المشوش والوميض عند الضغط في الموقع والتطبيق */
 * {
     -webkit-tap-highlight-color: transparent !important;
@@ -735,7 +727,6 @@ button, .btn, img, nav, i, .menu {
         <a href="https://t.me/Ert234789" class="floating-btn btn-tg">تليجرام للتواصل 💬</a>
     </div>
 
-</div> </div>
 </div>
 
   <div id="member-modal" class="cart-modal" style="display:none;">
@@ -1420,6 +1411,15 @@ function shareProduct(name, description, imgUrl) {
 }
       
     </script>
+
+      <style>
+@media screen and (max-width: 768px) {
+    .scroll-to-top, #scrollToTopBtn {
+        bottom: 90px !important; /* يرفعه فوق أزرار التواصل بالموبايل */
+        z-index: 9999 !important; /* يضمن ظهوره فوق كل شيء */
+    }
+}
+</style>
       
 </body>
 </html>
