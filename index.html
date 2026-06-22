@@ -948,19 +948,20 @@ button, .btn, img, nav, i, .menu {
                <div class="product-pv" style="font-size: 14px; color: #114232; font-weight: bold; margin-top: 4px; background: #fff8db; padding: 6px; border-radius: 4px; display: inline-block; text-align:center; width:calc(100% - 12px);">⭐ النقاط: ${productPV} PV</div>
                
                <!-- ترتيب الأزرار جنبًا إلى جنب بشكل متناسق للموبايل -->
-               <div style="display: flex; gap: 6px; margin-top: 8px; align-items: center;">
+               <div style="display: flex; gap: 8px; margin-top: 10px; align-items: stretch; justify-content: space-between;">
                  
                  <button onclick="addToCart('${safeName}', ${rawPrice}, ${productPV})" 
                          class="btn-add-to-cart" 
-                         style="background-color: #114232 !important; flex: 1; margin: 0; font-size: 14px; padding: 0 4px !important; height: 50px !important; display: flex; align-items: center; justify-content: center; border: none; border-radius: 8px; color: white; font-weight: bold; cursor: pointer;">
+                         style="background-color: #114232 !important; flex: 1; margin: 0; font-size: 14px; padding: 0 4px !important; height: 50px !important; display: flex; align-items: center; justify-content: center; border: none; border-radius: 8px; color: white; font-weight: bold; cursor: pointer; transition: 0.2s;">
                    🛒 إضافة للسلة
                  </button>
                  
                  <button type="button" 
                          onclick="event.stopPropagation(); shareProduct('${safeName}', '${safeDesc}')" 
-                         style="background: #f1f1f1 !important; border: none; border-radius: 8px; width: 50px !important; height: 50px !important; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: 0.2s; -webkit-tap-highlight-color: transparent; margin: 0; padding: 0;" 
+                         class="btn-share" 
+                         style="background-color: #f1f1f1 !important; border: none; border-radius: 8px; width: 50px !important; height: 50px !important; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: 0.2s; -webkit-tap-highlight-color: transparent; margin: 0; padding: 0; flex-shrink: 0;" 
                          title="مشاركة المنتج">
-                   <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#333333" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                   <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#333333" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                      <path d="M17 8l5 5-5 5"></path>
                      <path d="M22 13H9a4 4 0 0 0-4 4v2"></path>
                    </svg>
@@ -976,6 +977,7 @@ button, .btn, img, nav, i, .menu {
      loadingDiv.style.display = 'none';
      container.style.display = 'grid';
    }
+    
     function filterCategory(category, buttonElement) {
       const buttons = document.querySelectorAll('.btn-category');
       buttons.forEach(btn => btn.classList.remove('active'));
