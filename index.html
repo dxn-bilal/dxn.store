@@ -26,19 +26,19 @@
     outline: none !important;
   }
     
-   /* السماح بنسخ النصوص في كامل الموقع */
-  body {
-    -webkit-user-select: text; /* Safari */
-    -ms-user-select: text; /* IE 10+ */
-    user-select: text; /* النص قابل للتحديد */
-  }
-
-/* لكن، لمنع تحديد العناصر التجميلية (مثل الأزرار أو السلة) */
-.fixed-cart-top, .btn-category, .btn-add-to-cart, .floating-btn, .close-cart-btn {
-    -webkit-user-select: none !important;
-    user-select: none !important;
+  /* تعطيل النسخ وتحديد النصوص في الموقع بالكامل عدا الأزرار والمدخلات */
+body {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
-
+input, textarea, select, button, .copy-card-btn, #member-id-number {
+    -webkit-user-select: text !important;
+    -moz-user-select: text !important;
+    -ms-user-select: text !important;
+    user-select: text !important;
+}
     
     /* =================================================== */
     /* أولاً: تنسيقات الحاسبة الافتراضية (ناعمة وأنيقة وتلقائية)  */
@@ -886,53 +886,67 @@ button, .btn, img, nav, i, .menu {
     }
 
     function renderGrid(productsList) {
-      const container = document.getElementById('products-container');
-      const loadingDiv = document.getElementById('loading');
-      container.innerHTML = '';
+     const container = document.getElementById('products-container');
+     const loadingDiv = document.getElementById('loading');
+     container.innerHTML = '';
 
-      if (!productsList || productsList.length === 0) {
-        container.innerHTML = '<p style="text-align:center; grid-column: 1/-1; font-size:16px;">لا توجد منتجات حالياً في هذا القسم.</p>';
-      } else {
-        productsList.forEach(product => {
-          const card = document.createElement('div');
-          card.className = 'product-card';
+     if (!productsList || productsList.length === 0) {
+       container.innerHTML = '<p style="text-align:center; grid-column: 1/-1; font-size:16px;">لا توجد منتجات حالياً في هذا القسم.</p>';
+     } else {
+       productsList.forEach(product => {
+         const card = document.createElement('div');
+         card.className = 'product-card';
 
-          let name = product.name || 'منتج بدون اسم';
-          let rawPrice = Number(product.price);
-          let formattedPrice = !isNaN(rawPrice) ? rawPrice.toLocaleString() : 'غير محدد';
-          let description = product.description || ''; 
-          let imgUrl = (product.img && product.img.trim().startsWith('http')) ? product.img.trim() : '';
+         let name = product.name || 'منتج بدون اسم';
+         let rawPrice = Number(product.price);
+         let formattedPrice = !isNaN(rawPrice) ? rawPrice.toLocaleString() : 'غير محدد';
+         let description = product.description || ''; 
+         let imgUrl = (product.img && product.img.trim().startsWith('http')) ? product.img.trim() : '';
 
-          let productPV = Number(product.pv || product.points || 0);
-          let safeName = name.replace(/'/g, "\\'");
+         let productPV = Number(product.pv || product.points || 0);
+         
+         // تجهيز النصوص وتحميتها من علامات الاقتباس لتجنب أخطاء الكود
+         let safeName = name.replace(/'/g, "\\'");
+         let safeDesc = description.replace(/'/g, "\\'").replace(/\n/g, " ");
 
-          let imageSection = imgUrl 
-            ? `<img class="product-img" src="${imgUrl}" alt="${name}" style="cursor: zoom-in;" onclick="zoomImage('${imgUrl}')" onerror="handleImgError(this)">`
-            : `<div class="product-img-fallback">🌿</div>`;
+         let imageSection = imgUrl 
+           ? `<img class="product-img" src="${imgUrl}" alt="${name}" style="cursor: zoom-in;" onclick="zoomImage('${imgUrl}')" onerror="handleImgError(this)">`
+           : `<div class="product-img-fallback">🌿</div>`;
 
-          card.innerHTML = `
-            ${imageSection}
-            <div class="product-info">
-              <div>
-                <h3 class="product-name">${name}</h3>
-                ${description ? `<p class="product-benefits">${description}</p>` : ''}
-              </div>
-              <div>
-                <div class="product-price">${formattedPrice} د.ع</div>
-                <div class="product-pv" style="font-size: 14px; color: #114232; font-weight: bold; margin-top: 4px; background: #fff8db; padding: 6px; border-radius: 4px; display: inline-block; text-align:center; width:calc(100% - 12px);">⭐ النقاط: ${productPV} PV</div>
-                
-                <button onclick="addToCart('${safeName}', ${rawPrice}, ${productPV})" class="btn-add-to-cart" style="background-color: #114232;">
-                  🛒 إضافة للسلة
-                </button>
-              </div>
-            </div>
-          `;
-          container.appendChild(card);
-        });
-      }
-      loadingDiv.style.display = 'none';
-      container.style.display = 'grid';
-    }
+         card.innerHTML = `
+           ${imageSection}
+           <div class="product-info">
+             <div>
+               <h3 class="product-name">${name}</h3>
+               ${description ? `<p class="product-benefits">${description}</p>` : ''}
+             </div>
+             <div>
+               <div class="product-price">${formattedPrice} د.ع</div>
+               <div class="product-pv" style="font-size: 14px; color: #114232; font-weight: bold; margin-top: 4px; background: #fff8db; padding: 6px; border-radius: 4px; display: inline-block; text-align:center; width:calc(100% - 12px);">⭐ النقاط: ${productPV} PV</div>
+               
+               <!-- ترتيب الأزرار جنبًا إلى جنب بشكل متناسق للموبايل -->
+               <div style="display: flex; gap: 6px; margin-top: 8px;">
+                 <button onclick="addToCart('${safeName}', ${rawPrice}, ${productPV})" class="btn-add-to-cart" style="background-color: #114232; flex: 1; margin: 0; font-size: 14px; padding: 10px 4px;">
+                   🛒 إضافة للسلة
+                 </button>
+                 
+                 <!-- زر المشاركة الذكي الجديد مضاف هنا بصف زر السلة -->
+                 <button type="button" onclick="event.stopPropagation(); shareProduct('${safeName}', '${safeDesc}', '${imgUrl}')" style="background: #f1f1f1; border: none; border-radius: 8px; width: 40px; height: 40px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: 0.2s; -webkit-tap-highlight-color: transparent;" title="مشاركة المنتج">
+                   <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#333333" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                     <path d="M17 8l5 5-5 5"></path>
+                     <path d="M22 13H9a4 4 0 0 0-4 4v2"></path>
+                   </svg>
+                 </button>
+               </div>
+             </div>
+           </div>
+         `;
+         container.appendChild(card);
+       });
+     }
+     loadingDiv.style.display = 'none';
+     container.style.display = 'grid';
+   }
 
     function filterCategory(category, buttonElement) {
       const buttons = document.querySelectorAll('.btn-category');
@@ -1355,6 +1369,30 @@ document.addEventListener('DOMContentLoaded', initCart);
             });
         });
     });
+
+      // دالة مشاركة المنتج لكل التطبيقات المتاحة بالجهاز
+function shareProduct(name, description, imgUrl) {
+  const shareText = `🌱 *${name}*\n\n📝 *الفائدة:* ${description || 'منتج طبيعي متميز'}\n\n📸 *رابط صورة المنتج:* ${imgUrl || 'لا توجد صورة متوفرة'}`;
+  
+  if (navigator.share) {
+    navigator.share({
+      title: name,
+      text: shareText
+    })
+    .then(() => console.log('تمت المشاركة بنجاح'))
+    .catch((error) => console.log('تم إلغاء المشاركة أو حدث خطأ:', error));
+  } else {
+    // حل بديل للمتصفحات القديمة التي لا تدعم المشاركة المباشرة
+    const textarea = document.createElement('textarea');
+    textarea.value = shareText;
+    document.body.appendChild(textarea);
+    textarea.select();
+    document.execCommand('copy');
+    document.body.removeChild(textarea);
+    alert('📋 متصفحك لا يدعم فتح قائمة التطبيقات مباشرة، تم نسخ نص وفائدة المنتج تلقائياً لتتمكن من لصقها ومشاركتها في أي مكان!');
+  }
+}
+      
     </script>
       
 </body>
