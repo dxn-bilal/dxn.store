@@ -1,4 +1,4 @@
-const CACHE_NAME = 'dxn-store-v2';
+const CACHE_NAME = 'dxn-store-v3';
 const assets = [
   './',
   './index.html',
