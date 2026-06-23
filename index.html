@@ -725,6 +725,23 @@
     .mobile-device .product-card h3, .mobile-device .product-title, .mobile-device .product-name { font-weight: 500 !important; }
     .mobile-device .btn-add-to-cart { display: block !important; width: 100% !important; padding: 6px 4px !important; font-size: 13px !important; font-weight: 500 !important; }
     .mobile-device .cart-content { width: 88% !important; max-height: 82vh !important; padding: 16px !important; }
+
+    /* عند فتح الموقع من اللابتوب أو الشاشات الكبيرة */
+@media (min-width: 992px) {
+    .products-grid {
+        grid-template-columns: repeat(4, 1fr) !important;
+        gap: 15px !important; /* المسافة بين الكارتات */
+    }
+}
+
+/* للموبايل يظل قطعتين بصف واحد بشكل مرتب */
+@media (max-width: 768px) {
+    .products-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 10px !important;
+    }
+}
+    
   </style>
 
   <script>
@@ -745,7 +762,7 @@
   </div>
 
   <div id="top-left-cart" onclick="toggleCartModal()" style="position: fixed; top: 20px; left: 20px; width: 130px; box-sizing: border-box !important; background-color: #000000; color: #ffffff; padding: 10px 12px; border-radius: 50px; z-index: 9999; cursor: pointer; box-shadow: 0 4px 15px rgba(0,0,0,0.25); font-weight: bold; display: flex; align-items: center; justify-content: center; gap: 6px; direction: rtl;">
-    🛒 السلة <span id="cart-count-top" style="background-color: red; color: white; border-radius: 50%; padding: 2px 8px; font-size: 12px; font-weight: bold; border: 1px solid white;">0</span>
+    السلة <span id="cart-count-top" style="background-color: red; color: white; border-radius: 50%; padding: 2px 8px; font-size: 12px; font-weight: bold; border: 1px solid white;">0</span>
 </div>
 
 <div id="scroll-to-download-btn" onclick="event.stopPropagation(); scrollToDownload();" style="position: fixed; top: 75px; left: 20px; width: 130px; box-sizing: border-box !important; background-color: #114232; color: #ffffff; padding: 8px 10px; border-radius: 20px; z-index: 9999; cursor: pointer; box-shadow: 0 4px 12px rgba(0,0,0,0.2); font-weight: bold; font-size: 11px; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 2px; direction: rtl; user-select: none; -webkit-user-select: none; -webkit-tap-highlight-color: transparent;">
@@ -770,11 +787,13 @@
     <button class="btn-category" onclick="filterCategory('منتجات البشرة والتجميل', this)">منتجات البشرة والتجميل</button>
   </div>
 
-  <div class="loading-container">
-    <div id="loading" class="loading">جاري إظهار المنتجات...</div>
-  </div>
+  <div class="loading-container" style="display: flex; justify-content: center; align-items: center; width: 100%; padding: 50px 0; box-sizing: border-box;">
+    <div id="loading" class="loading" style="text-align: center; font-weight: bold; font-size: 16px; color: #114232;">
+        جاري إظهار المنتجات...
+    </div>
+</div>
 
-  <div id="products-container" class="products-grid" style="display: none;"></div>
+<div id="products-container" class="products-grid" style="display: none;"></div>
 
   <div class="floating-contact-bar">
     <div style="display: flex; flex-direction: column; gap: 6px; flex: 1;">
