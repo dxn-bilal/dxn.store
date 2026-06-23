@@ -1,7 +1,10 @@
-const CACHE_NAME = 'rafidain-store-v1';
+const CACHE_NAME = 'dxn-store-v1';
 const assets = [
   './',
-  './index.html'
+  './index.html',
+  './manifest.json',
+  './icon-192.png',
+  './icon-512.png'
 ];
 
 // تثبيت التطبيق وتخزين الملفات الأساسية مؤقتاً
