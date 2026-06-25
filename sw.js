@@ -1,4 +1,4 @@
-const CACHE_NAME = 'dxn-store-v11'; // اسم الإصدار الجديد
+const CACHE_NAME = 'dxn-store-v12'; // اسم الإصدار الجديد
 const assets = [
   './',
   './index.html',
