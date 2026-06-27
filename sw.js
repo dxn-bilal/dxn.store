@@ -1,7 +1,6 @@
 const CACHE_NAME = 'dxn-store-v15'; // اسم الإصدار الجديد
 const assets = [
   './',
-  './index.html',
   './manifest.json',
   './icon-192.png',
   './icon-512.png'
