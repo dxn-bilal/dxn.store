@@ -1,68 +1,95 @@
-const CACHE_NAME = 'dxn-store-v21'; // زيدنا الإصدار إلى v20 علمود يجبر جهاز الزبون يمسح v19 ويحدث فوراً
-const DYNAMIC_CACHE_NAME = 'dxn-dynamic-products-v1'; // كاش الصور والبيانات التلقائي
-
-// 1. دمجنا كل ملفاتك القديمة (الأيقونات والمانيفست) مع ملفات البرمجة الأساسية
+const CACHE_NAME = 'dxn-store-v22'; // اسم الإصدار الجديد
 const assets = [
-  './',
-  './style.css',
-  './script.js',
-  './manifest.json',
-  './icon-192.png',
-  './icon-512.png'
+  './',
+  './manifest.json',
+  './icon-192.png',
+  './icon-512.png'
 ];
 
-// 2. تثبيت التطبيق وإجبار السيرفس وركر الجديد على التنشيط فوراً (من كودك القديم)
+// 1. تثبيت التطبيق وإجبار السيرفس وركر الجديد على التنشيط فوراً
 self.addEventListener('install', e => {
-  self.skipWaiting(); // تجبر المتصفح على الانتقال للإصدار الجديد فوراً
-  e.waitUntil(
-    caches.open(CACHE_NAME).then(cache => {
-      return cache.addAll(assets);
-    })
-  );
+  self.skipWaiting(); // خطوة مصيرية: تجبر المتصفح على الانتقال لـ v3 فوراً بدون انتظار
+  e.waitUntil(
+    caches.open(CACHE_NAME).then(cache => {
+      return cache.addAll(assets);
+    })
+  );
 });
 
-// 3. التفعيل وحذف كاش الإصدارات القديمة تلقائياً (من كودك القديم مع حماية الكاش الديناميكي)
+// 2. التفعيل وحذف كاش الإصدارات القديمة (v1, v2) من جهاز الزبون تلقائياً
 self.addEventListener('activate', e => {
-  e.waitUntil(
-    caches.keys().then(cacheNames => {
-      return Promise.all(
-        cacheNames.map(cache => {
-          // يمسح أي كاش قديم، بس يعوف الكاش الثابت الجديد والكاش الديناميكي مالت الصور
-          if (cache !== CACHE_NAME && cache !== DYNAMIC_CACHE_NAME) {
-            console.log('جاري حذف الكاش القديم المنتهي:', cache);
-            return caches.delete(cache);
-          }
-        })
-      );
-    }).then(() => self.clients.claim()) // يسيطر على الموقع بالثانية الحالية
-  );
+  e.waitUntil(
+    caches.keys().then(cacheNames => {
+      return Promise.all(
+        cacheNames.map(cache => {
+          if (cache !== CACHE_NAME) {
+            console.log('جاري حذف الكاش القديم المنتهي:', cache);
+            return caches.delete(cache); // يمسح الفايلات القديمة تماماً علمود لا تظهر للزبون
+          }
+        })
+      );
+    }).then(() => self.clients.claim()) // يخلي السيرفس وركر الجديد يسيطر على الموقع بالثانية الحالية
+  );
 });
 
-// 4. الجلب الذكي: يفتح الملفات الأساسية أوفلاين + يلقط الصور وروابط الشيت تلقائياً (الكود الجديد مدمج)
+// 3. جلب البيانات وتشغيل المتجر أوفلاين وسونلاين
 self.addEventListener('fetch', e => {
-  e.respondWith(
-    caches.match(e.request).then(cachedResponse => {
-      // إذا الفايل أو الصورة موجودة مسبقاً بالكاش، افتحها فوراً بدون نت
-      if (cachedResponse) {
-        return cachedResponse;
-      }
+  e.respondWith(
+    caches.match(e.request).then(response => {
+      return response || fetch(e.request);
+    })
+  );
+});
 
-      // إذا مو موجودة، جيبها من النت وخزن نسخة منها للمستقبل
-      return fetch(e.request).then(networkResponse => {
-        return caches.open(DYNAMIC_CACHE_NAME).then(cache => {
-          // شرط لقط الصور وروابط غوغل شيت تلقائياً بدون ما تكتب اسماؤهن وحدة وحدة
-          if (
-            e.request.url.match(/\.(jpg|jpeg|png|gif|webp)$/i) || 
-            e.request.url.includes('google.com') || 
-            e.request.url.includes('script.google')
-          ) {
-            cache.put(e.request, networkResponse.clone()); // خزن نسخة أوفلاين
-          }
-          return networkResponse;
-        });
-      }).catch(() => {
-        // نتركها فارغة في حال الأوفلاين التام لملف غير مخزن
-      });
-    })
-  );
+
+هسة انا كودي القديم هيج
+
+const staticCacheName = 'static-assets-v1';
+const dynamicCacheName = 'dynamic-products-v1';
+
+// 1. هنا تحط فقط الملفات الأساسية الثابتة (بدون أي صورة منتج!)
+const staticAssets = [
+  './',
+  './index.html',
+  './style.css',
+  './script.js'
+];
+
+// تثبيت الكاش الثابت
+self.addEventListener('install', event => {
+  event.waitUntil(
+    caches.open(staticCacheName).then(cache => {
+      return cache.addAll(staticAssets);
+    })
+  );
+});
+
+// 2. الكود السحري لجلب الكاش التلقائي (الأساسي لشغلك)
+self.addEventListener('fetch', event => {
+  event.respondWith(
+    caches.match(event.request).then(cachedResponse => {
+      // إذا الملف موجود بالكاش (مثل الهيكل الأساسي)، يفتحه فوراً بدون نت
+      if (cachedResponse) {
+        return cachedResponse;
+      }
+
+      // إذا الملف مو موجود (مثل صورة جديدة أو بيانات الشيت)، يجلبها من النت ويحفظها فوراً
+      return fetch(event.request).then(networkResponse => {
+        return caches.open(dynamicCacheName).then(cache => {
+          // هنا نخبره: احفظ أي صورة (png, jpg) أو أي رابط جاي من غوغل شيت
+          if (
+            event.request.url.match(/\.(jpg|jpeg|png|gif|webp)$/i) || 
+            event.request.url.includes('google.com') || 
+            event.request.url.includes('script.google')
+          ) {
+            // يحفظ نسخة في الكاش الديناميكي ويعرض النسخة الأصلية للزبون
+            cache.put(event.request, networkResponse.clone());
+          }
+          return networkResponse;
+        });
+      }).catch(() => {
+        // إذا كان أوفلاين تماماً والملف مو مخزن، تكدر ترجع صفحة خطأ أو تتركها فارغة
+      });
+    })
+  );
 });
