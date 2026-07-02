@@ -1,4 +1,4 @@
-const CACHE_NAME = 'dxn-store-v18'; // اسم الإصدار الجديد
+const CACHE_NAME = 'dxn-store-v19'; // اسم الإصدار الجديد
 const assets = [
   './',
   './manifest.json',
