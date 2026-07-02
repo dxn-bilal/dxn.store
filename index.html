@@ -1464,7 +1464,8 @@
       }
 
       orderDetails += "\n• *الحساب الإجمالي:* " + totalSummaryPrice.toLocaleString() + " د.ع";
-      var encodedMessage = encodeURIComponent(fullMessage = orderTitle + customerInfo + orderDetails);
+     var fullMessage = orderTitle + customerInfo + orderDetails;
+     var encodedMessage = encodeURIComponent(fullMessage);
 
       if (typeof AppInventor !== 'undefined') {
           if (platform === 'whatsapp') {
