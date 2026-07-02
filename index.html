@@ -1035,16 +1035,24 @@
       // أ- تشغيل السلة واسترجاع البيانات المحفوظة
       initCart();
 
-      // ب- فحص إذا كان الزائر بداخل الـ APK لإخفاء أزرار التحميل
-      var isInsideApk = navigator.userAgent.includes('wv');
+      // ب- فحص إذا كان الزائر بداخل الـ APK الخاص بنا لإخفاء أزرار التحميل
+      // غيّرنا 'wv' إلى بصمة تطبيقك الخاصة لمنع التداخل مع الإنستغرام
+     var isInsideApk = navigator.userAgent.includes('MyApp_AlRafidain_V1');
 
-      if (isInsideApk) {
+     if (isInsideApk) {
+        var topScrollBtn = document.getElementById("scroll-to-download-btn");
+        var bottomDownloadSection = document.getElementById("download-section-wrapper");
+    
+        if (topScrollBtn) topScrollBtn.style.display = "none";
+        if (bottomDownloadSection) bottomDownloadSection.style.display = "none";
+        } else {
+    // إذا فتح من أي متصفح ثاني (إنستا، كروم، سفاري)، نضمن أن الأزرار تظهر بشكل طبيعي
           var topScrollBtn = document.getElementById("scroll-to-download-btn");
-          var bottomDownloadSection = document.getElementById("download-section-wrapper");
-
-          if (topScrollBtn) topScrollBtn.style.display = "none";
-          if (bottomDownloadSection) bottomDownloadSection.style.display = "none";
-      }
+       var bottomDownloadSection = document.getElementById("download-section-wrapper");
+    
+       if (topScrollBtn) topScrollBtn.style.display = "block"; 
+       if (bottomDownloadSection) bottomDownloadSection.style.display = "block"; 
+    }
 
       // ج- إدارة زر العودة للأعلى (Scroll to Top) الفخم الذكي
       const scrollToTopBtn = document.getElementById("scrollToTopBtn");
