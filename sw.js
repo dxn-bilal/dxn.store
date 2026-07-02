@@ -41,9 +41,6 @@ self.addEventListener('fetch', e => {
   );
 });
 
-
-هسة انا كودي القديم هيج
-
 const staticCacheName = 'static-assets-v1';
 const dynamicCacheName = 'dynamic-products-v1';
 
