@@ -1512,45 +1512,55 @@
     }
 
     function shareEntireSite() {
-        var currentUrl = window.location.origin + window.location.pathname;
-        var promoMessage = "مرحباً! تفضل بزيارة متجر DXN للمنتجات العضوية والطبيعية، واستكشف أفضل المنتجات والمكملات الغذائية:\n" + currentUrl;
+    var currentUrl = window.location.origin + window.location.pathname;
+    var promoMessage = "مرحباً! تفضل بزيارة متجر DXN للمنتجات العضوية والطبيعية، واستكشف أفضل المنتجات والمكملات الغذائية:\n" + currentUrl;
 
-        if (typeof AppInventor !== 'undefined') {
-            AppInventor.setWebViewString("share:" + promoMessage);
+    if (typeof AppInventor !== 'undefined') {
+        AppInventor.setWebViewString("share:" + promoMessage);
+    } else {
+        if (navigator.share) {
+            navigator.share({
+                title: "متجر DXN للمنتجات العضوية",
+                text: promoMessage
+            }).catch(err => console.log("خطأ في المشاركة:", err));
         } else {
-            if (navigator.share) {
-                navigator.share({
-                    title: "متجر DXN للمنتجات العضوية",
-                    text: promoMessage
-                }).catch(err => console.log("خطأ في المشاركة:", err));
+            // الحل الذكي للإنستغرام: بدلاً من النسخ فقط، نفتح الواتساب مباشرة للمشاركة!
+            var encodedMessage = encodeURIComponent(promoMessage);
+            if (/Android|iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+                window.location.href = "whatsapp://send?text=" + encodedMessage;
             } else {
-                navigator.clipboard.writeText(promoMessage);
-                alert("📋 تم نسخ رابط المتجر بنجاح، يمكنك الآن مشاركته وإرساله عبر أي تطبيق!");
+                window.open("https://api.whatsapp.com/send?text=" + encodedMessage, '_blank');
             }
         }
     }
+}
 
     function shareProduct(productName, productBenefit) {
-        var storeUrl = window.location.origin + window.location.pathname; 
-        var fullShareMessage = "• *متجر DXN للمنتجات الصحية* \n\n" +
-                               "• *المنتج:* " + productName + "\n" +
-                               "• *الفوائد:* " + productBenefit + "\n\n" +
-                               "• *رابط المتجر:* \n" + storeUrl;
+    var storeUrl = window.location.origin + window.location.pathname; 
+    var fullShareMessage = "• *متجر DXN للمنتجات الصحية* \n\n" +
+                           "• *المنتج:* " + productName + "\n" +
+                           "• *الفوائد:* " + productBenefit + "\n\n" +
+                           "• *رابط المتجر:* \n" + storeUrl;
 
-        if (typeof AppInventor !== 'undefined') {
-            AppInventor.setWebViewString("share:" + fullShareMessage);
+    if (typeof AppInventor !== 'undefined') {
+        AppInventor.setWebViewString("share:" + fullShareMessage);
+    } else {
+        if (navigator.share) {
+            navigator.share({
+                title: productName,
+                text: fullShareMessage
+            }).catch(err => console.log(err));
         } else {
-            if (navigator.share) {
-                navigator.share({
-                    title: productName,
-                    text: fullShareMessage
-                }).catch(err => console.log(err));
+            // الحل الذكي للإنستغرام بكرت المنتج لفتح الواتساب فوراً
+            var encodedMessage = encodeURIComponent(fullShareMessage);
+            if (/Android|iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+                window.location.href = "whatsapp://send?text=" + encodedMessage;
             } else {
-                navigator.clipboard.writeText(fullShareMessage);
-                alert("📋 تم نسخ تفاصيل المنتج والرابط، يمكنك مشاركته الآن!");
+                window.open("https://api.whatsapp.com/send?text=" + encodedMessage, '_blank');
             }
         }
     }
+}
   </script>
 
   <div id="update-banner" style="display: none; position: fixed; bottom: 20px; left: 20px; right: 20px; background-color: #114232; color: white; padding: 15px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); z-index: 10000; direction: rtl; font-family: sans-serif;">
