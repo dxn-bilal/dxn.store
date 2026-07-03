@@ -2,7 +2,7 @@ const CACHE_NAME = 'dxn-store-v28';
 const assets = [
   './',
   './manifest.json',
-  './icon-192.png',
+  './icon-192.png', 
   './icon-512.png'
 ];
 
