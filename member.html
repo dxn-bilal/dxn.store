@@ -1299,33 +1299,43 @@
       };
     }
 
-    // 🟢 دالة نسخ النص المحدثة التي تظهر بمنتصف الشاشة وتدعم كل التطبيقات
+   // 🟢 دالة نسخ النص الذكية (تغير نص الزر إلى تم! مباشرة بدون واجهة منبثقة)
     function copyText(textToCopy, element) {
+      function successState() {
+        if (element) {
+          var originalText = element.innerHTML;
+          element.innerHTML = "تم!";
+          element.style.color = "#27ae60"; // تحويل اللون للأخضر مؤقتاً للتأكيد
+          
+          setTimeout(function() {
+            element.innerHTML = originalText;
+            element.style.color = ""; // إرجاع اللون الأصلي
+          }, 2000);
+        }
+      }
+
       if (navigator.clipboard && navigator.clipboard.writeText) {
-        navigator.clipboard.writeText(textToCopy).then(() => {
-          // استدعاء نافذة المتجر المخصصة بمنتصف الشاشة
-          showCustomAlert("📋 تم نسخ بنجاح: " + textToCopy);
-        }).catch(() => {
-          fallbackCopyText(textToCopy);
+        navigator.clipboard.writeText(textToCopy).then(successState).catch(() => {
+          fallbackCopyText(textToCopy, successState);
         });
       } else {
-        fallbackCopyText(textToCopy);
+        fallbackCopyText(textToCopy, successState);
       }
     }
 
     // دالة النسخ الاحتياطية المضمونة بداخل التطبيقات والـ APK والـ WebView
-    function fallbackCopyText(textToCopy) {
+    function fallbackCopyText(textToCopy, successCallback) {
       var textArea = document.createElement("textarea");
       textArea.value = textToCopy;
-      textArea.style.position = "fixed"; // لمنع اهتزاز الشاشة أثناء النسخ
+      textArea.style.position = "fixed";
       document.body.appendChild(textArea);
       textArea.focus();
       textArea.select();
       try {
         document.execCommand('copy');
-        showCustomAlert("📋 تم نسخ بنجاح: " + textToCopy);
+        if (successCallback) successCallback();
       } catch (err) {
-        showCustomAlert("❌ عذراً، جهازك يمنع النسخ التلقائي، يرجى نسخه يدوياً.");
+        console.error("فشل النسخ التلقائي");
       }
       document.body.removeChild(textArea);
     }
