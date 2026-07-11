@@ -1587,36 +1587,28 @@
 
       fullMessage += "\n\n💰 *الحساب الإجمالي:* " + totalSummaryPrice.toLocaleString() + " د.ع";
 
-      // ⚙️ إعدادات البوت والجروب المخصص بينك وبين العضو
-      var telegramToken = "8797491005:AAHZccVcXO1_009WF94aUiOrMQCYWINswFw";
-      var chatId = "-5212596847";
+      // 🌐 الرابط السري المأمن اللي أخذته من غوغل سكربت بعد النشر
+     var webAppUrl = "https://script.google.com/macros/s/AKfycbxXP6rDVvGpVnZ-nfOgOVYa6FTCHJki3dWVu-XgyLIw6AUE3Y0YjkCU5bT5D7YQReEm/exec";
 
-      var telegramUrl = `https://api.telegram.org/bot${telegramToken}/sendMessage`;
-
-      // إرسال مباشر خلف الكواليس دون مغادرة الموقع
-      fetch(telegramUrl, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          chat_id: chatId,
-          text: fullMessage,
-          parse_mode: "Markdown"
-        })
-      })
-      .then(response => {
-        if (response.ok) {
-          alert("🎉 تم تأكيد واستلام طلبك بنجاح! سيتواصل معك القسم المختص فوراً لتجهيز الشحن.");
-          cart = []; 
-          updateCartUI();
-          toggleCartModal(); 
-        } else {
-          alert("❌ حدث خطأ في إرسال الطلب عبر البوت، يرجى المحاولة مجدداً.");
-        }
-      })
-      .catch(err => {
-        console.error(err);
-        alert("❌ فشل الاتصال بالسيرفر، تأكد من جودة إنترنت الهاتف.");
-      });
+     // إرسال البيانات إلى وسيط غوغل بأمان خلف الكواليس دون مغادرة الموقع
+     fetch(webAppUrl, {
+       method: "POST",
+       mode: "no-cors", // تمنع ظهور أي خطأ (CORS) بالمتصفح وتحمي الطلب
+       body: JSON.stringify({
+         message: fullMessage // نرسل نص الرسالة المجهز بالكامل إلى غوغل
+       })
+     })
+     .then(() => {
+       // يتم تنفيذ كود النجاح فوراً عند إرسال البيانات لسيرفر غوغل بنجاح
+       alert("🎉 تم تأكيد واستلام طلبك بنجاح! سيتواصل معك القسم المختص فوراً لتجهيز الشحن.");
+       cart = []; 
+       updateCartUI();
+       toggleCartModal(); 
+     })
+     .catch(err => {
+       console.error(err);
+       alert("❌ فشل الاتصال بالسيرفر، تأكد من جودة إنترنت الهاتف.");
+     });
     }
 
     function copyMemberID() {
