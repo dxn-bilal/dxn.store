@@ -1076,7 +1076,7 @@
       </div>
       
       <div class="member-id-container" style="background: #f4f7f5; padding: 15px; border-radius: 8px; text-align: center; border: 1px dashed #114232; margin-bottom: 15px; width: 100%; box-sizing: border-box;">
-        <h3 id="member-id-number" style="color:#114232; margin:0; letter-spacing:2px; font-size: 24px; font-weight: 800;">828119655</h3>
+        <h3 id="member-id-number" style="color:#114232; margin:0; letter-spacing:2px; font-size: 24px; font-weight: 800;">830183051</h3>
       </div>
       
       <div style="font-size: 13px; color: #cc3333; margin: 5px 0 12px 0; line-height: 1.5; background: #fff5f5; padding: 10px; border-radius: 6px; border: 1px solid #ffe3e3; text-align: right; direction: rtl;">
@@ -1297,6 +1297,37 @@
       document.getElementById('confirm-no-btn').onclick = function() {
         modal.style.display = 'none';
       };
+    }
+
+    // 🟢 دالة نسخ النص المحدثة التي تظهر بمنتصف الشاشة وتدعم كل التطبيقات
+    function copyText(textToCopy, element) {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(textToCopy).then(() => {
+          // استدعاء نافذة المتجر المخصصة بمنتصف الشاشة
+          showCustomAlert("📋 تم نسخ بنجاح: " + textToCopy);
+        }).catch(() => {
+          fallbackCopyText(textToCopy);
+        });
+      } else {
+        fallbackCopyText(textToCopy);
+      }
+    }
+
+    // دالة النسخ الاحتياطية المضمونة بداخل التطبيقات والـ APK والـ WebView
+    function fallbackCopyText(textToCopy) {
+      var textArea = document.createElement("textarea");
+      textArea.value = textToCopy;
+      textArea.style.position = "fixed"; // لمنع اهتزاز الشاشة أثناء النسخ
+      document.body.appendChild(textArea);
+      textArea.focus();
+      textArea.select();
+      try {
+        document.execCommand('copy');
+        showCustomAlert("📋 تم نسخ بنجاح: " + textToCopy);
+      } catch (err) {
+        showCustomAlert("❌ عذراً، جهازك يمنع النسخ التلقائي، يرجى نسخه يدوياً.");
+      }
+      document.body.removeChild(textArea);
     }
 
     function toggleInquiryMenu() {
@@ -1730,7 +1761,7 @@
           showLoading(false);
           
           // إظهار إشعار النجاح بمنتصف الشاشة مع زر "حسناً"
-          showCustomAlert("🎉 تم تأكيد واستلام طلبك بنجاح! سيتواصل معك القسم المختص فوراً لتجهيز الشحن.", function() {
+          showCustomAlert("تم تأكيد واستلام طلبك بنجاح.", function() {
             cart = []; 
             updateCartUI();
             toggleCartModal(); 
