@@ -1770,16 +1770,17 @@
         fullMessage += "\n\n💰 *الحساب الإجمالي:* " + totalSummaryPrice.toLocaleString() + " د.ع";
 
         // 🌐 رابط غوغل سكربت المأمن
-        var webAppUrl = "https://script.google.com/macros/s/AKfycbwPq5PlIvetAueCo5ugjEYIQzLeoBuQMh83n6R2R2-jrVyYt-3ooMKBOTaJWCfjdkMe/exec";
+        var webAppUrl = "https://script.google.com/macros/s/AKfycby70ldBIzljMDCKuhSvKjbkM6iXaeXshA9j3zgVVaxJDV8sLAXD_dU9bCWlMe4adeIy/exec";
 
         // إرسال البيانات إلى وسيط غوغل
-        fetch(webAppUrl, {
-          method: "POST",
-          mode: "no-cors",
-          body: JSON.stringify({
-            message: fullMessage
-          })
-        })
+       fetch(webAppUrl, {
+        method: "POST",
+        mode: "no-cors",
+        body: JSON.stringify({
+        message: fullMessage,
+        member: typeof memberKey !== 'undefined' ? memberKey : "main" // 👈 يرسل الاسم المجلد السري لغوغل تلقائياً
+         })
+      })
         .then(() => {
           // إخفاء شاشة التحميل فور اكتمال الإرسال
           showLoading(false);
