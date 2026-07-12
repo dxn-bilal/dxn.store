@@ -3,6 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <title>متجر منتجات DXN</title>
+  <!-- 🌟 1. إظهار الأيقونة فوراً أثناء تحميل الصفحة الأولي وقبل بدء الفيتش -->
+  <link rel="icon" type="image/jpeg" href="../Tbweb.jpg">
   <script>
     // 1️⃣ معلومات العضوة أفنان
     const memberId = "830183051"; 
@@ -17,7 +19,7 @@
         // الخروج برة المجلد لسحب الصور والملفات المشتركة
         let updatedHtml = html.replace('<head>', '<head><base href="../">');
         
-        // تبديل رقم العضوية والاسم الخاص ببلال إلى معلومات أفنان فوراً
+        // تبديل رقم العضوية والاسم الخاص ببلال إلى معلومات أفنان فوراً بكرت التخفيض
         updatedHtml = updatedHtml.replace('828119655', memberId);
         updatedHtml = updatedHtml.replace('BLAL JAMAL JASEEM', memberName);
         
@@ -25,10 +27,13 @@
         document.open();
         document.write(updatedHtml);
         document.close();
-     // ✨ إجبار المتصفح على قراءة أيقونة التبويب فوراً لأفنان
-     let favicon = document.createElement('link');
-     favicon.rel = 'icon'; favicon.type = 'image/jpeg'; favicon.href = '../Tbweb.jpg';
-     document.getElementsByTagName('head')[0].appendChild(favicon);
+        
+        // 🌟 2. التصحيح البرمجي: نكتب اسم الصورة مباشرة لأن وسم base متكفل بالرجوع خطوة ليبرة
+        let favicon = document.createElement('link');
+        favicon.rel = 'icon'; 
+        favicon.type = 'image/jpeg'; 
+        favicon.href = 'Tbweb.jpg'; 
+        document.getElementsByTagName('head')[0].appendChild(favicon);
       });
   </script>
 </head>
