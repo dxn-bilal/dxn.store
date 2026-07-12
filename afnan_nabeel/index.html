@@ -4,10 +4,11 @@
   <meta charset="UTF-8">
   <title>متجر منتجات DXN</title>
   <script>
-    // 1️⃣ معلومات العضو الجديد
+    // 1️⃣ معلومات العضوة أفنان
     const memberId = "830183051"; 
     const memberName = "afnan nabeelll"; 
-    const memberKey = "afnan_nabeel"; // 👈 المعرف السري المربوط بغوغل سكربت
+    // نثبت المعرف على الـ window مباشرة علمود ملفك الرئيسي يشوفه تلقائياً بدون استبدال أسطر معقدة
+    window.memberKey = "afnan_nabeel"; 
 
     // 2️⃣ جلب ملفك الرئيسي وتعديله ديناميكياً قبل العرض
     fetch('../member.html')
@@ -16,12 +17,9 @@
         // الخروج برة المجلد لسحب الصور والملفات المشتركة
         let updatedHtml = html.replace('<head>', '<head><base href="../">');
         
-        // تبديل رقم العضوية والاسم
+        // تبديل رقم العضوية والاسم الخاص ببلال إلى معلومات أفنان فوراً
         updatedHtml = updatedHtml.replace('828119655', memberId);
         updatedHtml = updatedHtml.replace('BLAL JAMAL JASEEM', memberName);
-        
-        // ✨ حل التناقض: حقن معرف العضو بداخل دالة إرسال الطلب تلقائياً
-        updatedHtml = updatedHtml.replace('message: fullMessage', 'message: fullMessage, member: "' + memberKey + '"');
         
         // عرض الصفحة كاملة بنظافة وبدون مشاكل
         document.open();
