@@ -348,7 +348,7 @@
       margin-right: 5px;
     }
 
-    /* 🟢 شريط الـ Footer العائم الجديد الذي يحتوي على قائمة "للاستفسار" بسهم */
+    /* 🟢 شريط الـ Footer العائم المحدث باللون الرصاصي الغامق الفخم والواضح جداً */
     .floating-contact-bar {
       position: fixed;
       bottom: 20px;
@@ -357,21 +357,22 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      background: rgba(255, 255, 255, 0.98);
+      background: rgba(55, 65, 81, 0.98) !important; /* 🌟 رصاصي غامق (Charcoal) ممتاز للتناسق */
       padding: 10px 16px;
       border-radius: 16px;
-      box-shadow: 0 6px 25px rgba(0,0,0,0.15);
+      box-shadow: 0 6px 25px rgba(0,0,0,0.25);
       z-index: 999;
       width: 420px; 
       box-sizing: border-box;
       transition: all 0.3s ease;
+      border: 1px solid rgba(255, 255, 255, 0.15);
     }
 
     #inquiry-toggle-btn {
       width: 100%;
       text-align: center;
       font-weight: bold;
-      color: #114232;
+      color: #ffffff !important; /* 🌟 نص أبيض ناصع ليبرز فوق الرصاصي الغامق */
       cursor: pointer;
       display: flex;
       align-items: center;
@@ -574,9 +575,9 @@
       font-size: 19px !important; 
       font-weight: bold !important; 
       text-align: right; 
-      background: #ffffff !important;
+      background: #f1f5f9 !important; /* 🌟 رصاصي فاتح مريح وعالي الوضوح بداخل السلة */
       border: 1px solid #cbd5e1 !important;
-      border-right: 6px solid #114232 !important; 
+      border-right: 6px solid #114232 !important; /* الخط الجانبي الأخضر المميز للمتجر */
       border-radius: 12px !important;
       padding: 18px 20px !important;
       position: -webkit-sticky !important;
@@ -589,6 +590,7 @@
       align-items: center;
       box-sizing: border-box;
       width: 100%;
+      color: #114232 !important; /* 🌟 جعل النص باللون الأخضر الغامق لزيادة التناسق والوضوح */
     }
 
     @media (min-width: 769px) {
@@ -633,10 +635,11 @@
         align-self: end !important; 
         position: sticky !important;
         bottom: 25px !important;
-        background: #ffffff !important;
+        background: #f1f5f9 !important; /* 🌟 رصاصي فاتح منسق */
         border: 1px solid #e2e8f0 !important;
         border-right: 6px solid #114232 !important;
         box-shadow: 0 -4px 25px rgba(0, 0, 0, 0.05) !important;
+        color: #114232 !important;
       }
     }
 
@@ -888,6 +891,87 @@
             gap: 10px !important;
         }
     }
+
+    /* =================================================== */
+    /* 9. النوافذ والتحميل المشفرة المخصصة بالمنتصف (New)  */
+    /* =================================================== */
+    .loading-overlay {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.6);
+      z-index: 1000000;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      color: #ffffff;
+      font-weight: bold;
+      font-size: 16px;
+      gap: 15px;
+    }
+
+    .spinner {
+      width: 50px;
+      height: 50px;
+      border: 5px solid #f3f3f3;
+      border-top: 5px solid #27ae60;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .custom-popup {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.6);
+      z-index: 1000001;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .custom-popup-box {
+      background: #ffffff;
+      padding: 25px;
+      border-radius: 16px;
+      width: 90%;
+      max-width: 380px;
+      text-align: center;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+      direction: rtl;
+      border-top: 5px solid #114232;
+    }
+
+    .custom-popup-btn {
+      background: #114232;
+      color: #ffffff;
+      border: none;
+      padding: 11px 25px;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 15px;
+      font-size: 15px;
+      transition: background 0.2s;
+    }
+
+    .custom-popup-btn:hover {
+      background: #0d3326;
+    }
+
+    .custom-popup-btn.btn-cancel {
+      background: #e2e8f0;
+      color: #333333;
+    }
+
+    .custom-popup-btn.btn-cancel:hover {
+      background: #cbd5e1;
+    }
   </style>
 
   <!-- 🛠️ تشغيل الـ Service Worker المخصص للعضو -->
@@ -912,11 +996,11 @@
     السلة <span id="cart-count-top" style="background-color: red; color: white; border-radius: 50%; padding: 2px 8px; font-size: 12px; font-weight: bold; border: 1px solid white;">0</span>
   </div>
 
-  <!-- 💡 الكود المطور والمضمون لسطرين منفصلين تماماً -->
-<div id="scroll-to-download-btn" onclick="event.stopPropagation(); scrollToDownload();" style="position: fixed; top: 75px; left: 20px; width: 130px; box-sizing: border-box !important; background-color: #114232; color: #ffffff; padding: 8px 10px; border-radius: 20px; z-index: 9999; cursor: pointer; box-shadow: 0 4px 12px rgba(0,0,0,0.2); font-weight: bold; font-size: 11px; display: flex !important; flex-direction: column !important; align-items: center; text-align: center; gap: 2px; direction: rtl; user-select: none; -webkit-user-select: none; -webkit-tap-highlight-color: transparent;">
-    <div style="display: block !important; width: 100%;">لتثبيت التطبيق</div>
-    <div style="display: block !important; width: 100%; margin-top: 2px;">للأندرويد والأبل</div>
-</div>
+  <!-- 💡 كود التثبيت المطور والمضمون لسطرين منفصلين تماماً -->
+  <div id="scroll-to-download-btn" onclick="event.stopPropagation(); scrollToDownload();" style="position: fixed; top: 75px; left: 20px; width: 130px; box-sizing: border-box !important; background-color: #114232; color: #ffffff; padding: 8px 10px; border-radius: 20px; z-index: 9999; cursor: pointer; box-shadow: 0 4px 12px rgba(0,0,0,0.2); font-weight: bold; font-size: 11px; display: flex !important; flex-direction: column !important; align-items: center; text-align: center; gap: 2px; direction: rtl; user-select: none; -webkit-user-select: none; -webkit-tap-highlight-color: transparent;">
+      <div style="display: block !important; width: 100%;">لتثبيت التطبيق</div>
+      <div style="display: block !important; width: 100%; margin-top: 2px;">للأندرويد والأبل</div>
+  </div>
 
   <header style="text-align: center; padding: 20px 10px;">
     <h1 style="color: #000000; margin: 0 0 8px 0; font-size: 28px; font-weight: bold;">منتجات DXN العضوية</h1>
@@ -943,7 +1027,7 @@
 
   <div id="products-container" class="products-grid" style="display: none;"></div>
 
-  <!-- 🟢 قائمة الاتصال السفلية المحدثة بنظام سهم "للاستفسار" منبثق -->
+  <!-- 🟢 قائمة الاتصال السفلية المحدثة بنظام سهم "للاستفسار" منبثق باللون الرصاصي -->
   <div class="floating-contact-bar">
     <div id="inquiry-toggle-btn" onclick="toggleInquiryMenu()">
       للاستفسار <span>▼</span>
@@ -996,7 +1080,7 @@
       </div>
       
       <div style="font-size: 13px; color: #cc3333; margin: 5px 0 12px 0; line-height: 1.5; background: #fff5f5; padding: 10px; border-radius: 6px; border: 1px solid #ffe3e3; text-align: right; direction: rtl;">
-        ⚠️ يجب التأكد من ظهور هذا الاسم لدى موظف المركز عند الشراء لضشان الخصم <br>
+        ⚠️ يجب التأكد من ظهور هذا الاسم لدى موظف المركز عند الشراء لضمان الخصم <br>
         <strong style="display: block; text-align: center; margin-top: 5px; font-size: 15px; color: #114232;">BLAL JAMAL JASEEM</strong>
       </div>
 
@@ -1027,7 +1111,6 @@
       </div>
 
       <div class="checkout-form">
-        <!-- 🚫 تم حذف أرقام الهاتف من التنبيه والوصف هنا بالكامل بناء على طلبك -->
         <div style="background: #fff8db; border-right: 4px solid #f39c12; padding: 12px; margin-bottom: 10px; border-radius: 6px; font-size: 14px; font-weight: bold; color: #b76e00; text-align: right; line-height: 1.5; box-shadow: 0 2px 5px rgba(0,0,0,0.02);">
           سعر التوصيل: عادة يكون 3,000 للمناطق الداخلية، و 5,000 أو 6,000 للمناطق الخارجية.
           <br>
@@ -1078,7 +1161,7 @@
         <label style="display: block; margin-bottom: 5px; font-weight: 600; color: #114232; font-size: 14px; text-align: right;">ملاحظات إضافية (اختياري)</label>
         <textarea id="cust-notes" placeholder="هل لديك أي تفاصيل أخرى؟"></textarea>
         
-        <!-- 🟢 الزر المحدث لإرسال الطلبات إلى بوت التليجرام الخاص بالمجموعة مباشرة -->
+        <!-- الزر المحدث لإرسال الطلبات مباشرة -->
         <div class="submit-buttons-row">
           <button onclick="sendOrderToTelegramBot()" class="btn-send tg-bot-btn">أطلب المنتجات</button>
         </div>
@@ -1092,6 +1175,19 @@
 
   <div id="download-section-wrapper" style="text-align: center; padding: 40px 15px 140px 15px; background-color: #ffffff; margin-top: 50px; border-top: 2px dashed #114232; user-select: none; -webkit-user-select: none;">
 
+     <h3 style="color: #114232; margin: 0 0 8px 0; font-size: 22px; font-weight: bold;">تطبيق متجر منتجات DXN</h3>
+      <p style="color: #555555; margin: 0 0 20px 0; font-size: 14px; font-weight: 600;">لتصفح أسرع وتجربة أفضل، حمل تطبيق المتجر الخاص بالموقع</p>
+
+      <a href="https://github.com/Bilal-Jamal100DXN-store/dxn.store/releases/download/v1.0/DXN_Store.apk" style="background-color: #000000; color: #ffffff; text-decoration: none; padding: 14px 28px; border-radius: 8px; font-weight: bold; font-size: 15px; display: inline-block; box-shadow: 0 4px 15px rgba(0,0,0,0.2); transition: 0.2s; -webkit-tap-highlight-color: transparent;">
+       تحميل التطبيق للأندرويد
+      </a>
+
+      <div style="margin-top: 20px; background-color: #f9f9f9; border: 1px solid #e0e0e0; padding: 12px; border-radius: 8px; max-width: 400px; margin-left: auto; margin-right: auto;">
+          <p style="color: #666; font-size: 12px; line-height: 1.6; margin: 0; font-weight: 600;">
+              💡 **ملاحظة أمان:** التطبيق آمن 100%. عند التثبيت، سيظهر لك تنبيه من الهاتف لحظر التثبيت من مصادر غير معروفة؛ هذا إجراء روتيني لأي تطبيق يتم تحميله من خارج المتجر، كل ما عليك هو الضغط على **(الإعدادات)** ثم تفعيل **(السماح من هذا المصدر)** لإتمام التثبيت بنجاح.
+          </p>
+      </div>
+    
       <div style="background-color: #ffffff; border: 1px solid #e0e0e0; padding: 25px 20px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); text-align: right; max-width: 400px; margin: 20px auto; direction: rtl; font-family: sans-serif;">
           <h4 style="color: #114232; margin: 0 0 12px 0; font-size: 18px; font-weight: bold;">تثبيت التطبيق السريع (PWA) للأندرويد والأبل</h4>
           <p style="color: #666666; margin: 0 0 20px 0; font-size: 13px; line-height: 1.5; text-align: justify;">إضافة موقع المتجر كأيقونة تطبيق خفيفة ومباشرة على شاشتك الرئيسية، وتعمل بكفاءة على جميع الأجهزة والأنظمة.</p>
@@ -1113,7 +1209,7 @@
               </ol>
           </div>
       </div>
-</div>
+  </div>
 
   <button id="scrollToTopBtn" class="scroll-to-top" title="العودة للأعلى">
     <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -1125,17 +1221,37 @@
     📢 مشاركة الموقع
   </button>
 
+  <!-- 🟢 العناصر المخصصة للتحميل والإشعارات والنوافذ بالمنتصف -->
+  <div id="loading-overlay" class="loading-overlay">
+    <div class="spinner"></div>
+    <div>جاري إرسال طلبك، يرجى الانتظار...</div>
+  </div>
+
+  <div id="custom-alert-popup" class="custom-popup">
+    <div class="custom-popup-box">
+      <h3 style="color: #114232; margin-top: 0; font-size: 18px;">إشعار المتجر</h3>
+      <p id="alert-message" style="font-size: 15px; color: #333333; line-height: 1.5; margin: 15px 0; font-weight: 600;"></p>
+      <button id="alert-confirm-btn" class="custom-popup-btn" style="width: 100%;">حسناً</button>
+    </div>
+  </div>
+
+  <div id="custom-confirm-popup" class="custom-popup">
+    <div class="custom-popup-box">
+      <h3 style="color: #114232; margin-top: 0; font-size: 18px;">تأكيد إرسال الطلب</h3>
+      <p id="confirm-message" style="font-size: 16px; font-weight: bold; color: #333333; margin: 15px 0;"></p>
+      <div style="display: flex; gap: 10px; justify-content: center; margin-top: 20px;">
+        <button id="confirm-yes-btn" class="custom-popup-btn" style="margin-top: 0; flex: 1; background-color: #27ae60;">نعم، متأكد</button>
+        <button id="confirm-no-btn" class="custom-popup-btn btn-cancel" style="margin-top: 0; flex: 1;">إلغاء</button>
+      </div>
+    </div>
+  </div>
+
   <script>
     let allProducts = [];
     let cart = []; 
 
     window.onload = function() {
-      // 1. رابط جلب المنتجات المعتمد
-      const googleWebAppUrl = "https://script.google.com/macros/s/AKfycbwPq5PlIvetAueCo5ugjEYIQzLeoBuQMh83n6R2R2-jrVyYt-3ooMKBOTaJWCfjdkMe/exec";
-
-      // 2. 🟢 كود تشغيل وتفعيل عداد الزوار لصفحة العضو المخصصة والمستقلة
-      const visitorCounterUrl = "ضع_هنا_رابط_ويب_تطبيق_غوغل_سكربت_الجديد_الخاص_بالعداد";
-      fetch(visitorCounterUrl).catch(e => console.log("خطأ في تسجيل الزيارة:", e));
+      const googleWebAppUrl = "https://script.google.com/macros/s/AKfycby70ldBIzljMDCKuhSvKjbkM6iXaeXshA9j3zgVVaxJDV8sLAXD_dU9bCWlMe4adeIy/exec";
 
       const cachedProducts = localStorage.getItem("dxn_products_cache");
       if (cachedProducts) {
@@ -1165,7 +1281,79 @@
         });
     };
 
-    // دالة تفتيح وإغلاق قائمة الاستفسار السفلية
+    // دالات الإشعارات والنوافذ والتحميل البرمجية المخصصة في منتصف الشاشة
+    function showLoading(show) {
+      document.getElementById('loading-overlay').style.display = show ? 'flex' : 'none';
+    }
+
+    function showCustomAlert(message, callback) {
+      document.getElementById('alert-message').innerText = message;
+      var modal = document.getElementById('custom-alert-popup');
+      modal.style.display = 'flex';
+      
+      var btn = document.getElementById('alert-confirm-btn');
+      btn.onclick = function() {
+        modal.style.display = 'none';
+        if(callback) callback();
+      };
+    }
+
+    function showCustomConfirm(message, onConfirm) {
+      document.getElementById('confirm-message').innerText = message;
+      var modal = document.getElementById('custom-confirm-popup');
+      modal.style.display = 'flex';
+      
+      document.getElementById('confirm-yes-btn').onclick = function() {
+        modal.style.display = 'none';
+        if(onConfirm) onConfirm();
+      };
+      
+      document.getElementById('confirm-no-btn').onclick = function() {
+        modal.style.display = 'none';
+      };
+    }
+
+   // 🟢 دالة نسخ النص الذكية (تغير نص الزر إلى تم! مباشرة بدون واجهة منبثقة)
+    function copyText(textToCopy, element) {
+      function successState() {
+        if (element) {
+          var originalText = element.innerHTML;
+          element.innerHTML = "تم!";
+          element.style.color = "#27ae60"; // تحويل اللون للأخضر مؤقتاً للتأكيد
+          
+          setTimeout(function() {
+            element.innerHTML = originalText;
+            element.style.color = ""; // إرجاع اللون الأصلي
+          }, 2000);
+        }
+      }
+
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(textToCopy).then(successState).catch(() => {
+          fallbackCopyText(textToCopy, successState);
+        });
+      } else {
+        fallbackCopyText(textToCopy, successState);
+      }
+    }
+
+    // دالة النسخ الاحتياطية المضمونة بداخل التطبيقات والـ APK والـ WebView
+    function fallbackCopyText(textToCopy, successCallback) {
+      var textArea = document.createElement("textarea");
+      textArea.value = textToCopy;
+      textArea.style.position = "fixed";
+      document.body.appendChild(textArea);
+      textArea.focus();
+      textArea.select();
+      try {
+        document.execCommand('copy');
+        if (successCallback) successCallback();
+      } catch (err) {
+        console.error("فشل النسخ التلقائي");
+      }
+      document.body.removeChild(textArea);
+    }
+
     function toggleInquiryMenu() {
       var content = document.getElementById("inquiry-content");
       var arrow = document.querySelector("#inquiry-toggle-btn span");
@@ -1364,22 +1552,6 @@
       }
     }
 
-    function copyText(textToCopy, element) {
-      navigator.clipboard.writeText(textToCopy).then(() => {
-        const tooltip = element.parentElement.querySelector('.tooltip-text');
-        tooltip.innerText = "تم النسخ! ✓";
-        tooltip.style.visibility = "visible";
-        tooltip.style.opacity = "1";
-
-        setTimeout(() => {
-          tooltip.style.visibility = "hidden";
-          tooltip.style.opacity = "0";
-        }, 2000);
-      }).catch(err => {
-        console.error('فشلت عملية النسخ: ', err);
-      });
-    }
-
     function toggleCartModal() {
       var modal = document.getElementById("cart-modal");
       if (!modal) return;
@@ -1433,7 +1605,7 @@
 
     function addToCart(name, price, pv) {
       if (isNaN(price) || price <= 0) {
-        alert("⚠️ هذا المنتج غير متاح للشراء حالياً.");
+        showCustomAlert("⚠️ هذا المنتج غير متاح للشراء حالياً.");
         return;
       }
 
@@ -1522,10 +1694,10 @@
     }
 
     function clearCart() {
-      if (confirm("هل أنت متأكد من رغبتك في إفراغ السلة وحذف جميع المنتجات المضافة؟")) {
+      showCustomConfirm("هل أنت متأكد من رغبتك في إفراغ السلة وحذف جميع المنتجات المضافة؟", function() {
         cart = []; 
         updateCartUI(); 
-      }
+      });
     }
 
     function changeQuantity(name, amount) {
@@ -1540,7 +1712,7 @@
       }
     }
 
-    // 🟢 دالة إرسال الطلبات المباشرة إلى سيرفر وبوت التليجرام الخاص بالمجموعة المشتركة
+    // 🟢 دالة إرسال الطلبات المباشرة المحدثة بـ نافذة التأكيد والتحميل المشفرة المخصصة بالمنتصف
     function sendOrderToTelegramBot() {
       var name = document.getElementById("cust-name").value.trim();
       var phone = document.getElementById("cust-phone").value.trim();
@@ -1549,96 +1721,129 @@
       var notes = document.getElementById("cust-notes").value.trim();
 
       if (!name || !phone || !governorate || !address) {
-        alert("⚠️ يرجى ملء الحقول الأساسية: الاسم، الهاتف، المحافظة، والعنوان.");
+        showCustomAlert("⚠️ يرجى ملء الحقول الأساسية: الاسم، الهاتف، المحافظة، والعنوان.");
         return;
       }
 
       if (cart.length === 0) {
-        alert("⚠️ سلتك فارغة! قُم بإضافة منتجات أولاً قبل إرسال الطلب.");
+        showCustomAlert("⚠️ سلتك فارغة! قُم بإضافة منتجات أولاً قبل إرسال الطلب.");
         return;
       }
 
-      // حفظ مؤقت لبيانات الزبون للسهولة
-      localStorage.setItem("saved_cust_name", name);
-      localStorage.setItem("saved_cust_phone", phone);
-      localStorage.setItem("saved_cust_governorate", governorate);
-      localStorage.setItem("saved_cust_address", address);
+      // 1️⃣ ظهور زر التأكيد المخصص بالمنتصف بناءً على طلبك
+      showCustomConfirm("هل أنت متأكد من الطلب؟", function() {
+        
+        // 2️⃣ إظهار شاشة التحميل الدوارة فوراً بعد التأكيد
+        showLoading(true);
 
-      // صياغة النص بـ Markdown للتليجرام
-      var fullMessage = "🚨 *طلب شراء جديد من متجر الأعضاء* 🚨\n\n" +
-                        "👤 *الزبون:* " + name + "\n" +
-                        "📞 *الهاتف:* " + phone + "\n" +
-                        "📍 *المحافظة:* " + governorate + "\n" +
-                        "🏠 *العنوان:* " + address + "\n" +
-                        "📝 *ملاحظات:* " + (notes ? notes : "لا يوجد") + "\n\n" +
-                        "🛒 *المنتجات المطلوبة:*\n";
+        // حفظ مؤقت لبيانات الزبون للسهولة
+        localStorage.setItem("saved_cust_name", name);
+        localStorage.setItem("saved_cust_phone", phone);
+        localStorage.setItem("saved_cust_governorate", governorate);
+        localStorage.setItem("saved_cust_address", address);
 
-      var totalSummaryPrice = 0;
-      var totalSummaryPV = 0;
+        // صياغة النص بـ Markdown للتليجرام
+        var fullMessage = "🚨 *طلب شراء جديد من متجر الأعضاء* 🚨\n\n" +
+                          "👤 *الزبون:* " + name + "\n" +
+                          "📞 *الهاتف:* " + phone + "\n" +
+                          "📍 *المحافظة:* " + governorate + "\n" +
+                          "🏠 *العنوان:* " + address + "\n" +
+                          "📝 *ملاحظات:* " + (notes ? notes : "لا يوجد") + "\n\n" +
+                          "🛒 *المنتجات المطلوبة:*\n";
 
-      cart.forEach((item, index) => {
-        var itemTotal = item.price * item.quantity;
-        totalSummaryPrice += itemTotal;
-        totalSummaryPV += (item.pv || 0) * item.quantity;
-        fullMessage += (index + 1) + ". " + item.name + " (العدد: " + item.quantity + ") -> " + itemTotal.toLocaleString() + " د.ع\n";
-      });
+        var totalSummaryPrice = 0;
+        var totalSummaryPV = 0;
 
-      if (totalSummaryPV >= 130) {
-        fullMessage += "\n🎁 *حالة التوصيل:* مجاني (عرض الـ 130 نقطة) 🎉";
-      } else {
-        fullMessage += "\n🚚 *حالة التوصيل:* غير مجاني (يُحدد حسب العنوان)";
-      }
+        cart.forEach((item, index) => {
+          var itemTotal = item.price * item.quantity;
+          totalSummaryPrice += itemTotal;
+          totalSummaryPV += (item.pv || 0) * item.quantity;
+          fullMessage += (index + 1) + ". " + item.name + " (العدد: " + item.quantity + ") -> " + itemTotal.toLocaleString() + " د.ع\n";
+        });
 
-      fullMessage += "\n\n💰 *الحساب الإجمالي:* " + totalSummaryPrice.toLocaleString() + " د.ع";
-
-      // ⚙️ إعدادات البوت والجروب المخصص بينك وبين العضو
-      var telegramToken = "ضع_هنا_توكن_البوت_الخاص_بك_من_botfather";
-      var chatId = "ضع_هنا_ايدي_الجروب_الذي_يحتوي_على_السالب";
-
-      var telegramUrl = `https://api.telegram.org/bot${telegramToken}/sendMessage`;
-
-      // إرسال مباشر خلف الكواليس دون مغادرة الموقع
-      fetch(telegramUrl, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          chat_id: chatId,
-          text: fullMessage,
-          parse_mode: "Markdown"
-        })
-      })
-      .then(response => {
-        if (response.ok) {
-          alert("🎉 تم تأكيد واستلام طلبك بنجاح! سيتواصل معك القسم المختص فوراً لتجهيز الشحن.");
-          cart = []; 
-          updateCartUI();
-          toggleCartModal(); 
+        if (totalSummaryPV >= 130) {
+          fullMessage += "\n🎁 *حالة التوصيل:* مجاني (عرض الـ 130 نقطة) 🎉";
         } else {
-          alert("❌ حدث خطأ في إرسال الطلب عبر البوت، يرجى المحاولة مجدداً.");
+          fullMessage += "\n🚚 *حالة التوصيل:* غير مجاني (يُحدد حسب العنوان)";
         }
-      })
-      .catch(err => {
-        console.error(err);
-        alert("❌ فشل الاتصال بالسيرفر، تأكد من جودة إنترنت الهاتف.");
+
+        fullMessage += "\n\n💰 *الحساب الإجمالي:* " + totalSummaryPrice.toLocaleString() + " د.ع";
+
+        // 🌐 رابط غوغل سكربت المأمن
+        var webAppUrl = "https://script.google.com/macros/s/AKfycbxXP6rDVvGpVnZ-nfOgOVYa6FTCHJki3dWVu-XgyLIw6AUE3Y0YjkCU5bT5D7YQReEm/exec";
+
+        // إرسال البيانات إلى وسيط غوغل
+        fetch(webAppUrl, {
+          method: "POST",
+          mode: "no-cors",
+          body: JSON.stringify({
+            message: fullMessage
+          })
+        })
+        .then(() => {
+          // إخفاء شاشة التحميل فور اكتمال الإرسال
+          showLoading(false);
+          
+          // إظهار إشعار النجاح بمنتصف الشاشة مع زر "حسناً"
+          showCustomAlert("تم تأكيد واستلام طلبك بنجاح.", function() {
+            cart = []; 
+            updateCartUI();
+            toggleCartModal(); 
+          });
+        })
+        .catch(err => {
+          // إخفاء شاشة التحميل عند حدوث أي خطأ بالشبكة
+          showLoading(false);
+          console.error(err);
+          showCustomAlert("❌ فشل الاتصال بالسيرفر، تأكد من جودة إنترنت الهاتف.");
+        });
       });
     }
 
+    // 🟢 دالة نسخ كود التخفيض المحدثة والمحمية ضد القيود البرمجية داخل الـ WebView
     function copyMemberID() {
       var idNum = document.getElementById("member-id-number").innerText;
-      navigator.clipboard.writeText(idNum);
 
       var btn = document.querySelector(".copy-card-btn");
       var originalText = btn.innerHTML;
 
-      btn.innerHTML = "تم النسخ بنجاح! ✓";
-      btn.style.background = "#114232"; 
-      btn.style.color = "#ffffff";
+      // دالة تغيير حالة وشكل الزر عند نجاح العملية المضمونة
+      function successState() {
+        btn.innerHTML = "تم النسخ بنجاح! ✓";
+        btn.style.background = "#114232"; 
+        btn.style.color = "#ffffff";
 
-      setTimeout(function() {
-        btn.innerHTML = originalText;
-        btn.style.background = "#000000"; 
-        btn.style.color = "#ffffff";      
-      }, 2000);
+        setTimeout(function() {
+          btn.innerHTML = originalText;
+          btn.style.background = "#000000"; 
+          btn.style.color = "#ffffff";      
+        }, 2000);
+      }
+
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(idNum).then(successState).catch(() => {
+          fallbackCopyMemberID(idNum, successState);
+        });
+      } else {
+        fallbackCopyMemberID(idNum, successState);
+      }
+    }
+
+    // الدالة الاحتياطية لنسخ كود التخفيض لضمان عمله داخل أي تطبيق موبايل
+    function fallbackCopyMemberID(textToCopy, successCallback) {
+      var textArea = document.createElement("textarea");
+      textArea.value = textToCopy;
+      textArea.style.position = "fixed";
+      document.body.appendChild(textArea);
+      textArea.focus();
+      textArea.select();
+      try {
+        document.execCommand('copy');
+        successCallback();
+      } catch (err) {
+        showCustomAlert("❌ عذراً، جهازك يمنع النسخ التلقائي، يرجى نسخه يدوياً.");
+      }
+      document.body.removeChild(textArea);
     }
 
     function scrollToDownload() {
