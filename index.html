@@ -1269,13 +1269,11 @@
     document.querySelectorAll('.main-site-only').forEach(el => el.style.display = 'none');
   }
 
-  // 🌟 الحركة الذكية: بناء رابط الفيتش وإضافة علامة إذا المفتوح هو موقع عضو
-  let finalFetchUrl = googleWebAppUrl;
-  if (typeof memberKey !== 'undefined' || window.memberKey) {
-    finalFetchUrl += "?isMember=true";
-  }
+  // 🌟 لقط اسم العضو المفتوح بالظبط (مثلاً afnan_nabeel)، وإذا ماكو يعني الموقع الرئيسي مالتك (main)
+  let currentMember = (typeof window.memberKey !== 'undefined') ? window.memberKey : 'main';
+  let finalFetchUrl = googleWebAppUrl + "?memberKey=" + currentMember;
 
-  // إرسال الطلب بالرابط الجديد (يجلب المنتجات بكل الأحوال بس يبلغ السكربت بنوع الزيارة)
+  // إرسال الطلب بالرابط الجديد الحامل لاسم العضو
   fetch(finalFetchUrl)
     .then(response => {
       if (!response.ok) throw new Error("فشل الاتصال بسيرفر البيانات");
