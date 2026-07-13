@@ -1254,9 +1254,10 @@
   <script>
     let allProducts = [];
     let cart = []; 
+    let currentCategory = 'الكل'; // 🌟 إضافة ذكية: لحفظ وتذكر القسم المفتوح حالياً أثناء التحميل
 
-    window.onload = function() {
-  // 🌟 الحل السحري: تنظيف شريط العنوان فوراً عند إعادة التشغيل وإزالة أي هاش (#) بدون تخريب رابط الأعضاء
+   window.onload = function() {
+  // تنظيف شريط العنوان فوراً عند إعادة التشغيل وإزالة أي هاش (#)
   if (window.location.hash) {
     history.replaceState(null, document.title, window.location.pathname + window.location.search);
   }
@@ -1266,7 +1267,8 @@
   const cachedProducts = localStorage.getItem("dxn_products_cache");
   if (cachedProducts) {
     allProducts = JSON.parse(cachedProducts);
-    renderGrid(allProducts);
+    // 🌟 تحديث: الفلترة حسب القسم الحالي المخزون بدل فرش الكل تلقائياً
+    filterCategory(currentCategory, null);
   }
 
   // إذا الصفحة انفتحت من مجلد عضو، اخفي عناصر بلال الخاصة فوراً
@@ -1274,11 +1276,11 @@
     document.querySelectorAll('.main-site-only').forEach(el => el.style.display = 'none');
   }
 
-  // لقط اسم العضو المفتوح بالظبط (مثلاً afnan_nabeel)، وإذا ماكو يعني الموقع الرئيسي مالتك (main)
+  // لقط اسم العضو المفتوح بالظبط
   let currentMember = (typeof window.memberKey !== 'undefined') ? window.memberKey : 'main';
   let finalFetchUrl = googleWebAppUrl + "?memberKey=" + currentMember;
 
-  // إرسال الطلب بالرابط الجديد الحامل لاسم العضو
+  // إرسال الطلب بجلب المنتجات
   fetch(finalFetchUrl)
     .then(response => {
       if (!response.ok) throw new Error("فشل الاتصال بسيرفر البيانات");
@@ -1288,7 +1290,9 @@
       if (data && !data.error) {
         localStorage.setItem("dxn_products_cache", JSON.stringify(data));
         allProducts = data;
-        renderGrid(allProducts);
+        
+        // 🌟 التصحيح الحاسم: عند اكتمال جلب البيانات، اعرض فقط القسم اللّي جان الزبون واكف عليه!
+        filterCategory(currentCategory, null);
       } else {
         handleResponse(data);
       }
@@ -1558,18 +1562,24 @@
     }
     
     function filterCategory(category, buttonElement) {
-      const buttons = document.querySelectorAll('.btn-category');
-      buttons.forEach(btn => btn.classList.remove('active'));
-      if (buttonElement) buttonElement.classList.add('active');
+  // 🌟 حفظ القسم اللّي انضغط بداخل المتغير العالمي فوراً
+  currentCategory = category; 
 
-      let filtered = [];
-      if (category === 'الكل') {
-        filtered = allProducts;
-      } else {
-        filtered = allProducts.filter(p => p.category && String(p.category).trim() === category.trim());
-      }
-      renderGrid(filtered);
-    }
+  // تحديث كلاسات الأزرار والتحديد فقط إذا تم الضغط من قبل مستخدم
+  if (buttonElement) {
+    const buttons = document.querySelectorAll('.btn-category');
+    buttons.forEach(btn => btn.classList.remove('active'));
+    buttonElement.classList.add('active');
+  }
+
+  let filtered = [];
+  if (category === 'الكل') {
+    filtered = allProducts;
+  } else {
+    filtered = allProducts.filter(p => p.category && String(p.category).trim() === category.trim());
+  }
+  renderGrid(filtered);
+}
 
     function zoomImage(url) {
       if(!url) return;
