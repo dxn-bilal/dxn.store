@@ -988,41 +988,41 @@
     السلة <span id="cart-count-top" style="background-color: red; color: white; border-radius: 50%; padding: 2px 8px; font-size: 12px; font-weight: bold; border: 1px solid white;">0</span>
   </div>
 
-  <!-- 💡 كود التثبيت المطور والمضمون لسطرين منفصلين تماماً -->
   <div id="scroll-to-download-btn" onclick="event.stopPropagation(); scrollToDownload();" style="position: fixed; top: 75px; left: 20px; width: 130px; box-sizing: border-box !important; background-color: #114232; color: #ffffff; padding: 8px 10px; border-radius: 20px; z-index: 9999; cursor: pointer; box-shadow: 0 4px 12px rgba(0,0,0,0.2); font-weight: bold; font-size: 11px; display: flex !important; flex-direction: column !important; align-items: center; text-align: center; gap: 2px; direction: rtl; user-select: none; -webkit-user-select: none; -webkit-tap-highlight-color: transparent;">
       <div style="display: block !important; width: 100%;">لتثبيت التطبيق</div>
       <div style="display: block !important; width: 100%; margin-top: 2px;">للأندرويد والأبل</div>
   </div>
 
-  <!-- 1️⃣ الهيدر الجديد: ناعم، عصري وبدون الصندوق الأخضر الضخم اللّي يزحف الشاشة -->
-  <header style="text-align: center; padding: 20px 15px; max-width: 800px; margin: 0 auto; background: transparent !important; border: none !important; box-shadow: none !important;">
-    <h1 style="color: #114232; margin: 0 0 6px 0; font-size: 26px; font-weight: bold;">منتجات DXN العضوية</h1>
-    <p style="color: #555555; margin: 0; font-size: 15px; font-weight: 600;">بإدارة عضو شركة DXN بلال جمال جاسم</p>
-  </header>
+  <!-- 🔒 1️⃣ كارت التوثيق المطور: يجمع عبارة الوثوقية والزر بمظهر ملموم وعصري جداً -->
+  <div style="max-width: 420px; margin: 25px auto 15px auto; padding: 15px; background-color: #ffffff; border: 1px solid #eef2f5; border-radius: 16px; box-shadow: 0 4px 15px rgba(17, 66, 50, 0.03); text-align: center; direction: rtl;">
+      <!-- نص الوثوقية المعتمد -->
+      <div style="color: #114232; font-size: 14px; font-weight: 700; display: flex; align-items: center; justify-content: center; gap: 6px; margin-bottom: 12px;">
+          <span>🔒 متجر رسمي معتمد</span>
+          <span style="color: #dddddd;">|</span>
+          <span>بإدارة الموزع: بلال جمال جاسم</span>
+      </div>
+      <!-- زر التخفيض الأنيق المدمج -->
+      <button onclick="toggleMemberModal()" style="width: 100%; background: linear-gradient(135deg, #114232 0%, #1c5c47 100%); color: #ffffff; border: none; padding: 11px 16px; border-radius: 50px; font-weight: bold; cursor: pointer; font-size: 13px; box-shadow: 0 4px 12px rgba(17, 66, 50, 0.1); transition: all 0.2s ease;">
+          🎫 اضغط هنا للحصول على كود التخفيض الرسمي
+      </button>
+  </div>
 
-  <!-- 2️⃣ حقل البحث الذكي -->
-  <div style="max-width: 420px; margin: 20px auto 15px auto; padding: 0 15px; direction: rtl;">
+  <!-- 🔍 2️⃣ خانة البحث الذكي الشامل -->
+  <div style="max-width: 420px; margin: 0 auto 12px auto; padding: 0 15px; direction: rtl;">
     <input type="text" id="product-search" oninput="searchProducts()" placeholder="🔍 ابحث عن اسم المنتج أو الفائدة..." 
            style="width: 100%; padding: 12px 20px; border: 2px solid #114232; border-radius: 50px; font-size: 15px; box-sizing: border-box; text-align: right; font-weight: 600; color: #114232; background-color: #ffffff; box-shadow: 0 4px 12px rgba(17, 66, 50, 0.04); outline: none;">
   </div>
 
-  <!-- 3️⃣ القائمة المنسدلة للأقسام -->
-  <div style="max-width: 420px; margin: 0 auto 15px auto; padding: 0 15px; direction: rtl;">
+  <!-- 📂 3️⃣ القائمة المنسدلة المحدثة للأقسام -->
+  <div style="max-width: 420px; margin: 0 auto 25px auto; padding: 0 15px; direction: rtl;">
     <select id="category-select" onchange="filterCategory(this.value)" 
             style="width: 100%; padding: 14px 20px; border: 2px solid #114232; border-radius: 50px; font-size: 15px; box-sizing: border-box; text-align: right; font-weight: 600; color: #114232; background-color: #ffffff; box-shadow: 0 4px 12px rgba(17, 66, 50, 0.04); outline: none; appearance: none; -webkit-appearance: none; cursor: pointer; background-image: url('data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'24\' height=\'24\' viewBox=\'0 0 24 24\' fill=\'none\' stroke=\'%23114232\' stroke-width=\'2.5\' stroke-linecap=\'round\' stroke-linejoin=\'round\'><polyline points=\'6 9 12 15 18 9\'></polyline></svg>'); background-repeat: no-repeat; background-position: left 20px center; background-size: 16px; line-height: 1.5;">
       <option value="الكل" selected>📂 تصفح حسب الأقسام...</option>
-      <option value="مكملات غذائية">مكملات غذائية</option>
-      <option value="الأغذية والمشروبات الصحية">الأغذية والمشروبات الصحية</option>
-      <option value="منتجات العناية الشخصية">منتجات العناية الشخصية</option>
-      <option value="منتجات البشرة والتجميل">منتجات البشرة والتجميل</option>
+      <option value="مكملات غذائية">🌿 مكملات غذائية</option>
+      <option value="الأغذية والمشروبات الصحية">☕ الأغذية والمشروبات الصحية</option>
+      <option value="منتجات العناية الشخصية">🧼 منتجات العناية الشخصية</option>
+      <option value="منتجات البشرة والتجميل">✨ منتجات البشرة والتجميل</option>
     </select>
-  </div>
-
-  <!-- 4️⃣ هنا قعدنا زر كود التخفيض بمكانه الاحترافي الجديد كـ بار مستقل ومتناسق 100% -->
-  <div style="max-width: 420px; margin: 0 auto 25px auto; padding: 0 15px; text-align: center;">
-    <button onclick="toggleMemberModal()" style="width: 100%; background: linear-gradient(135deg, #114232 0%, #1c5c47 100%); color: #ffffff; border: none; padding: 12px 20px; border-radius: 50px; font-weight: bold; cursor: pointer; font-size: 13px; box-shadow: 0 4px 15px rgba(17, 66, 50, 0.15); transition: all 0.2s ease;">
-        🎫 اضغط هنا للحصول على كود التخفيض للشراء من الفروع
-    </button>
   </div>
 
   <div class="loading-container" style="display: flex; justify-content: center; align-items: center; width: 100%; padding: 20px 0; box-sizing: border-box;">
