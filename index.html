@@ -83,40 +83,32 @@
     /* =================================================== */
     /* 2. الهيدر ومكونات الترويسة (Header & Top Elements)  */
     /* =================================================== */
-    header {
-      background-color: #2e7d32;
-      padding: 25px 15px;
-      text-align: center;
-      max-width: 800px;
-      margin: 20px auto;
-      border-radius: 12px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-      border: 1px solid #2e7d32;
-      color: #ffffff;
-    }
+   header {
+  background: linear-gradient(135deg, #114232 0%, #1c5c47 100%) !important;
+  padding: 35px 20px !important;
+  text-align: center;
+  max-width: 800px;
+  margin: 25px auto !important;
+  border-radius: 20px !important;
+  box-shadow: 0 10px 30px rgba(17, 66, 50, 0.15) !important;
+  border: none !important;
+  color: #ffffff !important;
+}
 
-    .categories {
-      display: flex;
-      justify-content: center;
-      gap: 10px;
-      margin: 15px auto;
-      flex-wrap: wrap;
-      padding: 0 10px;
-      max-width: 800px;
-    }
+/* تنسيق أزرار الأقسام لتصبح أكثر عصرية وتناسقاً مع البحث */
+.categories {
+  gap: 12px !important;
+  margin: 25px auto !important;
+}
 
-    .btn-category {
-      background-color: #fff;
-      border: 2px solid #2c5e3b; 
-      color: #2c5e3b;
-      padding: 8px 16px; 
-      border-radius: 25px;
-      cursor: pointer;
-      font-size: 15px; 
-      font-weight: bold; 
-      transition: all 0.3s ease;
-      touch-action: manipulation;
-    }
+.btn-category {
+  border: 2px solid #114232 !important;
+  color: #114232;
+  padding: 10px 20px !important;
+  border-radius: 50px !important; /* جعل الأزرار دائرية بالكامل لتطابق شريط البحث */
+  font-size: 14px !important;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.02);
+}
 
     .btn-category:hover, .btn-category.active {
       background-color: #27ae60;
@@ -1003,13 +995,13 @@
   </div>
 
   <header style="text-align: center; padding: 20px 10px;">
-    <h1 style="color: #000000; margin: 0 0 8px 0; font-size: 28px; font-weight: bold;">منتجات DXN العضوية</h1>
-    <p style="color: #222222; margin: 0 0 15px 0; font-size: 16px; font-weight: 600;">بإدارة عضو شركة DXN بلال جمال جاسم</p>
-    
-    <button onclick="toggleMemberModal()" style="background-color: #000000; color: #ffffff; border: none; padding: 12px 20px; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 14px; margin: 5px 0; transition: 0.2s; box-shadow: 0 4px 10px rgba(0,0,0,0.15);" onmouseover="this.style.opacity='0.9'" onmouseout="this.style.opacity='1'">
-        للشراء من مراكز البيع بدون توصيل اضغط هنا للحصول على كود التخفيض الرسمي
-    </button>
-  </header>
+  <h1 style="color: #ffffff; margin: 0 0 8px 0; font-size: 28px; font-weight: bold;">منتجات DXN العضوية</h1>
+  <p style="color: #e2e8f0; margin: 0 0 20px 0; font-size: 16px; font-weight: 600;">بإدارة عضو شركة DXN بلال جمال جاسم</p>
+  
+  <button onclick="toggleMemberModal()" style="background-color: #ffffff; color: #114232; border: none; padding: 14px 24px; border-radius: 50px; font-weight: bold; cursor: pointer; font-size: 14px; margin: 5px 0; transition: all 0.3s ease; box-shadow: 0 6px 20px rgba(0,0,0,0.2);">
+      للشراء من مراكز البيع بدون توصيل اضغط هنا للحصول على كود التخفيض الرسمي
+  </button>
+</header>
 
   <!-- 🔍 حقل البحث الجديد المنسق بألوان الهوية البصرية لمتجرك -->
   <div style="max-width: 420px; margin: 0 auto 20px auto; padding: 0 15px; direction: rtl;">
