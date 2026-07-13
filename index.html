@@ -1009,12 +1009,16 @@
            style="width: 100%; padding: 12px 20px; border: 2px solid #114232; border-radius: 50px; font-size: 15px; box-sizing: border-box; text-align: right; font-weight: 600; color: #114232; background-color: #ffffff; box-shadow: 0 4px 12px rgba(17, 66, 50, 0.04); outline: none;">
   </div>
 
-  <div class="categories">
-    <button class="btn-category active" onclick="filterCategory('الكل', this)">الكل</button>
-    <button class="btn-category" onclick="filterCategory('مكملات غذائية', this)">مكملات غذائية</button>
-    <button class="btn-category" onclick="filterCategory('الأغذية والمشروبات الصحية', this)">الأغذية والمشروبات الصحية</button>
-    <button class="btn-category" onclick="filterCategory('منتجات العناية الشخصية', this)">منتجات العناية الشخصية</button>
-    <button class="btn-category" onclick="filterCategory('منتجات البشرة والتجميل', this)">منتجات البشرة والتجميل</button>
+ <!-- 📂 القائمة المنسدلة الجديدة البديلة عن الأزرار الزاحفة -->
+  <div style="max-width: 420px; margin: 0 auto 25px auto; padding: 0 15px; direction: rtl;">
+    <select id="category-select" onchange="filterCategory(this.value)" 
+            style="width: 100%; padding: 12px 20px; border: 2px solid #114232; border-radius: 50px; font-size: 15px; box-sizing: border-box; text-align: right; font-weight: 600; color: #114232; background-color: #ffffff; box-shadow: 0 4px 12px rgba(17, 66, 50, 0.04); outline: none; appearance: none; -webkit-appearance: none; cursor: pointer; background-image: url('data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'24\' height=\'24\' viewBox=\'0 0 24 24\' fill=\'none\' stroke=\'%23114232\' stroke-width=\'2.5\' stroke-linecap=\'round\' stroke-linejoin=\'round\'><polyline points=\'6 9 12 15 18 9\'></polyline></svg>'); background-repeat: no-repeat; background-position: left 20px center; background-size: 16px;">
+      <option value="الكل" selected>📂 تصفح حسب الأقسام...</option>
+      <option value="مكملات غذائية">🌿 مكملات غذائية</option>
+      <option value="الأغذية والمشروبات الصحية">☕ الأغذية والمشروبات الصحية</option>
+      <option value="منتجات العناية الشخصية">🧼 منتجات العناية الشخصية</option>
+      <option value="منتجات البشرة والتجميل">✨ منتجات البشرة والتجميل</option>
+    </select>
   </div>
 
   <div class="loading-container" style="display: flex; justify-content: center; align-items: center; width: 100%; padding: 20px 0; box-sizing: border-box;">
@@ -1266,7 +1270,7 @@
   if (cachedProducts) {
     allProducts = JSON.parse(cachedProducts);
     // 🌟 تحديث: الفلترة حسب القسم الحالي المخزون بدل فرش الكل تلقائياً
-    filterCategory(currentCategory, null);
+    filterCategory(currentCategory);
   }
 
   // إذا الصفحة انفتحت من مجلد عضو، اخفي عناصر بلال الخاصة فوراً
@@ -1397,14 +1401,21 @@
 
   var topScrollBtn = document.getElementById("scroll-to-download-btn");
   var bottomDownloadSection = document.getElementById("download-section-wrapper");
+  var productsContainer = document.getElementById("products-container"); // مسك حاوية شبكة المنتجات
 
   // 2️⃣ هنا قفلنا الشرط: إذا تحقق أي واحد من الاثنين، يختفون فوراً
   if (isInsideApk || isInsidePwa) {
      if (topScrollBtn) topScrollBtn.style.display = "none";
      if (bottomDownloadSection) bottomDownloadSection.style.display = "none";
+     
+     // 🌟 الحل السحري: إعطاء مساحة سفلية إضافية تعوض اختفاء قسم التحميل وتمنع اختناق المنتجات خلف شريط الاستفسار
+     if (productsContainer) productsContainer.style.setProperty('margin-bottom', '180px', 'important');
   } else {
      if (topScrollBtn) topScrollBtn.style.display = "block"; 
      if (bottomDownloadSection) bottomDownloadSection.style.display = "block"; 
+     
+     // إرجاع المساحة الطبيعية إذا فتح من متصفح عادي
+     if (productsContainer) productsContainer.style.setProperty('margin-bottom', '60px', 'important');
   }
 
   // 3️⃣ كود السهم الصاعد مالتك الأصلي يظل مثل ما هو بدون أي تغيير
@@ -1567,35 +1578,31 @@
    container.style.display = 'grid';
 }
     
-   // 🌟 تحديث دالة الأقسام مع قفل الأمان لمنع الرمشة أثناء التحميل
-// 🌟 دالة الأقسام الذكية: تتفاعل مع الزبون فوراً وتظهر اللودر إذا البيانات لسه كاعد تشحن
-function filterCategory(category, buttonElement) {
+   // 🌟 دالة الأقسام الذكية المحدثة المتوافقة مع القائمة المنسدلة الجديدة
+function filterCategory(category) {
   currentCategory = category; 
 
-  // تصفير خانة البحث فوراً عند النقر على قسم جديد
+  // تصفير خانة البحث فوراً عند اختيار قسم جديد علمود ما تتداخل التصفية
   const searchInput = document.getElementById("product-search");
   if (searchInput) searchInput.value = "";
 
-  // تحديث شكل وتحديد الأزرار فوراً أمام الزبون لبيان الاستجابة
-  if (buttonElement) {
-    const buttons = document.querySelectorAll('.btn-category');
-    buttons.forEach(btn => btn.classList.remove('active'));
-    buttonElement.classList.add('active');
-  }
+  // مزامنة وتحديث قيمة القائمة المنسدلة في حال تم استدعاء الدالة تلقائياً عند أول تحميل للموقع
+  const selectElement = document.getElementById("category-select");
+  if (selectElement) selectElement.value = category;
 
-  // 🚨 الشرط الذكي: إذا المصفوفة فارغة والنت بعده كاعد يحمل، رجّع اللودر واطلع فوراً
+  // 🚨 قفل الأمان: إذا المنتجات لسه كاعد تلوّد من غوغل، رجّع اللودر واطلع فوراً بدون خربطة
   if (!allProducts || allProducts.length === 0) {
     const loadingDiv = document.getElementById('loading');
     const container = document.getElementById('products-container');
     if (loadingDiv && container) {
       loadingDiv.innerHTML = "جاري إظهار المنتجات...";
-      loadingDiv.style.display = 'block'; // إظهار عبارة جاري الإشهار
-      container.style.display = 'none';   // إخفاء حاوية المنتجات مؤقتاً
+      loadingDiv.style.display = 'block'; 
+      container.style.display = 'none';   
     }
-    return; // الخروج علمود ما يعبر لكود الفلترة ويخرب اللودر
+    return; 
   }
 
-  // --- إذا البيانات ملوّدة وجاهزة، كمل الفلترة المعتادة وافرش بالشاشة ---
+  // فرز المنتجات بناءً على الخيار المفتوح
   let filtered = [];
   if (category === 'الكل') {
     filtered = allProducts;
@@ -1604,6 +1611,7 @@ function filterCategory(category, buttonElement) {
   }
   renderGrid(filtered);
 }
+    
 
 // 🔍 دالة البحث الذكي مع قفل الأمان
 function searchProducts() {
