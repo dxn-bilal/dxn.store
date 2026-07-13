@@ -287,32 +287,6 @@
     /* =================================================== */
     /* 5. العناصر العائمة المحدثة (Floating Components)   */
     /* =================================================== */
-    #floating-share-btn {
-      position: fixed;
-      top: 20px;          
-      right: 20px;        
-      background-color: #2e7d32; 
-      color: white;
-      border: none;
-      padding: 12px 20px;
-      border-radius: 50px; 
-      font-size: 14px;
-      font-weight: bold;
-      font-family: 'Cairo', sans-serif;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); 
-      z-index: 99;      
-      cursor: pointer;
-      direction: rtl;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: transform 0.2s ease;
-    }
-
-    #floating-share-btn:active {
-      transform: scale(0.95);
-    }
-
     .fixed-cart-top {
       position: fixed;
       top: 15px;
@@ -773,6 +747,14 @@
     /* 8. شاشات الموبايل والاستجابة (Responsive & Mobile)  */
     /* =================================================== */
     @media (max-width: 768px) {
+      /* 🌟 نقل زر السلة لأسفل اليسار بالموبايل تلقائياً لمنع تصادمه مع أزرار الهيدر الجديدة */
+      #top-left-cart {
+        top: auto !important;
+        bottom: 100px !important;
+        left: 20px !important;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.35) !important;
+      }
+
       .checkout-form {
         border-right: none !important;
         border-top: 3px solid #114232 !important;
@@ -980,20 +962,33 @@
 
 <body>
   
-  <div style="text-align: center; padding: 0; background-color: #ffffff; border-bottom: 1px solid #eef2f5; box-shadow: 0 2px 8px rgba(0,0,0,0.04); overflow: hidden;">
-    <img src="Wageh.jpg" alt="متجر منتجات DXN" style="max-height: 220px; width: auto; display: block; margin: 0 auto; object-fit: contain;">
+  <!-- 🌟 الهيدر المطور الجديد: لوجو صغير جداً على اليمين وأزرار فخمة ثابتة تماماً على اليسار (بدون تكرار أو حركة) -->
+  <div style="background-color: #ffffff; border-bottom: 1px solid #eef2f5; box-shadow: 0 2px 8px rgba(0,0,0,0.04); padding: 10px 16px; display: flex; justify-content: space-between; align-items: center; direction: rtl; position: relative; z-index: 1000; flex-wrap: wrap; gap: 8px;">
+      <!-- الجهة اليمنى: اللوجو مصغر ومرتب جداً -->
+      <div style="flex-shrink: 0;">
+          <img src="Wageh.jpg" alt="متجر منتجات DXN" style="max-height: 55px; width: auto; display: block; object-fit: contain;">
+      </div>
+      
+      <!-- الجهة اليسرى: أزرار ملمومة وأنيقة (ثابتة في مكانها فوق ولا تطير بالصفحة) -->
+      <div style="display: flex; gap: 8px; align-items: center;"> 
+          <!-- زر تثبيت التطبيق الصغير السريع -->
+          <button id="scroll-to-download-btn" onclick="event.stopPropagation(); scrollToDownload();" style="background-color: #114232; color: #ffffff; border: none; padding: 7px 12px; border-radius: 50px; font-weight: bold; font-size: 12px; cursor: pointer; display: flex; align-items: center; gap: 4px; box-shadow: 0 2px 6px rgba(17, 66, 50, 0.1); transition: all 0.2s; user-select: none; -webkit-user-select: none;">
+              📲 <span style="font-size: 11px;">تثبيت التطبيق</span>
+          </button>
+          
+          <!-- زر مشاركة الموقع الصغير -->
+          <button id="header-share-btn" onclick="shareEntireSite()" style="background-color: #2e7d32; color: #ffffff; border: none; padding: 7px 12px; border-radius: 50px; font-weight: bold; font-size: 12px; cursor: pointer; display: flex; align-items: center; gap: 4px; box-shadow: 0 2px 6px rgba(46, 125, 50, 0.1); transition: all 0.2s;">
+              📢 <span style="font-size: 11px;">مشاركة الموقع</span>
+          </button>
+      </div>
   </div>
 
-  <div id="top-left-cart" onclick="toggleCartModal()" style="position: fixed; top: 20px; left: 20px; width: 130px; box-sizing: border-box !important; background-color: #000000; color: #ffffff; padding: 10px 12px; border-radius: 50px; z-index: 9999; cursor: pointer; box-shadow: 0 4px 15px rgba(0,0,0,0.25); font-weight: bold; display: flex; align-items: center; justify-content: center; gap: 6px; direction: rtl;">
-    السلة <span id="cart-count-top" style="background-color: red; color: white; border-radius: 50%; padding: 2px 8px; font-size: 12px; font-weight: bold; border: 1px solid white;">0</span>
+  <!-- 🛒 زر السلة العائم الذكي (يتحرك ويطير فوق المحتوى بشكل مستقل ومثالي) -->
+  <div id="top-left-cart" onclick="toggleCartModal()" style="position: fixed; top: 15px; left: 165px; width: 110px; box-sizing: border-box !important; background-color: #000000; color: #ffffff; padding: 8px 10px; border-radius: 50px; z-index: 9999; cursor: pointer; box-shadow: 0 4px 15px rgba(0,0,0,0.25); font-weight: bold; display: flex; align-items: center; justify-content: center; gap: 5px; direction: rtl; transition: all 0.3s ease;">
+    السلة <span id="cart-count-top" style="background-color: red; color: white; border-radius: 50%; padding: 2px 7px; font-size: 11px; font-weight: bold; border: 1px solid white;">0</span>
   </div>
 
-  <div id="scroll-to-download-btn" onclick="event.stopPropagation(); scrollToDownload();" style="position: fixed; top: 75px; left: 20px; width: 130px; box-sizing: border-box !important; background-color: #114232; color: #ffffff; padding: 8px 10px; border-radius: 20px; z-index: 9999; cursor: pointer; box-shadow: 0 4px 12px rgba(0,0,0,0.2); font-weight: bold; font-size: 11px; display: flex !important; flex-direction: column !important; align-items: center; text-align: center; gap: 2px; direction: rtl; user-select: none; -webkit-user-select: none; -webkit-tap-highlight-color: transparent;">
-      <div style="display: block !important; width: 100%;">لتثبيت التطبيق</div>
-      <div style="display: block !important; width: 100%; margin-top: 2px;">للأندرويد والأبل</div>
-  </div>
-
-  <!-- 🔒 1️⃣ كارت التوثيق المطور: يجمع عبارة الوثوقية والزر بمظهر ملموم وعصري جداً -->
+  <!-- 🔒 كارت التوثيق المطور: يجمع عبارة الوثوقية والزر بمظهر ملموم وعصري جداً -->
   <div style="max-width: 420px; margin: 25px auto 15px auto; padding: 15px; background-color: #ffffff; border: 1px solid #eef2f5; border-radius: 16px; box-shadow: 0 4px 15px rgba(17, 66, 50, 0.03); text-align: center; direction: rtl;">
       <!-- نص الوثوقية المعتمد -->
       <div style="color: #114232; font-size: 14px; font-weight: 700; display: flex; align-items: center; justify-content: center; gap: 6px; margin-bottom: 12px;">
@@ -1007,13 +1002,13 @@
       </button>
   </div>
 
-  <!-- 🔍 2️⃣ خانة البحث الذكي الشامل -->
+  <!-- 🔍 خانة البحث الذكي الشامل -->
   <div style="max-width: 420px; margin: 0 auto 12px auto; padding: 0 15px; direction: rtl;">
     <input type="text" id="product-search" oninput="searchProducts()" placeholder="🔍 ابحث عن اسم المنتج أو الفائدة..." 
            style="width: 100%; padding: 12px 20px; border: 2px solid #114232; border-radius: 50px; font-size: 15px; box-sizing: border-box; text-align: right; font-weight: 600; color: #114232; background-color: #ffffff; box-shadow: 0 4px 12px rgba(17, 66, 50, 0.04); outline: none;">
   </div>
 
-  <!-- 📂 3️⃣ القائمة المنسدلة المحدثة للأقسام -->
+  <!-- 📂 القائمة المنسدلة المحدثة للأقسام -->
   <div style="max-width: 420px; margin: 0 auto 25px auto; padding: 0 15px; direction: rtl;">
     <select id="category-select" onchange="filterCategory(this.value)" 
             style="width: 100%; padding: 14px 20px; border: 2px solid #114232; border-radius: 50px; font-size: 15px; box-sizing: border-box; text-align: right; font-weight: 600; color: #114232; background-color: #ffffff; box-shadow: 0 4px 12px rgba(17, 66, 50, 0.04); outline: none; appearance: none; -webkit-appearance: none; cursor: pointer; background-image: url('data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'24\' height=\'24\' viewBox=\'0 0 24 24\' fill=\'none\' stroke=\'%23114232\' stroke-width=\'2.5\' stroke-linecap=\'round\' stroke-linejoin=\'round\'><polyline points=\'6 9 12 15 18 9\'></polyline></svg>'); background-repeat: no-repeat; background-position: left 20px center; background-size: 16px; line-height: 1.5;">
@@ -1228,10 +1223,6 @@
     </svg>
   </button>
 
-  <button id="floating-share-btn" onclick="shareEntireSite()">
-    📢 مشاركة الموقع
-  </button>
-
   <!-- 🟢 العناصر المخصصة للتحميل والإشعارات والنوافذ بالمنتصف -->
   <div id="loading-overlay" class="loading-overlay">
     <div class="spinner"></div>
@@ -1415,7 +1406,7 @@
      // 🌟 الحل السحري: إعطاء مساحة سفلية إضافية تعوض اختفاء قسم التحميل وتمنع اختناق المنتجات خلف شريط الاستفسار
      if (productsContainer) productsContainer.style.setProperty('margin-bottom', '180px', 'important');
   } else {
-     if (topScrollBtn) topScrollBtn.style.display = "block"; 
+     if (topScrollBtn) topScrollBtn.style.display = "flex"; 
      if (bottomDownloadSection) bottomDownloadSection.style.display = "block"; 
      
      // إرجاع المساحة الطبيعية إذا فتح من متصفح عادي
