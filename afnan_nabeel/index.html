@@ -22,6 +22,9 @@
         // تبديل رقم العضوية والاسم الخاص ببلال إلى معلومات أفنان فوراً بكرت التخفيض
         updatedHtml = updatedHtml.replace('828119655', memberId);
         updatedHtml = updatedHtml.replace('BLAL JAMAL JASEEM', memberName);
+
+        // توجيه المتصفح للمانيفست الخاص بالعضوة لتثبيت الـ PWA بشكل صحيح باسمها
+        updatedHtml = updatedHtml.replace('href="manifest.json"', 'href="afnan_nabeel/manifest.json"');
         
         // عرض الصفحة كاملة بنظافة وبدون مشاكل
         document.open();
