@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://dxn-bilal.github.io/dxn.store/sitemap.xml
+Sitemap: https://dxn-market-bilal.github.io/sitemap.xml
