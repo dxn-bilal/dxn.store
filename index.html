@@ -983,13 +983,39 @@
     </select>
   </div>
 
-  <div class="loading-container" style="display: flex; justify-content: center; align-items: center; width: 100%; padding: 20px 0; box-sizing: border-box;">
+  <div class="loading-container" style="display: none; justify-content: center; align-items: center; width: 100%; padding: 20px 0; box-sizing: border-box;">
     <div id="loading" class="loading" style="text-align: center; font-weight: bold; font-size: 16px; color: #114232;">
         جاري إظهار المنتجات...
     </div>
   </div>
 
-  <div id="products-container" class="products-grid" style="display: none;"></div>
+  <div id="products-container" class="products-grid" style="display: grid;">
+
+  <!-- 📦 المنتج الأول -->
+  <div class="product-card">
+    <img class="product-img" src="رابط_الصورة" alt="فطر الريشي" onclick="zoomImage(this.src)">
+    <div class="product-info">
+      <h3 class="product-name">فطر الريشي (الجانوديرما)</h3>
+      <p class="product-benefits">يعزز المناعة العامة وينظف الجسم من السموم.</p>
+      <div class="product-price">28,000 د.ع</div>
+      <button onclick="addToCart('فطر الريشي', 28000, 20)" class="btn-add-to-cart">إضافة للسلة</button>
+    </div>
+  </div>
+
+  <!-- 📦 المنتج الثاني -->
+  <div class="product-card">
+    <img class="product-img" src="رابط_الصورة" alt="سبيرولينا" onclick="zoomImage(this.src)">
+    <div class="product-info">
+      <h3 class="product-name">سبيرولينا</h3>
+      <p class="product-benefits">الغذاء الفائق الغني بالفيتامينات والمعادن.</p>
+      <div class="product-price">18,000 د.ع</div>
+      <button onclick="addToCart('سبيرولينا', 18000, 15)" class="btn-add-to-cart">إضافة للسلة</button>
+    </div>
+  </div>
+
+  <!-- تضيف باقي المنتجات بنفس الطريقة هنا -->
+
+</div>
 
   <!-- 🟢 قائمة الاتصال السفلية المحدثة بنظام سهم "للاستفسار" منبثق باللون الرصاصي -->
   <div class="floating-contact-bar">
